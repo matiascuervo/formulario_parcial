@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "formulario_parcial", "formulario_parcial.csproj", "{D8A1AC91-B3C1-47B2-A171-41E7980B0E7D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "formulario_parcial", "formulario_parcial.csproj", "{D8A1AC91-B3C1-47B2-A171-41E7980B0E7D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

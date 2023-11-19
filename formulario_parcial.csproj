@@ -23,4 +23,14 @@
     </EmbeddedResource>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="json_datos_usuarios\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="BiblotecaDatamanager">
+      <HintPath>bin\Debug\net6.0-windows\BiblotecaDatamanager.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

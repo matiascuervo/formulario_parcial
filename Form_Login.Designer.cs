@@ -34,6 +34,7 @@
             label_Nombre = new Label();
             label_DNI = new Label();
             Boton_login = new Button();
+            Boton_Atras_Login = new RoundButton();
             SuspendLayout();
             // 
             // textBoxNombre
@@ -49,9 +50,10 @@
             // 
             textBoxDNI.Location = new Point(273, 172);
             textBoxDNI.Name = "textBoxDNI";
-            textBoxDNI.PlaceholderText = "EJM:40832326";
+            textBoxDNI.PlaceholderText = "******";
             textBoxDNI.Size = new Size(119, 23);
             textBoxDNI.TabIndex = 1;
+            textBoxDNI.UseSystemPasswordChar = true;
             textBoxDNI.TextChanged += textBoxDNI_TextChanged;
             // 
             // label_Nombre
@@ -66,7 +68,6 @@
             label_Nombre.TabIndex = 2;
             label_Nombre.Text = "Nombre\r\n";
             label_Nombre.TextAlign = ContentAlignment.BottomLeft;
-            label_Nombre.Click += label1_Click;
             // 
             // label_DNI
             // 
@@ -75,9 +76,9 @@
             label_DNI.Font = new Font("Constantia", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
             label_DNI.Location = new Point(145, 172);
             label_DNI.Name = "label_DNI";
-            label_DNI.Size = new Size(54, 23);
+            label_DNI.Size = new Size(112, 23);
             label_DNI.TabIndex = 3;
-            label_DNI.Text = "D.N.I\r\n";
+            label_DNI.Text = "Contraseña";
             // 
             // Boton_login
             // 
@@ -92,6 +93,19 @@
             Boton_login.UseVisualStyleBackColor = false;
             Boton_login.Click += Boton_login_Click;
             // 
+            // Boton_Atras_Login
+            // 
+            Boton_Atras_Login.BackColor = Color.Transparent;
+            Boton_Atras_Login.FlatStyle = FlatStyle.Popup;
+            Boton_Atras_Login.Font = new Font("Segoe UI", 27.75F, FontStyle.Regular, GraphicsUnit.Point);
+            Boton_Atras_Login.Location = new Point(468, 227);
+            Boton_Atras_Login.Name = "Boton_Atras_Login";
+            Boton_Atras_Login.Size = new Size(68, 58);
+            Boton_Atras_Login.TabIndex = 5;
+            Boton_Atras_Login.Text = "↩";
+            Boton_Atras_Login.UseVisualStyleBackColor = false;
+            Boton_Atras_Login.Click += Boton_Atras_Login_Click;
+            // 
             // FormularioUsuario
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -99,6 +113,7 @@
             BackColor = SystemColors.ScrollBar;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             ClientSize = new Size(529, 284);
+            Controls.Add(Boton_Atras_Login);
             Controls.Add(Boton_login);
             Controls.Add(label_DNI);
             Controls.Add(label_Nombre);
@@ -106,7 +121,7 @@
             Controls.Add(textBoxNombre);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FormularioUsuario";
-            Text = "VOLQUETES_POLY";
+            Text = "Login";
             ResumeLayout(false);
             PerformLayout();
         }
@@ -118,5 +133,6 @@
         private Label label_Nombre;
         private Label label_DNI;
         private Button Boton_login;
+        private RoundButton Boton_Atras_Login;
     }
 }

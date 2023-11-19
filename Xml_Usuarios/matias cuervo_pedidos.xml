@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Pedidos>
+  <Pedido>
+    <Usuario>matias cuervo</Usuario>
+    <TipoVolquete>Grande</TipoVolquete>
+    <Cantidad>2</Cantidad>
+    <MontoAPagar>40000</MontoAPagar>
+    <NumeroDePedido>0</NumeroDePedido>
+    <Domicilio>rivadavia 1371</Domicilio>
+  </Pedido>
+  <Pedido>
+    <Usuario>matias cuervo</Usuario>
+    <TipoVolquete>Chico</TipoVolquete>
+    <Cantidad>5</Cantidad>
+    <MontoAPagar>55000.0</MontoAPagar>
+    <NumeroDePedido>1</NumeroDePedido>
+    <Domicilio>riavadai 1371</Domicilio>
+  </Pedido>
+</Pedidos>

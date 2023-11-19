@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Pedidos>
+  <Pedido>
+    <Usuario>matias cuervo</Usuario>
+    <TipoVolquete>Chico</TipoVolquete>
+    <Cantidad>2</Cantidad>
+    <MontoAPagar>22000.0</MontoAPagar>
+    <NumeroDePedido>0</NumeroDePedido>
+    <Domicilio>riavadavia 1371</Domicilio>
+  </Pedido>
+  <Pedido>
+    <Usuario>gudio clas</Usuario>
+    <TipoVolquete>Grande</TipoVolquete>
+    <Cantidad>2</Cantidad>
+    <MontoAPagar>48000.0</MontoAPagar>
+    <NumeroDePedido>0</NumeroDePedido>
+    <Domicilio>carobobo 1212</Domicilio>
+  </Pedido>
+  <Pedido>
+    <Usuario></Usuario>
+    <Nombre>martin ferrero</Nombre>
+    <TipoVolquete>Chico</TipoVolquete>
+    <Cantidad>2</Cantidad>
+    <MontoAPagar>22000.0</MontoAPagar>
+    <NumeroDePedido>0</NumeroDePedido>
+    <Domicilio>emilio castro 828</Domicilio>
+  </Pedido>
+  <Pedido>
+    <Usuario></Usuario>
+    <Nombre>paula cuervo</Nombre>
+    <TipoVolquete>Grande</TipoVolquete>
+    <Cantidad>5</Cantidad>
+    <MontoAPagar>120000.0</MontoAPagar>
+    <NumeroDePedido>1</NumeroDePedido>
+    <Domicilio>rivadavia 1371</Domicilio>
+  </Pedido>
+  <Pedido>
+    <Usuario>matias</Usuario>
+    <Nombre>matias cuervo</Nombre>
+    <TipoVolquete>Grande</TipoVolquete>
+    <Cantidad>1</Cantidad>
+    <MontoAPagar>22000.0</MontoAPagar>
+    <NumeroDePedido>1</NumeroDePedido>
+    <Domicilio>rivadavia 1371</Domicilio>
+  </Pedido>
+</Pedidos>
