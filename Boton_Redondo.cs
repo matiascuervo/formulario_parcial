@@ -22,12 +22,17 @@ namespace formulario_parcial
             int cornerRadius = Math.Min(Width, Height); // Radio de las esquinas redondeadas
             using (GraphicsPath path = new GraphicsPath())
             {
-                path.AddEllipse(new Rectangle(0, 0, Width, Height));
+                path.AddEllipse(new Rectangle(0, 0, Width - 1, Height - 1));
                 this.Region = new Region(path);
             }
 
-            
+            // Pintar el fondo del círculo
+            using (SolidBrush brush = new SolidBrush(this.BackColor))
+            {
+                e.Graphics.FillEllipse(brush, new Rectangle(0, 0, Width - 1, Height - 1));
+            }
 
+            
         }
     }
 }

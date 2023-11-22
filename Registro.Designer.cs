@@ -56,7 +56,7 @@
             textBox_Contraseña_Registro.PasswordChar = '*';
             textBox_Contraseña_Registro.Size = new Size(100, 23);
             textBox_Contraseña_Registro.TabIndex = 1;
-           
+            textBox_Contraseña_Registro.TextChanged += textBox_Contraseña_Registro_TextChanged;
             // 
             // label1
             // 

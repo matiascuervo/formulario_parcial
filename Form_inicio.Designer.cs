@@ -82,13 +82,13 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            AutoValidate = AutoValidate.EnableAllowFocusChange;
             BackColor = SystemColors.ButtonFace;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             ClientSize = new Size(536, 376);
             Controls.Add(Label_Nombre_Inicio);
             Controls.Add(button_Registro);
             Controls.Add(Boton_nombre);
+            FormBorderStyle = FormBorderStyle.Fixed3D;
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Form_inicio";
             Text = "VOLQUETES_POLY";

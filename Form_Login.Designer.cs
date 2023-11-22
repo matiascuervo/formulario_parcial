@@ -31,24 +31,24 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormularioUsuario));
             textBoxNombre = new TextBox();
             textBoxDNI = new TextBox();
-            label_Nombre = new Label();
-            label_DNI = new Label();
             Boton_login = new Button();
             Boton_Atras_Login = new RoundButton();
+            roundButton1 = new RoundButton();
+            roundButton2 = new RoundButton();
             SuspendLayout();
             // 
             // textBoxNombre
             // 
-            textBoxNombre.Location = new Point(273, 85);
+            textBoxNombre.Location = new Point(209, 92);
             textBoxNombre.Name = "textBoxNombre";
-            textBoxNombre.PlaceholderText = "Ingrese Su Nombre";
+            textBoxNombre.PlaceholderText = "Ingrese Su Usuario";
             textBoxNombre.Size = new Size(119, 23);
             textBoxNombre.TabIndex = 0;
             textBoxNombre.TextChanged += textBoxNombre_TextChanged;
             // 
             // textBoxDNI
             // 
-            textBoxDNI.Location = new Point(273, 172);
+            textBoxDNI.Location = new Point(209, 172);
             textBoxDNI.Name = "textBoxDNI";
             textBoxDNI.PlaceholderText = "******";
             textBoxDNI.Size = new Size(119, 23);
@@ -56,34 +56,10 @@
             textBoxDNI.UseSystemPasswordChar = true;
             textBoxDNI.TextChanged += textBoxDNI_TextChanged;
             // 
-            // label_Nombre
-            // 
-            label_Nombre.AutoSize = true;
-            label_Nombre.BackColor = Color.Gold;
-            label_Nombre.Font = new Font("Constantia", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label_Nombre.ForeColor = SystemColors.ControlText;
-            label_Nombre.Location = new Point(145, 85);
-            label_Nombre.Name = "label_Nombre";
-            label_Nombre.Size = new Size(83, 23);
-            label_Nombre.TabIndex = 2;
-            label_Nombre.Text = "Nombre\r\n";
-            label_Nombre.TextAlign = ContentAlignment.BottomLeft;
-            // 
-            // label_DNI
-            // 
-            label_DNI.AutoSize = true;
-            label_DNI.BackColor = Color.Gold;
-            label_DNI.Font = new Font("Constantia", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label_DNI.Location = new Point(145, 172);
-            label_DNI.Name = "label_DNI";
-            label_DNI.Size = new Size(112, 23);
-            label_DNI.TabIndex = 3;
-            label_DNI.Text = "Contraseña";
-            // 
             // Boton_login
             // 
-            Boton_login.BackColor = SystemColors.HotTrack;
-            Boton_login.FlatStyle = FlatStyle.System;
+            Boton_login.BackColor = Color.Gold;
+            Boton_login.FlatStyle = FlatStyle.Popup;
             Boton_login.Font = new Font("Constantia", 12F, FontStyle.Bold, GraphicsUnit.Point);
             Boton_login.Location = new Point(209, 240);
             Boton_login.Name = "Boton_login";
@@ -98,13 +74,37 @@
             Boton_Atras_Login.BackColor = Color.Transparent;
             Boton_Atras_Login.FlatStyle = FlatStyle.Popup;
             Boton_Atras_Login.Font = new Font("Segoe UI", 27.75F, FontStyle.Regular, GraphicsUnit.Point);
-            Boton_Atras_Login.Location = new Point(468, 227);
+            Boton_Atras_Login.Location = new Point(12, 228);
             Boton_Atras_Login.Name = "Boton_Atras_Login";
             Boton_Atras_Login.Size = new Size(68, 58);
             Boton_Atras_Login.TabIndex = 5;
             Boton_Atras_Login.Text = "↩";
             Boton_Atras_Login.UseVisualStyleBackColor = false;
             Boton_Atras_Login.Click += Boton_Atras_Login_Click;
+            // 
+            // roundButton1
+            // 
+            roundButton1.BackColor = Color.Transparent;
+            roundButton1.BackgroundImage = (Image)resources.GetObject("roundButton1.BackgroundImage");
+            roundButton1.BackgroundImageLayout = ImageLayout.Stretch;
+            roundButton1.FlatStyle = FlatStyle.Popup;
+            roundButton1.Location = new Point(105, 76);
+            roundButton1.Name = "roundButton1";
+            roundButton1.Size = new Size(47, 39);
+            roundButton1.TabIndex = 11;
+            roundButton1.UseVisualStyleBackColor = false;
+            // 
+            // roundButton2
+            // 
+            roundButton2.BackColor = Color.Transparent;
+            roundButton2.BackgroundImage = (Image)resources.GetObject("roundButton2.BackgroundImage");
+            roundButton2.BackgroundImageLayout = ImageLayout.Stretch;
+            roundButton2.FlatStyle = FlatStyle.Popup;
+            roundButton2.Location = new Point(105, 162);
+            roundButton2.Name = "roundButton2";
+            roundButton2.Size = new Size(42, 40);
+            roundButton2.TabIndex = 12;
+            roundButton2.UseVisualStyleBackColor = false;
             // 
             // FormularioUsuario
             // 
@@ -113,12 +113,13 @@
             BackColor = SystemColors.ScrollBar;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             ClientSize = new Size(529, 284);
+            Controls.Add(roundButton2);
+            Controls.Add(roundButton1);
             Controls.Add(Boton_Atras_Login);
             Controls.Add(Boton_login);
-            Controls.Add(label_DNI);
-            Controls.Add(label_Nombre);
             Controls.Add(textBoxDNI);
             Controls.Add(textBoxNombre);
+            FormBorderStyle = FormBorderStyle.Fixed3D;
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FormularioUsuario";
             Text = "Login";
@@ -130,9 +131,9 @@
 
         private TextBox textBoxNombre;
         private TextBox textBoxDNI;
-        private Label label_Nombre;
-        private Label label_DNI;
         private Button Boton_login;
         private RoundButton Boton_Atras_Login;
+        private RoundButton roundButton1;
+        private RoundButton roundButton2;
     }
 }

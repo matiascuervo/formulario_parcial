@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using System.Xml.Linq;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using BiblotecaDatamanager;
+using Microsoft.VisualBasic.ApplicationServices;
 
 namespace formulario_parcial
 {
@@ -18,8 +19,9 @@ namespace formulario_parcial
     {
         public Dictionary<string, decimal> preciosVolquetes = new Dictionary<string, decimal>(); // Diccionario para almacenar los precios
         public Dictionary<string, decimal> recargosLocalidades = new Dictionary<string, decimal>();
-        static decimal numeroPedido = 0;
-       
+        private List<Pedido> listaPedidos = new List<Pedido>();
+        static Random random = new Random();
+
         public Form_ventas()
         {
             
@@ -34,7 +36,7 @@ namespace formulario_parcial
             InitializeRecargosDiccionario();
             InitilizecomboBox_Localidad();
         }
-
+        
         private void InitializeRecargosDiccionario()
         {
             recargosLocalidades.Add("Temperley", 0m);  // Sin recargo
@@ -191,46 +193,66 @@ namespace formulario_parcial
                         string Direccion = TextBox_Direccion.Text.ToLower();
 
 
-                        numeroPedido++;
-                        string numeroPedidoSt = $"{numeroPedido}";
-                        
+                        int numeroPedidoAleatorio = random.Next(100000, 999999);
 
-                        // Incrementar el contador de número de pedido
-                        // Especifica la ruta y el nombre del archivo XML
-                        string rutaDirectorio = @"C:\Users\Matias\source\repos\formulario_parcial\Xml_Usuarios"; 
-                        string xmlFileName = Path.Combine(rutaDirectorio, $"pedidos.xml");
                         string nombreUsuarioLogeado = UserManager.Instancia.UsuarioLogueado?.Nombre;
-                        // Resto del código para guardar el pedido en XML
-                        var pedidoElement = new XElement("Pedido",
-                            new XElement("Usuario",nombreUsuarioLogeado),
-                            new XElement("Nombre", nombre),
-                            new XElement("TipoVolquete", seleccion),
-                            new XElement("Cantidad", cantidadVolquetes),
-                            new XElement("MontoAPagar", costoTotal),
-                            new XElement("NumeroDePedido", numeroPedidoSt),
-                            new XElement("Domicilio", Direccion)
-                        );
 
-                        // Cargar el documento XML existente o crear uno nuevo
+                        Pedido nuevoPedido = new Pedido
+                        {
+                            Usuario = nombreUsuarioLogeado,
+                            Nombre = nombre,
+                            TipoVolquete = seleccion,
+                            Cantidad = cantidadVolquetes,
+                            MontoAPagar = costoTotal,
+                            NumeroDePedido = numeroPedidoAleatorio.ToString(),
+                            Domicilio = Direccion,
+                            Estado = Pedido.EstadoPedido.Activo
+                            
+                        };
 
+                        // Agregar el nuevo pedido a la lista
+                        listaPedidos.Add(nuevoPedido);
+
+
+
+                        var enviroment = System.Environment.CurrentDirectory;
+                        string rutaRelativa = Directory.GetParent(enviroment).Parent.Parent.FullName;
+                        string rutaCompleta= Path.Combine(rutaRelativa,"Xml_Usuarios", "pedidos.xml");
+
+                        var pedidosXml = new XElement("Pedidos",
+                           listaPedidos.Select(pedido =>
+                           new XElement("Pedido",
+                           new XElement("Usuario", pedido.Usuario),
+                           new XElement("Nombre", pedido.Nombre),
+                           new XElement("TipoVolquete", pedido.TipoVolquete),
+                           new XElement("Cantidad", pedido.Cantidad),
+                           new XElement("MontoAPagar", pedido.MontoAPagar),
+                           new XElement("NumeroDePedido", pedido.NumeroDePedido),
+                           new XElement("Domicilio", pedido.Domicilio),
+                           new XElement("Estado", pedido.Estado)
+                       )
+                   )
+               );
 
                         XDocument doc;
-                        if (System.IO.File.Exists(xmlFileName))
+                        if (System.IO.File.Exists(rutaCompleta))
                         {
-                            doc = XDocument.Load(xmlFileName);
+                            doc = XDocument.Load(rutaCompleta);
                         }
                         else
                         {
                             doc = new XDocument(new XElement("Pedidos"));
                         }
 
-                        // Agregar el nuevo pedido al documento XML
-                        doc.Root.Add(pedidoElement);
+                        
+                        doc.Root.Add(pedidosXml);
 
                         // Guardar el documento XML en el archivo
-                        doc.Save(xmlFileName);
+                        doc.Save(rutaCompleta);
 
                         MessageBox.Show("Pedido guardado con éxito.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show($"El Numero De Su Pedido es {numeroPedidoAleatorio}.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        
                     }
                 }
             }

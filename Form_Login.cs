@@ -12,13 +12,29 @@ namespace formulario_parcial
 {
     public partial class FormularioUsuario : Form
     {
-        // Utiliza la instancia única de UserManager proporcionada por el Singleton
+        //  la instancia única de UserManager proporcionada por el Singleton
         private UserManager userManager = UserManager.Instancia;
-
+        
         public FormularioUsuario()
         {
             InitializeComponent();
+
+            ConfigurarAutocompletado();
         }
+
+        private void ConfigurarAutocompletado()
+        {
+            // Crear una colección de cadenas para el autocompletado
+            var fuenteAutocompletado = new AutoCompleteStringCollection();
+            fuenteAutocompletado.AddRange(userManager.GetUsuarios().Select(u => u.Nombre).ToArray());
+
+            // Configurar el TextBox para el autocompletado
+            textBoxNombre.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            textBoxNombre.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            textBoxNombre.AutoCompleteCustomSource = fuenteAutocompletado;
+        }
+
+
 
         private void textBoxNombre_TextChanged(object sender, EventArgs e)
         {

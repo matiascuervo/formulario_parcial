@@ -43,4 +43,160 @@
     <NumeroDePedido>1</NumeroDePedido>
     <Domicilio>rivadavia 1371</Domicilio>
   </Pedido>
+  <Pedidos>
+    <Pedido>
+      <Usuario>matias</Usuario>
+      <Nombre>matias cuervo</Nombre>
+      <TipoVolquete>Chico</TipoVolquete>
+      <Cantidad>2</Cantidad>
+      <MontoAPagar>22000.0</MontoAPagar>
+      <NumeroDePedido>1</NumeroDePedido>
+      <Domicilio>rivadavia 1371</Domicilio>
+    </Pedido>
+  </Pedidos>
+  <Pedidos>
+    <Pedido>
+      <Usuario>matias</Usuario>
+      <Nombre>matias cuervo</Nombre>
+      <TipoVolquete>Grande</TipoVolquete>
+      <Cantidad>3</Cantidad>
+      <MontoAPagar>72000.0</MontoAPagar>
+      <NumeroDePedido>0,501725829938697</NumeroDePedido>
+      <Domicilio>rivadavia 1371</Domicilio>
+    </Pedido>
+  </Pedidos>
+  <Pedidos>
+    <Pedido>
+      <Usuario>matias</Usuario>
+      <Nombre>matias</Nombre>
+      <TipoVolquete>Grande</TipoVolquete>
+      <Cantidad>2</Cantidad>
+      <MontoAPagar>44000.0</MontoAPagar>
+      <NumeroDePedido>0</NumeroDePedido>
+      <Domicilio>rivadavia 1371</Domicilio>
+    </Pedido>
+  </Pedidos>
+  <Pedidos>
+    <Pedido>
+      <Usuario>matias</Usuario>
+      <Nombre>matias cuervo</Nombre>
+      <TipoVolquete>Chico</TipoVolquete>
+      <Cantidad>2</Cantidad>
+      <MontoAPagar>22000.0</MontoAPagar>
+      <NumeroDePedido>993463</NumeroDePedido>
+      <Domicilio>rivadavia 1371</Domicilio>
+    </Pedido>
+  </Pedidos>
+  <Pedidos>
+    <Pedido>
+      <Usuario>matias</Usuario>
+      <Nombre>matias cuervo</Nombre>
+      <TipoVolquete>Grande</TipoVolquete>
+      <Cantidad>2</Cantidad>
+      <MontoAPagar>44000.0</MontoAPagar>
+      <NumeroDePedido>474242</NumeroDePedido>
+      <Domicilio>rivadavia 1371</Domicilio>
+    </Pedido>
+  </Pedidos>
+  <Pedidos>
+    <Pedido>
+      <Usuario>matias</Usuario>
+      <Nombre>matias cuervo</Nombre>
+      <TipoVolquete>Chico</TipoVolquete>
+      <Cantidad>2</Cantidad>
+      <MontoAPagar>20000</MontoAPagar>
+      <NumeroDePedido>709415</NumeroDePedido>
+      <Domicilio>rivadavia 1371</Domicilio>
+    </Pedido>
+  </Pedidos>
+  <Pedidos>
+    <Pedido>
+      <Usuario>matias</Usuario>
+      <Nombre>matias</Nombre>
+      <TipoVolquete>Grande</TipoVolquete>
+      <Cantidad>2</Cantidad>
+      <MontoAPagar>44000.0</MontoAPagar>
+      <NumeroDePedido>159407</NumeroDePedido>
+      <Domicilio>rivadavia 1371</Domicilio>
+    </Pedido>
+  </Pedidos>
+  <Pedidos>
+    <Pedido>
+      <Usuario>matias</Usuario>
+      <Nombre>matias cuervo</Nombre>
+      <TipoVolquete>Grande</TipoVolquete>
+      <Cantidad>1</Cantidad>
+      <MontoAPagar>20000</MontoAPagar>
+      <NumeroDePedido>974318</NumeroDePedido>
+      <Domicilio>rivadavia 1371</Domicilio>
+    </Pedido>
+  </Pedidos>
+  <Pedidos>
+    <Pedido>
+      <Usuario>matias</Usuario>
+      <Nombre>matias cuervo</Nombre>
+      <TipoVolquete>Chico</TipoVolquete>
+      <Cantidad>2</Cantidad>
+      <MontoAPagar>22000.0</MontoAPagar>
+      <NumeroDePedido>544347</NumeroDePedido>
+      <Domicilio>rivadavia 1371</Domicilio>
+    </Pedido>
+  </Pedidos>
+  <Pedidos>
+    <Pedido>
+      <Usuario>matias</Usuario>
+      <Nombre>matias cuervo</Nombre>
+      <TipoVolquete>Chico</TipoVolquete>
+      <Cantidad>1</Cantidad>
+      <MontoAPagar>11000.0</MontoAPagar>
+      <NumeroDePedido>527046</NumeroDePedido>
+      <Domicilio>rivadavia 1371</Domicilio>
+    </Pedido>
+  </Pedidos>
+  <Pedidos>
+    <Pedido>
+      <Usuario>matias</Usuario>
+      <Nombre>matias cuervo</Nombre>
+      <TipoVolquete>Chico</TipoVolquete>
+      <Cantidad>1</Cantidad>
+      <MontoAPagar>11000.0</MontoAPagar>
+      <NumeroDePedido>705238</NumeroDePedido>
+      <Domicilio>rivadavia 1371</Domicilio>
+    </Pedido>
+  </Pedidos>
+  <Pedidos>
+    <Pedido>
+      <Usuario>matias</Usuario>
+      <Nombre>matias</Nombre>
+      <TipoVolquete>Chico</TipoVolquete>
+      <Cantidad>2</Cantidad>
+      <MontoAPagar>22000.0</MontoAPagar>
+      <NumeroDePedido>436234</NumeroDePedido>
+      <Domicilio>123</Domicilio>
+    </Pedido>
+  </Pedidos>
+  <Pedidos>
+    <Pedido>
+      <Usuario>matias</Usuario>
+      <Nombre>matias cuervo</Nombre>
+      <TipoVolquete>Chico</TipoVolquete>
+      <Cantidad>2</Cantidad>
+      <MontoAPagar>20000</MontoAPagar>
+      <NumeroDePedido>347189</NumeroDePedido>
+      <Domicilio>1731</Domicilio>
+      <Estado>Cancelado</Estado>
+    </Pedido>
+  </Pedidos>
+  <Pedidos>
+    <Pedido>
+      <Usuario>matias</Usuario>
+      <Nombre>matias cuervo</Nombre>
+      <TipoVolquete>Chico</TipoVolquete>
+      <Cantidad>2</Cantidad>
+      <MontoAPagar>22000.0</MontoAPagar>
+      <NumeroDePedido>120475</NumeroDePedido>
+      <Domicilio>1371</Domicilio>
+      <Estado>Cancelado</Estado>
+    </Pedido>
+  </Pedidos>
 </Pedidos>

@@ -36,7 +36,7 @@ namespace formulario_parcial
                 if (!string.IsNullOrWhiteSpace(Usuario) && !string.IsNullOrWhiteSpace(contraseña))
                 {
                     // Registra al nuevo usuario utilizando el UserManager (Singleton)
-                    userManager.RegistrarCredenciales(Usuario, contraseña);
+                    userManager.RegistrarCredenciales(Usuario, contraseña,"Usuario");
 
                     // Limpia los campos de entrada
                     textBox_Nombre_Registro.Clear();
@@ -60,6 +60,11 @@ namespace formulario_parcial
         private void Boton_Volver_Registro_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void textBox_Contraseña_Registro_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
