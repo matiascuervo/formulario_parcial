@@ -72,5 +72,10 @@ namespace formulario_parcial
         {
 
         }
+
+        private void Form_alquiler_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

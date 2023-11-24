@@ -32,7 +32,6 @@
             toolStrip1 = new ToolStrip();
             toolStripButton_Pedidos = new ToolStripButton();
             toolStripLabel1 = new ToolStripLabel();
-            toolStripTextBox_Pedidos = new ToolStripTextBox();
             toolStripSeparator1 = new ToolStripSeparator();
             dataGridView_Pedidos = new DataGridView();
             columna_Usuario = new DataGridViewTextBoxColumn();
@@ -43,15 +42,18 @@
             Columna_Numero_De_Pedido = new DataGridViewTextBoxColumn();
             Columna_Direccion = new DataGridViewTextBoxColumn();
             Columna_Estado = new DataGridViewTextBoxColumn();
+            Columna_FechaEntrega = new DataGridViewTextBoxColumn();
+            Columna_FechaRetiro = new DataGridViewTextBoxColumn();
             Boton_Volver_Pedidos = new RoundButton();
             button_Cancelar = new Button();
+            textBox_Cancelar = new TextBox();
             toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView_Pedidos).BeginInit();
             SuspendLayout();
             // 
             // toolStrip1
             // 
-            toolStrip1.Items.AddRange(new ToolStripItem[] { toolStripButton_Pedidos, toolStripLabel1, toolStripTextBox_Pedidos, toolStripSeparator1 });
+            toolStrip1.Items.AddRange(new ToolStripItem[] { toolStripButton_Pedidos, toolStripLabel1, toolStripSeparator1 });
             toolStrip1.Location = new Point(0, 0);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Size = new Size(800, 25);
@@ -74,12 +76,6 @@
             toolStripLabel1.Size = new Size(49, 22);
             toolStripLabel1.Text = "Pedidos";
             // 
-            // toolStripTextBox_Pedidos
-            // 
-            toolStripTextBox_Pedidos.Name = "toolStripTextBox_Pedidos";
-            toolStripTextBox_Pedidos.Size = new Size(100, 25);
-            toolStripTextBox_Pedidos.Click += toolStripTextBox_Pedidos_Click;
-            // 
             // toolStripSeparator1
             // 
             toolStripSeparator1.Name = "toolStripSeparator1";
@@ -92,12 +88,12 @@
             dataGridView_Pedidos.CellBorderStyle = DataGridViewCellBorderStyle.Sunken;
             dataGridView_Pedidos.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
             dataGridView_Pedidos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView_Pedidos.Columns.AddRange(new DataGridViewColumn[] { columna_Usuario, Columna_Nombre, Columna_Tipo, Columna_Cantidad, Columna_MontoAPagar, Columna_Numero_De_Pedido, Columna_Direccion, Columna_Estado });
+            dataGridView_Pedidos.Columns.AddRange(new DataGridViewColumn[] { columna_Usuario, Columna_Nombre, Columna_Tipo, Columna_Cantidad, Columna_MontoAPagar, Columna_Numero_De_Pedido, Columna_Direccion, Columna_Estado, Columna_FechaEntrega, Columna_FechaRetiro });
             dataGridView_Pedidos.GridColor = SystemColors.ControlDarkDark;
-            dataGridView_Pedidos.Location = new Point(0, 28);
+            dataGridView_Pedidos.Location = new Point(0, 23);
             dataGridView_Pedidos.Name = "dataGridView_Pedidos";
             dataGridView_Pedidos.RowTemplate.Height = 25;
-            dataGridView_Pedidos.Size = new Size(788, 100);
+            dataGridView_Pedidos.Size = new Size(800, 333);
             dataGridView_Pedidos.TabIndex = 1;
             dataGridView_Pedidos.CellContentClick += dataGridView_Pedidos_CellContentClick;
             // 
@@ -141,39 +137,60 @@
             Columna_Estado.HeaderText = "Estado Del Pedido";
             Columna_Estado.Name = "Columna_Estado";
             // 
+            // Columna_FechaEntrega
+            // 
+            Columna_FechaEntrega.HeaderText = "Fecha De Entrega";
+            Columna_FechaEntrega.Name = "Columna_FechaEntrega";
+            // 
+            // Columna_FechaRetiro
+            // 
+            Columna_FechaRetiro.HeaderText = "Fecha De Retiro";
+            Columna_FechaRetiro.Name = "Columna_FechaRetiro";
+            // 
             // Boton_Volver_Pedidos
             // 
             Boton_Volver_Pedidos.BackColor = Color.Transparent;
             Boton_Volver_Pedidos.FlatStyle = FlatStyle.Popup;
             Boton_Volver_Pedidos.Font = new Font("Segoe UI", 26.25F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            Boton_Volver_Pedidos.ForeColor = SystemColors.ActiveCaptionText;
+            Boton_Volver_Pedidos.ForeColor = Color.Yellow;
             Boton_Volver_Pedidos.Location = new Point(0, 376);
             Boton_Volver_Pedidos.Name = "Boton_Volver_Pedidos";
             Boton_Volver_Pedidos.Size = new Size(74, 76);
-            Boton_Volver_Pedidos.TabIndex = 8;
+            Boton_Volver_Pedidos.TabIndex = 3;
             Boton_Volver_Pedidos.Text = "↩";
             Boton_Volver_Pedidos.UseVisualStyleBackColor = false;
             Boton_Volver_Pedidos.Click += Boton_Volver_Pedidos_Click_1;
             // 
             // button_Cancelar
             // 
-            button_Cancelar.BackColor = Color.WhiteSmoke;
+            button_Cancelar.BackColor = Color.Gold;
             button_Cancelar.BackgroundImageLayout = ImageLayout.Stretch;
-            button_Cancelar.FlatStyle = FlatStyle.Popup;
-            button_Cancelar.Location = new Point(12, 277);
+            button_Cancelar.FlatStyle = FlatStyle.Flat;
+            button_Cancelar.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            button_Cancelar.Location = new Point(199, 376);
             button_Cancelar.Name = "button_Cancelar";
             button_Cancelar.Size = new Size(116, 37);
-            button_Cancelar.TabIndex = 9;
+            button_Cancelar.TabIndex = 1;
             button_Cancelar.Text = "Cancelar Pedido";
             button_Cancelar.UseVisualStyleBackColor = false;
             button_Cancelar.Click += button_Cancelar_Click;
+            // 
+            // textBox_Cancelar
+            // 
+            textBox_Cancelar.Location = new Point(403, 376);
+            textBox_Cancelar.Name = "textBox_Cancelar";
+            textBox_Cancelar.PlaceholderText = "N° De Pedido A Cancelar";
+            textBox_Cancelar.Size = new Size(143, 23);
+            textBox_Cancelar.TabIndex = 2;
             // 
             // Pedidos_Form
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
+            BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(800, 450);
+            Controls.Add(textBox_Cancelar);
             Controls.Add(button_Cancelar);
             Controls.Add(Boton_Volver_Pedidos);
             Controls.Add(dataGridView_Pedidos);
@@ -195,7 +212,6 @@
         private ToolStripButton toolStripButton_Pedidos;
         private ToolStripLabel toolStripLabel1;
         private ToolStripSeparator toolStripSeparator1;
-        private ToolStripTextBox toolStripTextBox_Pedidos;
         private DataGridView dataGridView_Pedidos;
         private DataGridViewTextBoxColumn columna_Usuario;
         private DataGridViewTextBoxColumn Columna_Nombre;
@@ -207,5 +223,8 @@
         private RoundButton Boton_Volver_Pedidos;
         private Button button_Cancelar;
         private DataGridViewTextBoxColumn Columna_Estado;
+        private DataGridViewTextBoxColumn Columna_FechaEntrega;
+        private DataGridViewTextBoxColumn Columna_FechaRetiro;
+        private TextBox textBox_Cancelar;
     }
 }

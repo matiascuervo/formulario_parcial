@@ -34,13 +34,16 @@
             Boton_Volver_App = new RoundButton();
             button_usuarios = new Button();
             Boton_Pedidos_Usuarios = new Button();
+            pictureBox1 = new PictureBox();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // button_Ventas
             // 
-            button_Ventas.BackColor = Color.Orange;
+            button_Ventas.BackColor = Color.Gold;
             button_Ventas.FlatStyle = FlatStyle.Popup;
             button_Ventas.Font = new Font("Verdana", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            button_Ventas.ForeColor = Color.Black;
             button_Ventas.Location = new Point(31, 130);
             button_Ventas.Name = "button_Ventas";
             button_Ventas.Size = new Size(145, 43);
@@ -51,7 +54,7 @@
             // 
             // button_Pedidos
             // 
-            button_Pedidos.BackColor = Color.Red;
+            button_Pedidos.BackColor = Color.Gold;
             button_Pedidos.FlatStyle = FlatStyle.Popup;
             button_Pedidos.Font = new Font("Verdana", 9F, FontStyle.Bold, GraphicsUnit.Point);
             button_Pedidos.Location = new Point(31, 281);
@@ -78,7 +81,7 @@
             // 
             // button_usuarios
             // 
-            button_usuarios.Location = new Point(629, 130);
+            button_usuarios.Location = new Point(629, 120);
             button_usuarios.Name = "button_usuarios";
             button_usuarios.Size = new Size(134, 43);
             button_usuarios.TabIndex = 8;
@@ -89,7 +92,7 @@
             // 
             // Boton_Pedidos_Usuarios
             // 
-            Boton_Pedidos_Usuarios.Location = new Point(629, 294);
+            Boton_Pedidos_Usuarios.Location = new Point(629, 280);
             Boton_Pedidos_Usuarios.Name = "Boton_Pedidos_Usuarios";
             Boton_Pedidos_Usuarios.Size = new Size(134, 44);
             Boton_Pedidos_Usuarios.TabIndex = 9;
@@ -98,6 +101,17 @@
             Boton_Pedidos_Usuarios.Visible = false;
             Boton_Pedidos_Usuarios.Click += Boton_Pedidos_Usuarios_Click;
             // 
+            // pictureBox1
+            // 
+            pictureBox1.BackColor = Color.Transparent;
+            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
+            pictureBox1.Location = new Point(182, 76);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(405, 331);
+            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1.TabIndex = 10;
+            pictureBox1.TabStop = false;
+            // 
             // Form_alquiler
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -105,6 +119,7 @@
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(800, 450);
+            Controls.Add(pictureBox1);
             Controls.Add(Boton_Pedidos_Usuarios);
             Controls.Add(button_usuarios);
             Controls.Add(Boton_Volver_App);
@@ -114,6 +129,8 @@
             Name = "Form_alquiler";
             Text = "VOLQUETES POLY";
             TransparencyKey = Color.Linen;
+            Load += Form_alquiler_Load;
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
         }
 
@@ -123,5 +140,6 @@
         private RoundButton Boton_Volver_App;
         private Button button_usuarios;
         private Button Boton_Pedidos_Usuarios;
+        private PictureBox pictureBox1;
     }
 }

@@ -199,4 +199,98 @@
       <Estado>Cancelado</Estado>
     </Pedido>
   </Pedidos>
+  <Pedidos>
+    <Pedido>
+      <Usuario>matias</Usuario>
+      <Nombre>matias cuervo</Nombre>
+      <TipoVolquete>Chico</TipoVolquete>
+      <Cantidad>2</Cantidad>
+      <MontoAPagar>20000</MontoAPagar>
+      <NumeroDePedido>570349</NumeroDePedido>
+      <Domicilio>rivadiva 1371</Domicilio>
+      <Estado>Activo</Estado>
+    </Pedido>
+  </Pedidos>
+  <Pedidos>
+    <Pedido>
+      <Usuario>matias</Usuario>
+      <Nombre>luis</Nombre>
+      <TipoVolquete>Chico</TipoVolquete>
+      <Cantidad>2</Cantidad>
+      <MontoAPagar>24000.0</MontoAPagar>
+      <NumeroDePedido>394845</NumeroDePedido>
+      <Domicilio>eziza 444</Domicilio>
+      <Estado>Cancelado</Estado>
+    </Pedido>
+  </Pedidos>
+  <Pedidos>
+    <Pedido>
+      <Usuario>matias</Usuario>
+      <Nombre>matias cuervo</Nombre>
+      <TipoVolquete>Chico</TipoVolquete>
+      <Cantidad>2</Cantidad>
+      <MontoAPagar>22000.0</MontoAPagar>
+      <NumeroDePedido>144544</NumeroDePedido>
+      <Domicilio>rivadavia 1371</Domicilio>
+      <FechaEntrega>02/12/2023</FechaEntrega>
+      <DuracionEntregaDias>7</DuracionEntregaDias>
+    </Pedido>
+  </Pedidos>
+  <Pedidos>
+    <Pedido>
+      <Usuario>matias</Usuario>
+      <Nombre>matias cuervo</Nombre>
+      <TipoVolquete>Grande</TipoVolquete>
+      <Cantidad>2</Cantidad>
+      <MontoAPagar>44000.0</MontoAPagar>
+      <NumeroDePedido>228257</NumeroDePedido>
+      <Domicilio>rivadavia 1371</Domicilio>
+      <FechaEntrega>23/11/2023</FechaEntrega>
+      <DuracionEntregaDias>7</DuracionEntregaDias>
+      <FechaRetiro>30/11/2023</FechaRetiro>
+    </Pedido>
+  </Pedidos>
+  <Pedidos>
+    <Pedido>
+      <Usuario>matias</Usuario>
+      <Nombre>matias cuervo</Nombre>
+      <TipoVolquete>Grande</TipoVolquete>
+      <Cantidad>3</Cantidad>
+      <MontoAPagar>66000.0</MontoAPagar>
+      <NumeroDePedido>778659</NumeroDePedido>
+      <Domicilio>calle falsa 123</Domicilio>
+      <FechaEntrega>23/11/2023</FechaEntrega>
+      <DuracionEntregaDias>7Dias</DuracionEntregaDias>
+      <FechaRetiro>30/11/2023</FechaRetiro>
+    </Pedido>
+  </Pedidos>
+  <Pedidos>
+    <Pedido>
+      <Usuario>matias</Usuario>
+      <Nombre>matias cuervo</Nombre>
+      <TipoVolquete>Chicos</TipoVolquete>
+      <Cantidad>2</Cantidad>
+      <MontoAPagar>20000</MontoAPagar>
+      <NumeroDePedido>542318</NumeroDePedido>
+      <Domicilio>rivadavia 1371</Domicilio>
+      <FechaEntrega>01/12/2023</FechaEntrega>
+      <DuracionEntregaDias>7Dias</DuracionEntregaDias>
+      <FechaRetiro>08/12/2023</FechaRetiro>
+    </Pedido>
+  </Pedidos>
+  <Pedidos>
+    <Pedido>
+      <Usuario>matias</Usuario>
+      <Nombre>matias cuervo</Nombre>
+      <TipoVolquete>Chicos</TipoVolquete>
+      <Cantidad>5</Cantidad>
+      <MontoAPagar>55000.0</MontoAPagar>
+      <NumeroDePedido>597508</NumeroDePedido>
+      <Domicilio>rivadavia 1371</Domicilio>
+      <Estado>Cancelado</Estado>
+      <FechaEntrega>25/12/2023</FechaEntrega>
+      <DuracionEntregaDias>7Dias</DuracionEntregaDias>
+      <FechaRetiro>01/01/2024</FechaRetiro>
+    </Pedido>
+  </Pedidos>
 </Pedidos>

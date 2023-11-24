@@ -17,34 +17,30 @@ namespace formulario_parcial
 
         private void dataGridView_Pedidos_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            // Aquí puedes agregar lógica si es necesario
+
         }
 
         private void toolStripTextBox_Pedidos_Click(object sender, EventArgs e)
         {
             // Verificar que el campo de búsqueda no esté vacío antes de buscar
-            if (!string.IsNullOrEmpty(toolStripTextBox_Pedidos.Text.Trim()))
-            {
-                BuscarPedidoPorNumero(toolStripTextBox_Pedidos.Text);
-            }
+           
         }
 
         private void toolStripButton_Pedidos_Click(object sender, EventArgs e)
         {
             // Verificar que el campo de búsqueda no esté vacío antes de buscar
-            if (!string.IsNullOrEmpty(toolStripTextBox_Pedidos.Text.Trim()))
-            {
-                BuscarPedidoPorNumero(toolStripTextBox_Pedidos.Text);
-            }
+
+            MostrarPedidosDelUsuario(UserManager.Instancia.UsuarioLogueado?.Nombre);
+
+
         }
-        private void BuscarPedidoPorNumero(string numeroPedido)
+        private void MostrarPedidosDelUsuario(string nombreUsuario)
         {
-            string numeroPedidoSinEspacios = numeroPedido.Trim();
+            dataGridView_Pedidos.Rows.Clear();
 
             var enviroment = System.Environment.CurrentDirectory;
             string rutaRelativa = Directory.GetParent(enviroment).Parent.Parent.FullName;
             string rutaCompleta = Path.Combine(rutaRelativa, "Xml_Usuarios", "pedidos.xml");
-        
 
             if (File.Exists(rutaCompleta))
             {
@@ -52,31 +48,12 @@ namespace formulario_parcial
                 {
                     XDocument doc = XDocument.Load(rutaCompleta);
 
-                    // Buscar el pedido por número en el archivo XML
-                    var pedidoEncontrado = doc.Descendants("Pedido")
-                        .FirstOrDefault(p => p.Element("NumeroDePedido")?.Value == numeroPedidoSinEspacios);
+                    var pedidosDelUsuario = doc.Descendants("Pedido")
+                        .Where(p => p.Element("Usuario")?.Value == nombreUsuario);
 
-                    if (pedidoEncontrado != null)
+                    foreach (var pedido in pedidosDelUsuario)
                     {
-                        // Verifica que el usuario actual es el mismo que realizó el pedido
-                        string usuarioPedido = pedidoEncontrado.Element("Usuario")?.Value;
-
-                        
-                        string nombreUsuarioLogeado = UserManager.Instancia.UsuarioLogueado?.Nombre;
-
-                        if (usuarioPedido == nombreUsuarioLogeado)
-                        {
-                            
-                            MostrarDetallesPedido(pedidoEncontrado);
-                        }
-                        else
-                        {
-                            MessageBox.Show("No tienes permiso para ver este pedido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Hand);
-                        }
-                    }
-                    else
-                    {
-                        MessageBox.Show("Pedido no encontrado.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        AgregarFilaPedidoAlDataGridView(pedido);
                     }
                 }
                 catch (Exception ex)
@@ -91,21 +68,21 @@ namespace formulario_parcial
         }
 
 
-        public void MostrarDetallesPedido(XElement pedido)
+        private void AgregarFilaPedidoAlDataGridView(XElement pedido)
         {
-            // Limpia las filas 
-            dataGridView_Pedidos.Rows.Clear();
+            int rowIndex = dataGridView_Pedidos.Rows.Add();
+            DataGridViewRow row = dataGridView_Pedidos.Rows[rowIndex];
 
-
-            // Asignar valores a las celdas en las columnas correspondientes
-            dataGridView_Pedidos.Rows[0].Cells["columna_Usuario"].Value = pedido.Element("Usuario")?.Value;
-            dataGridView_Pedidos.Rows[0].Cells["columna_Nombre"].Value = pedido.Element("Nombre")?.Value;
-            dataGridView_Pedidos.Rows[0].Cells["columna_Tipo"].Value = pedido.Element("TipoVolquete")?.Value;
-            dataGridView_Pedidos.Rows[0].Cells["columna_Cantidad"].Value = pedido.Element("Cantidad")?.Value;
-            dataGridView_Pedidos.Rows[0].Cells["columna_MontoAPagar"].Value = pedido.Element("MontoAPagar")?.Value;
-            dataGridView_Pedidos.Rows[0].Cells["Columna_Numero_De_Pedido"].Value = pedido.Element("NumeroDePedido")?.Value;
-            dataGridView_Pedidos.Rows[0].Cells["columna_Direccion"].Value = pedido.Element("Domicilio")?.Value;
-            dataGridView_Pedidos.Rows[0].Cells["columna_Estado"].Value = pedido.Element("Estado")?.Value;
+            row.Cells["columna_Usuario"].Value = pedido.Element("Usuario")?.Value;
+            row.Cells["columna_Nombre"].Value = pedido.Element("Nombre")?.Value;
+            row.Cells["columna_Tipo"].Value = pedido.Element("TipoVolquete")?.Value;
+            row.Cells["columna_Cantidad"].Value = pedido.Element("Cantidad")?.Value;
+            row.Cells["columna_MontoAPagar"].Value = pedido.Element("MontoAPagar")?.Value;
+            row.Cells["Columna_Numero_De_Pedido"].Value = pedido.Element("NumeroDePedido")?.Value;
+            row.Cells["columna_Direccion"].Value = pedido.Element("Domicilio")?.Value;
+            row.Cells["columna_Estado"].Value = pedido.Element("Estado")?.Value;
+            row.Cells["columna_FechaEntrega"].Value = pedido.Element("FechaEntrega")?.Value;
+            row.Cells["columna_FechaRetiro"].Value = pedido.Element("FechaRetiro")?.Value;
         }
 
         private void Boton_Volver_Pedidos_Click_1(object sender, EventArgs e)
@@ -119,34 +96,21 @@ namespace formulario_parcial
         {
             try
             {
-                // Verifica si hay una celda seleccionada en el DataGridView
-                // Obtenie la fila seleccionada
-                // Obtenie el número de pedido de la celda seleccionada
-                // Verifica si el valor de la celda no es null o cadena vacía
-                if (dataGridView_Pedidos.SelectedCells.Count > 0)
+                // Verifica si hay un número de pedido ingresado
+                if (!string.IsNullOrEmpty(textBox_Cancelar.Text.Trim()))
                 {
-                    DataGridViewRow selectedRow = dataGridView_Pedidos.Rows[dataGridView_Pedidos.SelectedCells[0].RowIndex];
+                    string numeroPedido = textBox_Cancelar.Text.Trim();
 
-                    string numeroPedido = selectedRow.Cells["Columna_Numero_De_Pedido"].Value?.ToString();
+                    // Busca el pedido por el número y lo cancela
+                    CambiarEstadoPedido(numeroPedido, EstadoPedido.Cancelado);
 
-                    if (!string.IsNullOrEmpty(numeroPedido))
-                    {
-                        BuscarPedidoPorNumero(numeroPedido);
-                        
-
-                        CambiarEstadoPedido(numeroPedido, EstadoPedido.Cancelado);
-                        
-                    }
-                    else
-                    {
-                        // Lanzar  excepción personalizada 
-                        throw new PedidoNoEncontradoException();
-                    }
+                    // Vuelve a mostrar los pedidos del usuario después de la cancelación
+                    MostrarPedidosDelUsuario(UserManager.Instancia.UsuarioLogueado?.Nombre);
                 }
                 else
                 {
-                    
-                    throw new PedidoNoEncontradoException();
+                    // Muestra un mensaje indicando que el número de pedido no es válido
+                    MessageBox.Show("Ingrese Un Número De Pedido En La Caja De Texto De La Derecha Para Cancelarlo.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (PedidoNoEncontradoException ex)
@@ -158,6 +122,7 @@ namespace formulario_parcial
                 MessageBox.Show($"Error inesperado: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
 
 
         private void CambiarEstadoPedido(string numeroPedido, EstadoPedido nuevoEstado)
@@ -191,13 +156,13 @@ namespace formulario_parcial
                             }
                         }
 
-                        
+
                         string nuevoEstadoStr = nuevoEstado.ToString();
 
-                        // Actualizar el estado del pedido en el archivo XML
+                        // Actualiza el estado del pedido en el archivo XML
                         pedidoEncontrado.Element("Estado").Value = nuevoEstadoStr;
 
-                        
+
                         doc.Save(rutaCompleta);
                     }
                     else
@@ -216,5 +181,6 @@ namespace formulario_parcial
             }
         }
 
+       
     }
 }

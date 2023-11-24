@@ -24,11 +24,11 @@ namespace formulario_parcial
 
         private void ConfigurarAutocompletado()
         {
-            // Crear una colección de cadenas para el autocompletado
+            // Crea una colección de cadenas para el autocompletado
             var fuenteAutocompletado = new AutoCompleteStringCollection();
             fuenteAutocompletado.AddRange(userManager.GetUsuarios().Select(u => u.Nombre).ToArray());
 
-            // Configurar el TextBox para el autocompletado
+            // A Qui Configuro el TextBox para el autocompletado
             textBoxNombre.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             textBoxNombre.AutoCompleteSource = AutoCompleteSource.CustomSource;
             textBoxNombre.AutoCompleteCustomSource = fuenteAutocompletado;
@@ -76,7 +76,7 @@ namespace formulario_parcial
                 Form_alquiler form_Alquiler = new Form_alquiler();
 
                 
-                form_Alquiler.DialogResult = DialogResult.OK;
+                
                 this.Hide();
 
                 

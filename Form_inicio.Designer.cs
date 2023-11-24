@@ -37,7 +37,7 @@
             // Boton_nombre
             // 
             Boton_nombre.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            Boton_nombre.BackColor = SystemColors.Highlight;
+            Boton_nombre.BackColor = Color.Gold;
             Boton_nombre.Cursor = Cursors.Hand;
             Boton_nombre.DialogResult = DialogResult.OK;
             Boton_nombre.FlatStyle = FlatStyle.Flat;
@@ -52,7 +52,7 @@
             // 
             // button_Registro
             // 
-            button_Registro.BackColor = Color.Red;
+            button_Registro.BackColor = Color.Gold;
             button_Registro.Cursor = Cursors.Hand;
             button_Registro.FlatStyle = FlatStyle.Flat;
             button_Registro.Font = new Font("Tahoma", 11.25F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
@@ -76,7 +76,6 @@
             Label_Nombre_Inicio.Size = new Size(203, 40);
             Label_Nombre_Inicio.TabIndex = 2;
             Label_Nombre_Inicio.Text = "Volquetes Poly";
-            Label_Nombre_Inicio.Click += label1_Click;
             // 
             // Form_inicio
             // 
@@ -91,7 +90,7 @@
             FormBorderStyle = FormBorderStyle.Fixed3D;
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Form_inicio";
-            Text = "VOLQUETES_POLY";
+            Text = "VOLQUETES POLY";
             ResumeLayout(false);
             PerformLayout();
         }

@@ -23,7 +23,7 @@ namespace formulario_parcial
 
         private void Registro_Load(object sender, EventArgs e)
         {
-            // Código de inicialización si es necesario
+            
         }
 
         private void Boton_registro_Click(object sender, EventArgs e)
@@ -36,7 +36,7 @@ namespace formulario_parcial
                 if (!string.IsNullOrWhiteSpace(Usuario) && !string.IsNullOrWhiteSpace(contraseña))
                 {
                     // Registra al nuevo usuario utilizando el UserManager (Singleton)
-                    userManager.RegistrarCredenciales(Usuario, contraseña,"Usuario");
+                    userManager.RegistrarCredenciales(Usuario, contraseña,"Usuario","Activo");
 
                     // Limpia los campos de entrada
                     textBox_Nombre_Registro.Clear();

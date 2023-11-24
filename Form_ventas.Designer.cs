@@ -43,6 +43,10 @@
             label_Dirrecion = new Label();
             TextBox_Direccion = new TextBox();
             label2 = new Label();
+            label_fecha = new Label();
+            dateTime_Venta = new DateTimePicker();
+            label3 = new Label();
+            label4 = new Label();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -86,8 +90,8 @@
             // 
             // Button_Pedir
             // 
-            Button_Pedir.BackColor = Color.Red;
-            Button_Pedir.FlatStyle = FlatStyle.System;
+            Button_Pedir.BackColor = Color.Gold;
+            Button_Pedir.FlatStyle = FlatStyle.Flat;
             Button_Pedir.Location = new Point(321, 283);
             Button_Pedir.Name = "Button_Pedir";
             Button_Pedir.Size = new Size(153, 40);
@@ -187,6 +191,46 @@
             label2.Size = new Size(0, 25);
             label2.TabIndex = 13;
             // 
+            // label_fecha
+            // 
+            label_fecha.AutoSize = true;
+            label_fecha.BackColor = Color.Gold;
+            label_fecha.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            label_fecha.Location = new Point(135, 277);
+            label_fecha.Name = "label_fecha";
+            label_fecha.Size = new Size(114, 20);
+            label_fecha.TabIndex = 15;
+            label_fecha.Text = "Fecha De Envio";
+            // 
+            // dateTime_Venta
+            // 
+            dateTime_Venta.Location = new Point(105, 300);
+            dateTime_Venta.Name = "dateTime_Venta";
+            dateTime_Venta.Size = new Size(200, 23);
+            dateTime_Venta.TabIndex = 16;
+            dateTime_Venta.ValueChanged += dateTime_Venta_ValueChanged;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.BackColor = Color.Snow;
+            label3.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            label3.Location = new Point(339, 55);
+            label3.Name = "label3";
+            label3.Size = new Size(64, 19);
+            label3.TabIndex = 17;
+            label3.Text = "$ 10.000";
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            label4.Location = new Point(601, 55);
+            label4.Name = "label4";
+            label4.Size = new Size(64, 19);
+            label4.TabIndex = 18;
+            label4.Text = "$ 20.000";
+            // 
             // Form_ventas
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -194,6 +238,10 @@
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(828, 373);
+            Controls.Add(label4);
+            Controls.Add(label3);
+            Controls.Add(dateTime_Venta);
+            Controls.Add(label_fecha);
             Controls.Add(label2);
             Controls.Add(TextBox_Direccion);
             Controls.Add(label_Dirrecion);
@@ -210,7 +258,7 @@
             Controls.Add(label1);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Form_ventas";
-            Text = "Form_ventas";
+            Text = "Venta";
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -233,5 +281,9 @@
         private Label label_Dirrecion;
         private TextBox TextBox_Direccion;
         private Label label2;
+        private Label label_fecha;
+        private DateTimePicker dateTime_Venta;
+        private Label label3;
+        private Label label4;
     }
 }

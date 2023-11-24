@@ -34,9 +34,7 @@
             label1 = new Label();
             label2 = new Label();
             Boton_registro = new Button();
-            pictureBox1 = new PictureBox();
             Boton_Volver_Registro = new RoundButton();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // textBox_Nombre_Registro
@@ -65,7 +63,7 @@
             label1.FlatStyle = FlatStyle.System;
             label1.Font = new Font("Verdana", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
             label1.ForeColor = Color.White;
-            label1.Location = new Point(226, 135);
+            label1.Location = new Point(226, 129);
             label1.Name = "label1";
             label1.Size = new Size(105, 25);
             label1.TabIndex = 2;
@@ -90,7 +88,7 @@
             Boton_registro.Cursor = Cursors.Hand;
             Boton_registro.FlatStyle = FlatStyle.Popup;
             Boton_registro.Font = new Font("Sitka Small", 9.75F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            Boton_registro.ForeColor = Color.Red;
+            Boton_registro.ForeColor = Color.Gold;
             Boton_registro.Location = new Point(226, 302);
             Boton_registro.Name = "Boton_registro";
             Boton_registro.Size = new Size(108, 46);
@@ -98,18 +96,6 @@
             Boton_registro.Text = "Registrarme";
             Boton_registro.UseVisualStyleBackColor = false;
             Boton_registro.Click += Boton_registro_Click;
-            // 
-            // pictureBox1
-            // 
-            pictureBox1.BackColor = Color.Transparent;
-            pictureBox1.BorderStyle = BorderStyle.FixedSingle;
-            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(146, -1);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(547, 133);
-            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox1.TabIndex = 5;
-            pictureBox1.TabStop = false;
             // 
             // Boton_Volver_Registro
             // 
@@ -139,7 +125,6 @@
             Controls.Add(label1);
             Controls.Add(textBox_Contraseña_Registro);
             Controls.Add(textBox_Nombre_Registro);
-            Controls.Add(pictureBox1);
             Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             FormBorderStyle = FormBorderStyle.None;
             Icon = (Icon)resources.GetObject("$this.Icon");
@@ -147,7 +132,6 @@
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Registro";
             Load += Registro_Load;
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -159,7 +143,6 @@
         private Label label1;
         private Label label2;
         private Button Boton_registro;
-        private PictureBox pictureBox1;
         private RoundButton Boton_Volver_Registro;
     }
 }

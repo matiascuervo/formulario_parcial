@@ -22,16 +22,7 @@ namespace formulario_parcial
             Registro.ShowDialog();
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
-        {
-
-
-        }
+      
 
 
     }

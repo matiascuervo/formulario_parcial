@@ -31,13 +31,13 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Usuarios));
             Boton_Volver_Usuarios = new RoundButton();
             dataGridView_Usuarios = new DataGridView();
-            Column_Usuario = new DataGridViewTextBoxColumn();
-            Columna_Nombre = new DataGridViewTextBoxColumn();
-            Columna_Tipo = new DataGridViewTextBoxColumn();
-            Columna_Cantidad = new DataGridViewTextBoxColumn();
-            Columna_MontoAPagar = new DataGridViewTextBoxColumn();
-            Columna_Numero_De_Pedido = new DataGridViewTextBoxColumn();
-            Columna_Direccion = new DataGridViewTextBoxColumn();
+            Columna_Usuario = new DataGridViewTextBoxColumn();
+            Columna_Contraseña = new DataGridViewTextBoxColumn();
+            Columna_Rol = new DataGridViewTextBoxColumn();
+            Columna_Estado = new DataGridViewTextBoxColumn();
+            Boton_Mostrar_Usuarios = new Button();
+            textBox_Baja = new TextBox();
+            Bonton_Baja = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView_Usuarios).BeginInit();
             SuspendLayout();
             // 
@@ -47,7 +47,7 @@
             Boton_Volver_Usuarios.FlatStyle = FlatStyle.Flat;
             Boton_Volver_Usuarios.Font = new Font("Segoe UI", 26.25F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
             Boton_Volver_Usuarios.ForeColor = SystemColors.ActiveCaptionText;
-            Boton_Volver_Usuarios.Location = new Point(-5, 396);
+            Boton_Volver_Usuarios.Location = new Point(0, 394);
             Boton_Volver_Usuarios.Name = "Boton_Volver_Usuarios";
             Boton_Volver_Usuarios.Size = new Size(57, 56);
             Boton_Volver_Usuarios.TabIndex = 8;
@@ -58,48 +58,64 @@
             // dataGridView_Usuarios
             // 
             dataGridView_Usuarios.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView_Usuarios.Columns.AddRange(new DataGridViewColumn[] { Column_Usuario, Columna_Nombre, Columna_Tipo, Columna_Cantidad, Columna_MontoAPagar, Columna_Numero_De_Pedido, Columna_Direccion });
-            dataGridView_Usuarios.Location = new Point(25, 12);
+            dataGridView_Usuarios.Columns.AddRange(new DataGridViewColumn[] { Columna_Usuario, Columna_Contraseña, Columna_Rol, Columna_Estado });
+            dataGridView_Usuarios.Location = new Point(0, -4);
             dataGridView_Usuarios.Name = "dataGridView_Usuarios";
             dataGridView_Usuarios.RowTemplate.Height = 25;
-            dataGridView_Usuarios.Size = new Size(745, 149);
+            dataGridView_Usuarios.Size = new Size(444, 271);
             dataGridView_Usuarios.TabIndex = 9;
-            dataGridView_Usuarios.CellContentClick += dataGridView_Usuarios_CellContentClick;
             // 
-            // Column_Usuario
+            // Columna_Usuario
             // 
-            Column_Usuario.HeaderText = "Usuario";
-            Column_Usuario.Name = "Column_Usuario";
+            Columna_Usuario.HeaderText = "Usuario";
+            Columna_Usuario.Name = "Columna_Usuario";
             // 
-            // Columna_Nombre
+            // Columna_Contraseña
             // 
-            Columna_Nombre.HeaderText = "Nombre";
-            Columna_Nombre.Name = "Columna_Nombre";
+            Columna_Contraseña.HeaderText = "Contraseña";
+            Columna_Contraseña.Name = "Columna_Contraseña";
             // 
-            // Columna_Tipo
+            // Columna_Rol
             // 
-            Columna_Tipo.HeaderText = "Tipo De Volquete";
-            Columna_Tipo.Name = "Columna_Tipo";
+            Columna_Rol.HeaderText = "Rol";
+            Columna_Rol.Name = "Columna_Rol";
             // 
-            // Columna_Cantidad
+            // Columna_Estado
             // 
-            Columna_Cantidad.HeaderText = "Cantidad";
-            Columna_Cantidad.Name = "Columna_Cantidad";
+            Columna_Estado.HeaderText = "Estado";
+            Columna_Estado.Name = "Columna_Estado";
             // 
-            // Columna_MontoAPagar
+            // Boton_Mostrar_Usuarios
             // 
-            Columna_MontoAPagar.HeaderText = "Monto A Pagar";
-            Columna_MontoAPagar.Name = "Columna_MontoAPagar";
+            Boton_Mostrar_Usuarios.BackColor = Color.LightSkyBlue;
+            Boton_Mostrar_Usuarios.FlatStyle = FlatStyle.Flat;
+            Boton_Mostrar_Usuarios.Location = new Point(450, 12);
+            Boton_Mostrar_Usuarios.Name = "Boton_Mostrar_Usuarios";
+            Boton_Mostrar_Usuarios.Size = new Size(133, 23);
+            Boton_Mostrar_Usuarios.TabIndex = 10;
+            Boton_Mostrar_Usuarios.Text = "Mostrar usuarios";
+            Boton_Mostrar_Usuarios.UseVisualStyleBackColor = false;
+            Boton_Mostrar_Usuarios.Click += Boton_Mostrar_Usuarios_Click;
             // 
-            // Columna_Numero_De_Pedido
+            // textBox_Baja
             // 
-            Columna_Numero_De_Pedido.HeaderText = "Numero De Pedido";
-            Columna_Numero_De_Pedido.Name = "Columna_Numero_De_Pedido";
+            textBox_Baja.Location = new Point(627, 69);
+            textBox_Baja.Name = "textBox_Baja";
+            textBox_Baja.Size = new Size(108, 23);
+            textBox_Baja.TabIndex = 11;
+            textBox_Baja.TextChanged += textBox_Baja_TextChanged;
             // 
-            // Columna_Direccion
+            // Bonton_Baja
             // 
-            Columna_Direccion.HeaderText = "Domicilio";
-            Columna_Direccion.Name = "Columna_Direccion";
+            Bonton_Baja.BackColor = Color.LightSkyBlue;
+            Bonton_Baja.FlatStyle = FlatStyle.Flat;
+            Bonton_Baja.Location = new Point(450, 69);
+            Bonton_Baja.Name = "Bonton_Baja";
+            Bonton_Baja.Size = new Size(133, 23);
+            Bonton_Baja.TabIndex = 12;
+            Bonton_Baja.Text = "Dar De BaJa";
+            Bonton_Baja.UseVisualStyleBackColor = false;
+            Bonton_Baja.Click += Bonton_Baja_Click;
             // 
             // Usuarios
             // 
@@ -107,26 +123,30 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.SteelBlue;
             ClientSize = new Size(800, 450);
-            Controls.Add(dataGridView_Usuarios);
+            Controls.Add(Bonton_Baja);
+            Controls.Add(textBox_Baja);
+            Controls.Add(Boton_Mostrar_Usuarios);
             Controls.Add(Boton_Volver_Usuarios);
+            Controls.Add(dataGridView_Usuarios);
             FormBorderStyle = FormBorderStyle.Fixed3D;
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Usuarios";
             Text = "Usuarios";
             ((System.ComponentModel.ISupportInitialize)dataGridView_Usuarios).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
 
         private RoundButton Boton_Volver_Usuarios;
         private DataGridView dataGridView_Usuarios;
-        private DataGridViewTextBoxColumn Column_Usuario;
-        private DataGridViewTextBoxColumn Columna_Nombre;
-        private DataGridViewTextBoxColumn Columna_Tipo;
-        private DataGridViewTextBoxColumn Columna_Cantidad;
-        private DataGridViewTextBoxColumn Columna_MontoAPagar;
-        private DataGridViewTextBoxColumn Columna_Numero_De_Pedido;
-        private DataGridViewTextBoxColumn Columna_Direccion;
+        private Button Boton_Mostrar_Usuarios;
+        private DataGridViewTextBoxColumn Columna_Usuario;
+        private DataGridViewTextBoxColumn Columna_Contraseña;
+        private DataGridViewTextBoxColumn Columna_Rol;
+        private DataGridViewTextBoxColumn Columna_Estado;
+        private TextBox textBox_Baja;
+        private Button Bonton_Baja;
     }
 }

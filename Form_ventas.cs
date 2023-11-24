@@ -18,25 +18,25 @@ namespace formulario_parcial
     public partial class Form_ventas : Form
     {
         public Dictionary<string, decimal> preciosVolquetes = new Dictionary<string, decimal>(); // Diccionario para almacenar los precios
-        public Dictionary<string, decimal> recargosLocalidades = new Dictionary<string, decimal>();
-        private List<Pedido> listaPedidos = new List<Pedido>();
+        public Dictionary<string, decimal> recargosLocalidades = new Dictionary<string, decimal>();// Diccionario para localidades
+        private List<Pedido> listaPedidos = new List<Pedido>(); //lista de pedidos
         static Random random = new Random();
 
         public Form_ventas()
         {
-            
+
             InitializeComponent();
 
-            
+
             InitializePreciosDiccionario();
 
-            
+
             InitializeComboBoxItems();
 
             InitializeRecargosDiccionario();
             InitilizecomboBox_Localidad();
         }
-        
+
         private void InitializeRecargosDiccionario()
         {
             recargosLocalidades.Add("Temperley", 0m);  // Sin recargo
@@ -44,7 +44,7 @@ namespace formulario_parcial
             recargosLocalidades.Add("Adrogue", 0.1m);  // 10% de recargo
             recargosLocalidades.Add("Banfield", 0.2m); // 20% de recargo
             recargosLocalidades.Add("Burzaco", 0.2m);  // 20% de recargo
-                                                         
+
         }
 
         private void InitilizecomboBox_Localidad()
@@ -59,16 +59,16 @@ namespace formulario_parcial
 
         private void InitializePreciosDiccionario()
         {
-            preciosVolquetes.Add("Chico", 10000); // Precio para el volquete chico
-            preciosVolquetes.Add("Grande", 20000); // Precio para el volquete grande
-            
+            preciosVolquetes.Add("Chicos", 10000); // Precio para el volquete chico
+            preciosVolquetes.Add("Grandes", 20000); // Precio para el volquete grande
+
         }
 
         private void InitializeComboBoxItems()
         {
-            comboBox_ventas.Items.Add("Chico");
-            comboBox_ventas.Items.Add("Grande");
-            
+            comboBox_ventas.Items.Add("Chicos");
+            comboBox_ventas.Items.Add("Grandes");
+
         }
 
 
@@ -76,13 +76,13 @@ namespace formulario_parcial
 
         private void comboBox_ventas_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
+
             var seleccion = comboBox_ventas.SelectedItem.ToString();
 
             if (preciosVolquetes.ContainsKey(seleccion))
             {
                 decimal precio = preciosVolquetes[seleccion];
-                
+
                 MessageBox.Show($"Has seleccionado un volquete {seleccion}. Precio: {precio:C}. Realizar pedido...");
             }
             else
@@ -98,7 +98,7 @@ namespace formulario_parcial
                 string cantidadTexto = textBox_Cantidad.Text;
                 if (int.TryParse(cantidadTexto, out int cantidadVolquetes))
                 {
-                   
+
                     if (comboBox_ventas.SelectedItem != null)
                     {
                         var seleccion = comboBox_ventas.SelectedItem.ToString();
@@ -112,13 +112,13 @@ namespace formulario_parcial
                 }
                 else
                 {
-                    
+
                     MessageBox.Show("Ingrese un número válido", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch (Exception ex)
             {
-                
+
                 MessageBox.Show("Ocurrió un error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -140,7 +140,7 @@ namespace formulario_parcial
                 if (recargosLocalidades.ContainsKey(localidad))
                 {
                     decimal recargo = recargosLocalidades[localidad];
-                    // Aquí puedes usar 'recargo' para aplicar el recargo al precio del volquete seleccionado
+
                     if (comboBox_ventas.SelectedItem != null)
                     {
                         var seleccion = comboBox_ventas.SelectedItem.ToString();
@@ -185,8 +185,8 @@ namespace formulario_parcial
                     var localidad = comboBox_Localidad.SelectedItem.ToString();
                     if (recargosLocalidades.ContainsKey(localidad))
                     {
+                        // Aplica el recargo al precio del volquete
                         decimal recargo = recargosLocalidades[localidad];
-                        // Aplicar el recargo al precio del volquete
                         decimal precioConRecargo = precio + (precio * recargo);
                         decimal costoTotal = cantidadVolquetes * precioConRecargo;
                         string nombre = textBox_Nombre_Final.Text.ToLower();
@@ -197,6 +197,11 @@ namespace formulario_parcial
 
                         string nombreUsuarioLogeado = UserManager.Instancia.UsuarioLogueado?.Nombre;
 
+                        DateTime FechaEntrega = dateTime_Venta.Value;
+                        
+                        DateTime FechaRetiro = FechaEntrega.AddDays(7);
+
+                        
                         Pedido nuevoPedido = new Pedido
                         {
                             Usuario = nombreUsuarioLogeado,
@@ -206,18 +211,20 @@ namespace formulario_parcial
                             MontoAPagar = costoTotal,
                             NumeroDePedido = numeroPedidoAleatorio.ToString(),
                             Domicilio = Direccion,
-                            Estado = Pedido.EstadoPedido.Activo
-                            
+                            Estado = Pedido.EstadoPedido.Activo,
+                            FechaEntrega = FechaEntrega,
+                            DuracionEntregaDias = 7,
+                            FechaRetiro = FechaRetiro
                         };
 
                         // Agregar el nuevo pedido a la lista
                         listaPedidos.Add(nuevoPedido);
 
-
+                        
 
                         var enviroment = System.Environment.CurrentDirectory;
                         string rutaRelativa = Directory.GetParent(enviroment).Parent.Parent.FullName;
-                        string rutaCompleta= Path.Combine(rutaRelativa,"Xml_Usuarios", "pedidos.xml");
+                        string rutaCompleta = Path.Combine(rutaRelativa, "Xml_Usuarios", "pedidos.xml");
 
                         var pedidosXml = new XElement("Pedidos",
                            listaPedidos.Select(pedido =>
@@ -229,7 +236,11 @@ namespace formulario_parcial
                            new XElement("MontoAPagar", pedido.MontoAPagar),
                            new XElement("NumeroDePedido", pedido.NumeroDePedido),
                            new XElement("Domicilio", pedido.Domicilio),
-                           new XElement("Estado", pedido.Estado)
+                           new XElement("Estado", pedido.Estado),
+                           new XElement("FechaEntrega", pedido.FechaEntrega.ToString("dd/MM/yyyy")),  
+                           new XElement("DuracionEntregaDias", pedido.DuracionEntregaDias,"Dias"),
+                           new XElement("FechaRetiro", pedido.FechaRetiro.ToString("dd/MM/yyyy"))
+
                        )
                    )
                );
@@ -244,7 +255,7 @@ namespace formulario_parcial
                             doc = new XDocument(new XElement("Pedidos"));
                         }
 
-                        
+
                         doc.Root.Add(pedidosXml);
 
                         // Guardar el documento XML en el archivo
@@ -252,10 +263,16 @@ namespace formulario_parcial
 
                         MessageBox.Show("Pedido guardado con éxito.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         MessageBox.Show($"El Numero De Su Pedido es {numeroPedidoAleatorio}.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        
+                        MessageBox.Show($"Has seleccionado {cantidadVolquetes} volquetes {seleccion} en {localidad}.El Costo total Es: {costoTotal:C}");
+
                     }
                 }
             }
+        }
+
+        private void dateTime_Venta_ValueChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
