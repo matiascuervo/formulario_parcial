@@ -26,7 +26,7 @@ namespace formulario_parcial
 
         private void Usuarios_Load(object sender, EventArgs e)
         {
-            
+
             List<Persona> usuarios = DataManager.CargarDatos();
 
             // Enlazar la lista
@@ -49,7 +49,7 @@ namespace formulario_parcial
                 int rowIndex = dataGridView_Usuarios.Rows.Add();
                 DataGridViewRow row = dataGridView_Usuarios.Rows[rowIndex];
 
-                
+
                 row.Cells["columna_Usuario"].Value = usuario.Nombre;
                 row.Cells["columna_Contraseña"].Value = usuario.Contraseña;
                 row.Cells["columna_Rol"].Value = usuario.Rol;
@@ -81,7 +81,7 @@ namespace formulario_parcial
                 // Cambiar el estado del usuario 
                 usuario.Estado = "Debaja";
 
-                
+
                 DataManager.GuardarDatos(usuarios);
 
                 // Actualizar el DataGridView 
@@ -96,11 +96,34 @@ namespace formulario_parcial
             }
         }
 
-
-
-        private void textBox_Baja_TextChanged(object sender, EventArgs e)
+        private void Boton_Reactivar_Usuario_Click(object sender, EventArgs e)
         {
+            string nombreUsuario = textBox_Baja.Text;
 
+            // Carga los usuarios
+            List<Persona> usuarios = DataManager.CargarDatos();
+
+            // Buscar al usuario en la lista
+            Persona usuario = usuarios.FirstOrDefault(u => u.Nombre == nombreUsuario);
+
+            if (usuario != null)
+            {
+                // Cambiar el estado del usuario a "Activo"
+                usuario.Estado = "Activo";
+
+                // Guardar los cambios en el archivo JSON
+                DataManager.GuardarDatos(usuarios);
+
+                // Actualizar el DataGridView
+                dataGridView_Usuarios.Rows.Clear();
+                AgregarUsuariosAlDataGridView(usuarios);
+
+                MessageBox.Show($"Usuario {nombreUsuario} reactivado correctamente.", "Reactivación Exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show($"El usuario {nombreUsuario} no existe.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

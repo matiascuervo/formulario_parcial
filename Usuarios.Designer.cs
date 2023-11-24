@@ -38,6 +38,7 @@
             Boton_Mostrar_Usuarios = new Button();
             textBox_Baja = new TextBox();
             Bonton_Baja = new Button();
+            Boton_Reactivar_Usuario = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView_Usuarios).BeginInit();
             SuspendLayout();
             // 
@@ -59,7 +60,7 @@
             // 
             dataGridView_Usuarios.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView_Usuarios.Columns.AddRange(new DataGridViewColumn[] { Columna_Usuario, Columna_Contraseña, Columna_Rol, Columna_Estado });
-            dataGridView_Usuarios.Location = new Point(0, -4);
+            dataGridView_Usuarios.Location = new Point(0, -1);
             dataGridView_Usuarios.Name = "dataGridView_Usuarios";
             dataGridView_Usuarios.RowTemplate.Height = 25;
             dataGridView_Usuarios.Size = new Size(444, 271);
@@ -99,11 +100,11 @@
             // 
             // textBox_Baja
             // 
-            textBox_Baja.Location = new Point(627, 69);
+            textBox_Baja.Location = new Point(652, 69);
             textBox_Baja.Name = "textBox_Baja";
+            textBox_Baja.PlaceholderText = "Usuarios";
             textBox_Baja.Size = new Size(108, 23);
             textBox_Baja.TabIndex = 11;
-            textBox_Baja.TextChanged += textBox_Baja_TextChanged;
             // 
             // Bonton_Baja
             // 
@@ -117,12 +118,25 @@
             Bonton_Baja.UseVisualStyleBackColor = false;
             Bonton_Baja.Click += Bonton_Baja_Click;
             // 
+            // Boton_Reactivar_Usuario
+            // 
+            Boton_Reactivar_Usuario.BackColor = Color.LightSkyBlue;
+            Boton_Reactivar_Usuario.FlatStyle = FlatStyle.Flat;
+            Boton_Reactivar_Usuario.Location = new Point(450, 129);
+            Boton_Reactivar_Usuario.Name = "Boton_Reactivar_Usuario";
+            Boton_Reactivar_Usuario.Size = new Size(133, 23);
+            Boton_Reactivar_Usuario.TabIndex = 13;
+            Boton_Reactivar_Usuario.Text = "Reactivar Usuario";
+            Boton_Reactivar_Usuario.UseVisualStyleBackColor = false;
+            Boton_Reactivar_Usuario.Click += Boton_Reactivar_Usuario_Click;
+            // 
             // Usuarios
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.SteelBlue;
             ClientSize = new Size(800, 450);
+            Controls.Add(Boton_Reactivar_Usuario);
             Controls.Add(Bonton_Baja);
             Controls.Add(textBox_Baja);
             Controls.Add(Boton_Mostrar_Usuarios);
@@ -148,5 +162,6 @@
         private DataGridViewTextBoxColumn Columna_Estado;
         private TextBox textBox_Baja;
         private Button Bonton_Baja;
+        private Button Boton_Reactivar_Usuario;
     }
 }

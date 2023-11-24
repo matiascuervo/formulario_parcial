@@ -20,6 +20,7 @@ namespace formulario_parcial
             InitializeComponent();
 
             ConfigurarAutocompletado();
+            ActualizarUsuarios();
         }
 
         private void ConfigurarAutocompletado()
@@ -52,11 +53,10 @@ namespace formulario_parcial
         {
             try
             {
-                // Obtener el nombre y DNI de los TextBox
+                // Obtener el nombre y la contraseña de los TextBox
                 string nombre = textBoxNombre.Text;
                 string contraseña = textBoxDNI.Text;
 
-                
                 if (string.IsNullOrWhiteSpace(nombre) || string.IsNullOrWhiteSpace(contraseña))
                 {
                     throw new ArgumentException("El nombre y la contraseña son obligatorios.");
@@ -68,19 +68,31 @@ namespace formulario_parcial
                     throw new ArgumentException("Credenciales incorrectas.");
                 }
 
-                // Limpiar los TextBox después de verificar las credenciales
-                textBoxNombre.Clear();
-                textBoxDNI.Clear();
+                // Obtener la información del usuario
+                Persona usuario = userManager.GetUsuarios().FirstOrDefault(u => u.Nombre == nombre);
 
-                
-                Form_alquiler form_Alquiler = new Form_alquiler();
+                // Verificar si el usuario está activo
+                if (usuario != null && usuario.Estado == "Activo")
+                {
+                    // Limpiar los TextBox después de verificar las credenciales
+                    textBoxNombre.Clear();
+                    textBoxDNI.Clear();
 
-                
-                
-                this.Hide();
-
-                
-                form_Alquiler.ShowDialog();
+                    // Mostrar el formulario de alquiler
+                    Form_alquiler form_Alquiler = new Form_alquiler();
+                    this.Hide();
+                    form_Alquiler.ShowDialog();
+                }
+                else if (usuario != null && usuario.Estado == "Debaja")
+                {
+                    // Mostrar un mensaje si el usuario está dado de baja
+                    MessageBox.Show("Ha sido dado de baja de la aplicación. Comuníquese con el soporte o llame al número 464-4100 para obtener más ayuda.", "Usuario Dado de Baja", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+                else
+                {
+                    // Usuario no encontrado
+                    throw new ArgumentException("Usuario no encontrado.");
+                }
             }
             catch (ArgumentException ex)
             {
@@ -88,11 +100,42 @@ namespace formulario_parcial
             }
         }
 
+
         private void Boton_Atras_Login_Click(object sender, EventArgs e)
         {
             this.Hide();
             Form_inicio inicio = new Form_inicio();
             inicio.ShowDialog();
         }
+
+
+        private void ActualizarUsuarios()
+        {
+            // Cargar usuarios
+            List<Persona> usuarios = DataManager.CargarDatos();
+
+            // Verificar y actualizar los campos nulos
+            foreach (var usuario in usuarios)
+            {
+                
+                if (usuario.Estado == null)
+                {
+                    usuario.Estado = "Activo"; 
+                }
+
+                if (usuario.Rol == null)
+                {
+
+                    usuario.Rol = "Usuario";
+
+                }
+
+                
+            }
+
+            
+            DataManager.GuardarDatos(usuarios);
+        }
+
     }
 }
