@@ -293,4 +293,64 @@
       <FechaRetiro>01/01/2024</FechaRetiro>
     </Pedido>
   </Pedidos>
+  <Pedidos>
+    <Pedido>
+      <Usuario>matias</Usuario>
+      <Nombre>matias cuervo</Nombre>
+      <TipoVolquete>Chicos</TipoVolquete>
+      <Cantidad>2</Cantidad>
+      <MontoAPagar>22000.0</MontoAPagar>
+      <NumeroDePedido>892451</NumeroDePedido>
+      <Domicilio>rivadavia 1371</Domicilio>
+      <Estado>Cancelado</Estado>
+      <FechaEntrega>24/11/2023</FechaEntrega>
+      <DuracionEntregaDias>7Dias</DuracionEntregaDias>
+      <FechaRetiro>01/12/2023</FechaRetiro>
+    </Pedido>
+  </Pedidos>
+  <Pedidos>
+    <Pedido>
+      <Usuario>matias</Usuario>
+      <Nombre>matias cuervo</Nombre>
+      <TipoVolquete>BibliotecaDatamanager.Volquete</TipoVolquete>
+      <Cantidad>2</Cantidad>
+      <MontoAPagar>44000.0</MontoAPagar>
+      <NumeroDePedido>403609</NumeroDePedido>
+      <Domicilio>1371</Domicilio>
+      <Estado>Activo</Estado>
+      <FechaEntrega>27/11/2023</FechaEntrega>
+      <DuracionEntregaDias>7Dias</DuracionEntregaDias>
+      <FechaRetiro>04/12/2023</FechaRetiro>
+    </Pedido>
+  </Pedidos>
+  <Pedidos>
+    <Pedido>
+      <Usuario>matias</Usuario>
+      <Nombre>matias</Nombre>
+      <TipoVolquete>BibliotecaDatamanager.Volquete</TipoVolquete>
+      <Cantidad>2</Cantidad>
+      <MontoAPagar>80000</MontoAPagar>
+      <NumeroDePedido>210977</NumeroDePedido>
+      <Domicilio>1371</Domicilio>
+      <Estado>Activo</Estado>
+      <FechaEntrega>27/11/2023</FechaEntrega>
+      <DuracionEntregaDias>7Dias</DuracionEntregaDias>
+      <FechaRetiro>04/12/2023</FechaRetiro>
+    </Pedido>
+  </Pedidos>
+  <Pedidos>
+    <Pedido>
+      <Usuario>matias</Usuario>
+      <Nombre>matias cuervo</Nombre>
+      <TipoVolquete>VolqueteChico</TipoVolquete>
+      <Cantidad>5</Cantidad>
+      <MontoAPagar>120000.0</MontoAPagar>
+      <NumeroDePedido>389266</NumeroDePedido>
+      <Domicilio>rivadavia 1371</Domicilio>
+      <Estado>Activo</Estado>
+      <FechaEntrega>27/11/2023</FechaEntrega>
+      <DuracionEntregaDias>7Dias</DuracionEntregaDias>
+      <FechaRetiro>04/12/2023</FechaRetiro>
+    </Pedido>
+  </Pedidos>
 </Pedidos>

@@ -12,7 +12,7 @@ namespace formulario_parcial
 {
     public partial class FormularioUsuario : Form
     {
-        //  la instancia única de UserManager proporcionada por el Singleton
+        //  la instancia única de UserManager Singleton
         private UserManager userManager = UserManager.Instancia;
         
         public FormularioUsuario()
@@ -25,7 +25,7 @@ namespace formulario_parcial
 
         private void ConfigurarAutocompletado()
         {
-            // Crea una colección de cadenas para el autocompletado
+            //  colección de cadenas para el autocompletado
             var fuenteAutocompletado = new AutoCompleteStringCollection();
             fuenteAutocompletado.AddRange(userManager.GetUsuarios().Select(u => u.Nombre).ToArray());
 
@@ -53,7 +53,7 @@ namespace formulario_parcial
         {
             try
             {
-                // Obtener el nombre y la contraseña de los TextBox
+                
                 string nombre = textBoxNombre.Text;
                 string contraseña = textBoxDNI.Text;
 
@@ -62,35 +62,34 @@ namespace formulario_parcial
                     throw new ArgumentException("El nombre y la contraseña son obligatorios.");
                 }
 
-                // Validar las credenciales utilizando el UserManager (Singleton)
+                
                 if (!userManager.VerificarCredenciales(nombre, contraseña))
                 {
                     throw new ArgumentException("Credenciales incorrectas.");
                 }
 
-                // Obtener la información del usuario
                 Persona usuario = userManager.GetUsuarios().FirstOrDefault(u => u.Nombre == nombre);
 
-                // Verificar si el usuario está activo
+                
                 if (usuario != null && usuario.Estado == "Activo")
                 {
-                    // Limpiar los TextBox después de verificar las credenciales
+                    
                     textBoxNombre.Clear();
                     textBoxDNI.Clear();
 
-                    // Mostrar el formulario de alquiler
+                    
                     Form_alquiler form_Alquiler = new Form_alquiler();
                     this.Hide();
                     form_Alquiler.ShowDialog();
                 }
                 else if (usuario != null && usuario.Estado == "Debaja")
                 {
-                    // Mostrar un mensaje si el usuario está dado de baja
+                    
                     MessageBox.Show("Ha sido dado de baja de la aplicación. Comuníquese con el soporte o llame al número 464-4100 para obtener más ayuda.", "Usuario Dado de Baja", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
                 else
                 {
-                    // Usuario no encontrado
+                    
                     throw new ArgumentException("Usuario no encontrado.");
                 }
             }
