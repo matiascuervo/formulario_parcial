@@ -15,15 +15,22 @@ using Microsoft.VisualBasic.ApplicationServices;
 using BibliotecaDatamanager;
 using System.Reflection.Metadata.Ecma335;
 
+
 namespace formulario_parcial
 {
     public partial class Form_ventas : Form
     {
         private Volquete volqueteSeleccionado;
-
+        private Bolson bolsonSeleccionado;
         public Dictionary<string, decimal> recargosLocalidades = new Dictionary<string, decimal>();// Diccionario para localidades
         private List<Pedido> listaPedidos = new List<Pedido>(); //lista de pedidos
         static Random random = new Random();
+        private bool bolsonSeleccionadoConVolquete = false;
+        private int cantidadbolsones;
+        private int NumeroDebolsones;
+        private decimal costoTotalBolsones ;
+        private bool BolsonSolo = false;
+        private System.Windows.Forms.ToolTip toolTip1;
 
         public Form_ventas()
         {
@@ -35,6 +42,9 @@ namespace formulario_parcial
             InitializeRecargosDiccionario();
             InitilizecomboBox_Localidad();
             InitializecomboBox_BolsonesItems();
+            radioButton_Bolson.CheckedChanged += radioButton_Bolson_CheckedChanged;
+            toolTip1 = new System.Windows.Forms.ToolTip();
+            toolTip1.SetToolTip(radioButton_Bolson, "Los Bolsones Solo Se venden En Conjunto Con Algun Volquete.");
         }
 
         private void InitializeRecargosDiccionario()
@@ -73,36 +83,98 @@ namespace formulario_parcial
 
         }
 
+
+
+
+        private void radioButton_Bolson_CheckedChanged(object sender, EventArgs e)
+        {
+            
+            if (radioButton_Bolson.Checked)
+            {
+                label_Bolsones.Visible = textBox_Cantidad_Bolsones.Visible = comboBox_Bolsones.Visible = label_Medida.Visible= label_BCantidad.Visible = pictureBox2.Visible = label_PrecioBolsaG .Visible = label_MedidaBolsaGrande.Visible = label_MedidaBolsaGChica .Visible = label_PrecioBolsaC.Visible= true;
+            }
+            else
+            {
+                label_Bolsones.Visible = textBox_Cantidad_Bolsones.Visible = comboBox_Bolsones.Visible = label_Medida.Visible = label_BCantidad.Visible = pictureBox2.Visible = label_PrecioBolsaG.Visible = label_MedidaBolsaGrande.Visible = label_MedidaBolsaGChica.Visible = label_PrecioBolsaC.Visible = false;
+            }
+        }
+
+
+
         private void comboBox_BolsonesSelectedIndexChanged(object sender, EventArgs e)
         {
-            var seleccion = comboBox_Bolsones.SelectedItem?.ToString(); // Usar ?. para evitar null reference
+            var seleccion_Bolson = comboBox_Bolsones.SelectedItem?.ToString(); // Usar ?. para evitar null reference
 
             Producto producto = new Producto();
 
             try
             {
-                if (seleccion == "2m3")
+                if (seleccion_Bolson == "2m3")
                 {
                     string tamañoBolsonGrande = "2m3";
                     Bolson bolson_Grande = new Bolson(tamañoBolsonGrande);
                     producto.Tipo = bolson_Grande.Tipo;
-                    
+                    producto.MontoAPagar = bolson_Grande.MontoAPagar;
+                    bolsonSeleccionado = bolson_Grande;
+                    bolsonSeleccionadoConVolquete = true;
+                    BolsonSolo = true;
                 }
-                else if (seleccion == "1m3")
+                else if (seleccion_Bolson == "1m3")
                 {
                     string tamañoBolsonChico = "1m3";
                     Bolson bolson_chico = new Bolson(tamañoBolsonChico);
                     producto.Tipo = bolson_chico.Tipo;
+                    producto.MontoAPagar = bolson_chico.MontoAPagar;
+                    bolsonSeleccionado = bolson_chico;
+                    bolsonSeleccionadoConVolquete = true;
+                    BolsonSolo = true;
+
                 }
 
-
-                    MessageBox.Show($"Tipo de Producto: {producto.Tipo}");
+                
+                MessageBox.Show("Los Bolsones No Tienen Recarga De Acarreo");
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Ocurrió un error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
+
+
+
+
+        private void textBox_Cantidad_BolsonestChanged(object sender, EventArgs e)
+        {   
+            try
+            {
+                string cantidadTexto = textBox_Cantidad_Bolsones.Text;
+                if (int.TryParse(cantidadTexto, out int cantidadbolsones))
+                {
+                    if (comboBox_ventas.SelectedItem != null && bolsonSeleccionado != null)
+                    {
+                        // No necesitas crear una nueva instancia de Volquete aquí, ya tienes volqueteSeleccionado
+                        decimal precio = bolsonSeleccionado.MontoAPagar;
+
+                        costoTotalBolsones = cantidadbolsones * precio; // Asigna el valor calculado a la variable de clase
+                        NumeroDebolsones = cantidadbolsones;                                               // Agrega mensajes de depuración
+                        MessageBox.Show($"Costo total de bolsones: {costoTotalBolsones:C}");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Ingrese un número válido", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ocurrió un error: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+
+
+
 
 
         private void comboBox_ventas_SelectedIndexChanged(object sender, EventArgs e)
@@ -117,7 +189,7 @@ namespace formulario_parcial
 
                 if (seleccion == "chicos")
                 {
-                    MessageBox.Show("Seleccion: chicos");
+                    
                     string tamañoVolqueteChico = "chico";
                     Volquete volquete_chico = new Volquete(tamañoVolqueteChico);
                     producto.Tipo = volquete_chico.Tipo;
@@ -126,7 +198,7 @@ namespace formulario_parcial
                 }
                 else if (seleccion == "grandes")
                 {
-                    MessageBox.Show("Seleccion: Grandes");
+                    
                     string tamañoVolqueteGrande = "grande";
                     Volquete volquete_grande = new Volquete(tamañoVolqueteGrande);
                     producto.Tipo = volquete_grande.Tipo;
@@ -134,8 +206,6 @@ namespace formulario_parcial
                     volqueteSeleccionado = volquete_grande;
                 }
 
-
-                MessageBox.Show($"Tipo de Producto: {producto.Tipo}, Monto a Pagar: {producto.MontoAPagar}");
 
             }
             catch (Exception ex)
@@ -225,7 +295,9 @@ namespace formulario_parcial
                 return;
             }
 
-            var seleccion = comboBox_ventas.SelectedItem.ToString();
+
+
+                var seleccion = comboBox_ventas.SelectedItem.ToString();
 
             if (comboBox_Localidad.SelectedItem != null)
             {
@@ -238,6 +310,9 @@ namespace formulario_parcial
                     decimal costoTotal = cantidadVolquetes * precioConRecargo;
                     string nombre = textBox_Nombre_Final.Text.ToLower();
                     string Direccion = TextBox_Direccion.Text.ToLower();
+
+
+                    
 
                     int numeroPedidoAleatorio = random.Next(100000, 999999);
 
@@ -260,10 +335,25 @@ namespace formulario_parcial
                         Estado = Pedido.EstadoPedido.Activo,
                         FechaEntrega = FechaEntrega,
                         DuracionEntregaDias = 7,
-                        FechaRetiro = FechaRetiro
+                        FechaRetiro = FechaRetiro,
+                        Bolson = bolsonSeleccionadoConVolquete ? bolsonSeleccionado : null,
+                        CantidadBolsones = bolsonSeleccionadoConVolquete ? cantidadbolsones :0,
+                        MontoAPagarBolson = costoTotalBolsones
                     };
 
-                    // Agregar el nuevo pedido a la lista
+                    if (bolsonSeleccionadoConVolquete == true)
+                    {   
+
+                        nuevoPedido.Bolson = bolsonSeleccionado;
+                        nuevoPedido.CantidadBolsones = NumeroDebolsones;
+                        nuevoPedido.MontoAPagarBolson = costoTotalBolsones;  // Asigna el costo total de los bolsones al pedido
+                        var ConstoFinal = costoTotal + nuevoPedido.MontoAPagarBolson;
+                        // Agrega mensajes de depuración para verificar los valores
+                        MessageBox.Show($"Monto a Pagar Final: {ConstoFinal}");
+                    }
+     
+     
+                        // Agregar el nuevo pedido a la lista
                     listaPedidos.Add(nuevoPedido);
 
                     var enviroment = System.Environment.CurrentDirectory;
@@ -283,7 +373,14 @@ namespace formulario_parcial
                        new XElement("Estado", pedido.Estado),
                        new XElement("FechaEntrega", pedido.FechaEntrega.ToString("dd/MM/yyyy")),
                        new XElement("DuracionEntregaDias", pedido.DuracionEntregaDias, "Dias"),
-                       new XElement("FechaRetiro", pedido.FechaRetiro.ToString("dd/MM/yyyy"))
+                       new XElement("FechaRetiro", pedido.FechaRetiro.ToString("dd/MM/yyyy")),
+                       pedido.Bolson != null
+                       ? new XElement("Bolson",
+                         new XElement("TipoBolson", pedido.Bolson.Tipo),
+                         new XElement("CantidadBolsones", pedido.CantidadBolsones),
+                         new XElement("MontoAPagarBolson", pedido.MontoAPagarBolson)
+                        )
+                        : null
 
                    )
                )
@@ -307,7 +404,9 @@ namespace formulario_parcial
 
                     MessageBox.Show("Pedido guardado con éxito.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     MessageBox.Show($"El Numero De Su Pedido es {numeroPedidoAleatorio}.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    MessageBox.Show($"Has seleccionado {cantidadVolquetes} volquetes {volqueteSeleccionado.Tipo} en {localidad}.El Costo total Es: {costoTotal:C}");
+                    
+                    
+                    
                 }
             }
         }

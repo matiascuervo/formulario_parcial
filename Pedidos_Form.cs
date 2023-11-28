@@ -15,10 +15,7 @@ namespace formulario_parcial
 
 
 
-        private void dataGridView_Pedidos_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
+       
 
         private void toolStripTextBox_Pedidos_Click(object sender, EventArgs e)
         {
@@ -83,6 +80,10 @@ namespace formulario_parcial
             row.Cells["columna_Estado"].Value = pedido.Element("Estado")?.Value;
             row.Cells["columna_FechaEntrega"].Value = pedido.Element("FechaEntrega")?.Value;
             row.Cells["columna_FechaRetiro"].Value = pedido.Element("FechaRetiro")?.Value;
+            row.Cells["columna_bolsones"].Value = pedido.Element("Bolson")?.Element("TipoBolson")?.Value;
+            row.Cells["columna_cantidadbolsones"].Value = pedido.Element("Bolson")?.Element("CantidadBolsones")?.Value;
+            row.Cells["Columna_Preciobolsones"].Value = pedido.Element("Bolson")?.Element("MontoAPagarBolson")?.Value;
+
         }
 
         private void Boton_Volver_Pedidos_Click_1(object sender, EventArgs e)

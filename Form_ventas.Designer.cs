@@ -49,15 +49,17 @@
             label4 = new Label();
             label5 = new Label();
             pictureBox2 = new PictureBox();
-            label6 = new Label();
-            label7 = new Label();
-            label8 = new Label();
-            label9 = new Label();
+            label_PrecioBolsaG = new Label();
+            label_PrecioBolsaC = new Label();
+            label_MedidaBolsaGrande = new Label();
+            label_MedidaBolsaGChica = new Label();
             comboBox_Bolsones = new ComboBox();
-            label10 = new Label();
+            label_Bolsones = new Label();
             label_BCantidad = new Label();
             label_Medida = new Label();
             textBox_Cantidad_Bolsones = new TextBox();
+            label_Agregar = new Label();
+            radioButton_Bolson = new RadioButton();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             SuspendLayout();
@@ -266,50 +268,55 @@
             pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox2.TabIndex = 20;
             pictureBox2.TabStop = false;
+            pictureBox2.Visible = false;
             // 
-            // label6
+            // label_PrecioBolsaG
             // 
-            label6.AutoSize = true;
-            label6.BackColor = Color.Snow;
-            label6.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            label6.Location = new Point(361, 288);
-            label6.Name = "label6";
-            label6.Size = new Size(64, 19);
-            label6.TabIndex = 21;
-            label6.Text = "$ 16.000";
+            label_PrecioBolsaG.AutoSize = true;
+            label_PrecioBolsaG.BackColor = Color.Snow;
+            label_PrecioBolsaG.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            label_PrecioBolsaG.Location = new Point(361, 288);
+            label_PrecioBolsaG.Name = "label_PrecioBolsaG";
+            label_PrecioBolsaG.Size = new Size(64, 19);
+            label_PrecioBolsaG.TabIndex = 21;
+            label_PrecioBolsaG.Text = "$ 16.000";
+            label_PrecioBolsaG.Visible = false;
             // 
-            // label7
+            // label_PrecioBolsaC
             // 
-            label7.AutoSize = true;
-            label7.BackColor = Color.Snow;
-            label7.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            label7.Location = new Point(468, 288);
-            label7.Name = "label7";
-            label7.Size = new Size(64, 19);
-            label7.TabIndex = 22;
-            label7.Text = "$ 10.000";
+            label_PrecioBolsaC.AutoSize = true;
+            label_PrecioBolsaC.BackColor = Color.Snow;
+            label_PrecioBolsaC.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            label_PrecioBolsaC.Location = new Point(468, 288);
+            label_PrecioBolsaC.Name = "label_PrecioBolsaC";
+            label_PrecioBolsaC.Size = new Size(64, 19);
+            label_PrecioBolsaC.TabIndex = 22;
+            label_PrecioBolsaC.Text = "$ 10.000";
+            label_PrecioBolsaC.Visible = false;
             // 
-            // label8
+            // label_MedidaBolsaGrande
             // 
-            label8.AutoSize = true;
-            label8.BackColor = Color.Gold;
-            label8.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label8.Location = new Point(361, 252);
-            label8.Name = "label8";
-            label8.Size = new Size(51, 25);
-            label8.TabIndex = 23;
-            label8.Text = "2m3";
+            label_MedidaBolsaGrande.AutoSize = true;
+            label_MedidaBolsaGrande.BackColor = Color.Gold;
+            label_MedidaBolsaGrande.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            label_MedidaBolsaGrande.Location = new Point(361, 252);
+            label_MedidaBolsaGrande.Name = "label_MedidaBolsaGrande";
+            label_MedidaBolsaGrande.Size = new Size(51, 25);
+            label_MedidaBolsaGrande.TabIndex = 23;
+            label_MedidaBolsaGrande.Text = "2m3";
+            label_MedidaBolsaGrande.Visible = false;
             // 
-            // label9
+            // label_MedidaBolsaGChica
             // 
-            label9.AutoSize = true;
-            label9.BackColor = Color.Gold;
-            label9.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label9.Location = new Point(468, 252);
-            label9.Name = "label9";
-            label9.Size = new Size(51, 25);
-            label9.TabIndex = 24;
-            label9.Text = "1m3";
+            label_MedidaBolsaGChica.AutoSize = true;
+            label_MedidaBolsaGChica.BackColor = Color.Gold;
+            label_MedidaBolsaGChica.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            label_MedidaBolsaGChica.Location = new Point(468, 252);
+            label_MedidaBolsaGChica.Name = "label_MedidaBolsaGChica";
+            label_MedidaBolsaGChica.Size = new Size(51, 25);
+            label_MedidaBolsaGChica.TabIndex = 24;
+            label_MedidaBolsaGChica.Text = "1m3";
+            label_MedidaBolsaGChica.Visible = false;
             // 
             // comboBox_Bolsones
             // 
@@ -318,17 +325,20 @@
             comboBox_Bolsones.Name = "comboBox_Bolsones";
             comboBox_Bolsones.Size = new Size(121, 23);
             comboBox_Bolsones.TabIndex = 6;
+            comboBox_Bolsones.Visible = false;
+            comboBox_Bolsones.SelectedIndexChanged += comboBox_BolsonesSelectedIndexChanged;
             // 
-            // label10
+            // label_Bolsones
             // 
-            label10.AutoSize = true;
-            label10.BackColor = Color.Gold;
-            label10.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label10.Location = new Point(46, 252);
-            label10.Name = "label10";
-            label10.Size = new Size(91, 25);
-            label10.TabIndex = 26;
-            label10.Text = "Bolsones";
+            label_Bolsones.AutoSize = true;
+            label_Bolsones.BackColor = Color.Gold;
+            label_Bolsones.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            label_Bolsones.Location = new Point(46, 252);
+            label_Bolsones.Name = "label_Bolsones";
+            label_Bolsones.Size = new Size(91, 25);
+            label_Bolsones.TabIndex = 26;
+            label_Bolsones.Text = "Bolsones";
+            label_Bolsones.Visible = false;
             // 
             // label_BCantidad
             // 
@@ -340,6 +350,7 @@
             label_BCantidad.Size = new Size(92, 25);
             label_BCantidad.TabIndex = 27;
             label_BCantidad.Text = "Cantidad";
+            label_BCantidad.Visible = false;
             // 
             // label_Medida
             // 
@@ -351,6 +362,7 @@
             label_Medida.Size = new Size(79, 25);
             label_Medida.TabIndex = 28;
             label_Medida.Text = "Medida";
+            label_Medida.Visible = false;
             // 
             // textBox_Cantidad_Bolsones
             // 
@@ -358,6 +370,33 @@
             textBox_Cantidad_Bolsones.Name = "textBox_Cantidad_Bolsones";
             textBox_Cantidad_Bolsones.Size = new Size(121, 23);
             textBox_Cantidad_Bolsones.TabIndex = 7;
+            textBox_Cantidad_Bolsones.Visible = false;
+            textBox_Cantidad_Bolsones.TextChanged += textBox_Cantidad_BolsonestChanged;
+            // 
+            // label_Agregar
+            // 
+            label_Agregar.AutoSize = true;
+            label_Agregar.BackColor = Color.Gold;
+            label_Agregar.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            label_Agregar.Location = new Point(46, 227);
+            label_Agregar.Name = "label_Agregar";
+            label_Agregar.Size = new Size(151, 25);
+            label_Agregar.TabIndex = 29;
+            label_Agregar.Text = "Agregar Bolson";
+            // 
+            // radioButton_Bolson
+            // 
+            radioButton_Bolson.AutoSize = true;
+            radioButton_Bolson.BackColor = Color.Gold;
+            radioButton_Bolson.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            radioButton_Bolson.Location = new Point(221, 233);
+            radioButton_Bolson.Name = "radioButton_Bolson";
+            radioButton_Bolson.Size = new Size(110, 19);
+            radioButton_Bolson.TabIndex = 31;
+            radioButton_Bolson.TabStop = true;
+            radioButton_Bolson.Text = "Agregar Bolson";
+            radioButton_Bolson.UseVisualStyleBackColor = false;
+            radioButton_Bolson.CheckedChanged += radioButton_Bolson_CheckedChanged;
             // 
             // Form_ventas
             // 
@@ -366,15 +405,17 @@
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(926, 509);
+            Controls.Add(radioButton_Bolson);
+            Controls.Add(label_Agregar);
             Controls.Add(textBox_Cantidad_Bolsones);
             Controls.Add(label_Medida);
             Controls.Add(label_BCantidad);
-            Controls.Add(label10);
+            Controls.Add(label_Bolsones);
             Controls.Add(comboBox_Bolsones);
-            Controls.Add(label9);
-            Controls.Add(label8);
-            Controls.Add(label7);
-            Controls.Add(label6);
+            Controls.Add(label_MedidaBolsaGChica);
+            Controls.Add(label_MedidaBolsaGrande);
+            Controls.Add(label_PrecioBolsaC);
+            Controls.Add(label_PrecioBolsaG);
             Controls.Add(pictureBox2);
             Controls.Add(label5);
             Controls.Add(label4);
@@ -427,14 +468,17 @@
         private Label label4;
         private Label label5;
         private PictureBox pictureBox2;
-        private Label label6;
-        private Label label7;
-        private Label label8;
-        private Label label9;
+        private Label label_PrecioBolsaG;
+        private Label label_PrecioBolsaC;
+        private Label label_MedidaBolsaGrande;
+        private Label label_MedidaBolsaGChica;
         private ComboBox comboBox_Bolsones;
-        private Label label10;
+        private Label label_Bolsones;
         private Label label_BCantidad;
         private Label label_Medida;
         private TextBox textBox_Cantidad_Bolsones;
+        private Label label_Agregar;
+        private CheckBox checkBox_Bolsones;
+        private RadioButton radioButton_Bolson;
     }
 }

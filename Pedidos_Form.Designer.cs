@@ -34,6 +34,9 @@
             toolStripLabel1 = new ToolStripLabel();
             toolStripSeparator1 = new ToolStripSeparator();
             dataGridView_Pedidos = new DataGridView();
+            Boton_Volver_Pedidos = new RoundButton();
+            button_Cancelar = new Button();
+            textBox_Cancelar = new TextBox();
             columna_Usuario = new DataGridViewTextBoxColumn();
             Columna_Nombre = new DataGridViewTextBoxColumn();
             Columna_Tipo = new DataGridViewTextBoxColumn();
@@ -44,9 +47,9 @@
             Columna_Estado = new DataGridViewTextBoxColumn();
             Columna_FechaEntrega = new DataGridViewTextBoxColumn();
             Columna_FechaRetiro = new DataGridViewTextBoxColumn();
-            Boton_Volver_Pedidos = new RoundButton();
-            button_Cancelar = new Button();
-            textBox_Cancelar = new TextBox();
+            columna_bolsones = new DataGridViewTextBoxColumn();
+            Columna_cantidadbolsones = new DataGridViewTextBoxColumn();
+            Columna_Preciobolsones = new DataGridViewTextBoxColumn();
             toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView_Pedidos).BeginInit();
             SuspendLayout();
@@ -88,14 +91,49 @@
             dataGridView_Pedidos.CellBorderStyle = DataGridViewCellBorderStyle.Sunken;
             dataGridView_Pedidos.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
             dataGridView_Pedidos.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView_Pedidos.Columns.AddRange(new DataGridViewColumn[] { columna_Usuario, Columna_Nombre, Columna_Tipo, Columna_Cantidad, Columna_MontoAPagar, Columna_Numero_De_Pedido, Columna_Direccion, Columna_Estado, Columna_FechaEntrega, Columna_FechaRetiro });
+            dataGridView_Pedidos.Columns.AddRange(new DataGridViewColumn[] { columna_Usuario, Columna_Nombre, Columna_Tipo, Columna_Cantidad, Columna_MontoAPagar, Columna_Numero_De_Pedido, Columna_Direccion, Columna_Estado, Columna_FechaEntrega, Columna_FechaRetiro, columna_bolsones, Columna_cantidadbolsones, Columna_Preciobolsones });
             dataGridView_Pedidos.GridColor = SystemColors.ControlDarkDark;
-            dataGridView_Pedidos.Location = new Point(0, 23);
+            dataGridView_Pedidos.Location = new Point(0, 28);
             dataGridView_Pedidos.Name = "dataGridView_Pedidos";
             dataGridView_Pedidos.RowTemplate.Height = 25;
             dataGridView_Pedidos.Size = new Size(800, 333);
             dataGridView_Pedidos.TabIndex = 1;
-            dataGridView_Pedidos.CellContentClick += dataGridView_Pedidos_CellContentClick;
+            // 
+            // Boton_Volver_Pedidos
+            // 
+            Boton_Volver_Pedidos.BackColor = Color.Transparent;
+            Boton_Volver_Pedidos.FlatStyle = FlatStyle.Popup;
+            Boton_Volver_Pedidos.Font = new Font("Segoe UI", 26.25F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            Boton_Volver_Pedidos.ForeColor = Color.Yellow;
+            Boton_Volver_Pedidos.Location = new Point(0, 376);
+            Boton_Volver_Pedidos.Name = "Boton_Volver_Pedidos";
+            Boton_Volver_Pedidos.Size = new Size(74, 76);
+            Boton_Volver_Pedidos.TabIndex = 3;
+            Boton_Volver_Pedidos.Text = "↩";
+            Boton_Volver_Pedidos.UseVisualStyleBackColor = false;
+            Boton_Volver_Pedidos.Click += Boton_Volver_Pedidos_Click_1;
+            // 
+            // button_Cancelar
+            // 
+            button_Cancelar.BackColor = Color.Gold;
+            button_Cancelar.BackgroundImageLayout = ImageLayout.Stretch;
+            button_Cancelar.FlatStyle = FlatStyle.Flat;
+            button_Cancelar.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            button_Cancelar.Location = new Point(199, 376);
+            button_Cancelar.Name = "button_Cancelar";
+            button_Cancelar.Size = new Size(116, 37);
+            button_Cancelar.TabIndex = 1;
+            button_Cancelar.Text = "Cancelar Pedido";
+            button_Cancelar.UseVisualStyleBackColor = false;
+            button_Cancelar.Click += button_Cancelar_Click;
+            // 
+            // textBox_Cancelar
+            // 
+            textBox_Cancelar.Location = new Point(403, 376);
+            textBox_Cancelar.Name = "textBox_Cancelar";
+            textBox_Cancelar.PlaceholderText = "N° De Pedido A Cancelar";
+            textBox_Cancelar.Size = new Size(143, 23);
+            textBox_Cancelar.TabIndex = 2;
             // 
             // columna_Usuario
             // 
@@ -147,41 +185,20 @@
             Columna_FechaRetiro.HeaderText = "Fecha De Retiro";
             Columna_FechaRetiro.Name = "Columna_FechaRetiro";
             // 
-            // Boton_Volver_Pedidos
+            // columna_bolsones
             // 
-            Boton_Volver_Pedidos.BackColor = Color.Transparent;
-            Boton_Volver_Pedidos.FlatStyle = FlatStyle.Popup;
-            Boton_Volver_Pedidos.Font = new Font("Segoe UI", 26.25F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            Boton_Volver_Pedidos.ForeColor = Color.Yellow;
-            Boton_Volver_Pedidos.Location = new Point(0, 376);
-            Boton_Volver_Pedidos.Name = "Boton_Volver_Pedidos";
-            Boton_Volver_Pedidos.Size = new Size(74, 76);
-            Boton_Volver_Pedidos.TabIndex = 3;
-            Boton_Volver_Pedidos.Text = "↩";
-            Boton_Volver_Pedidos.UseVisualStyleBackColor = false;
-            Boton_Volver_Pedidos.Click += Boton_Volver_Pedidos_Click_1;
+            columna_bolsones.HeaderText = "Bolsones";
+            columna_bolsones.Name = "columna_bolsones";
             // 
-            // button_Cancelar
+            // Columna_cantidadbolsones
             // 
-            button_Cancelar.BackColor = Color.Gold;
-            button_Cancelar.BackgroundImageLayout = ImageLayout.Stretch;
-            button_Cancelar.FlatStyle = FlatStyle.Flat;
-            button_Cancelar.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            button_Cancelar.Location = new Point(199, 376);
-            button_Cancelar.Name = "button_Cancelar";
-            button_Cancelar.Size = new Size(116, 37);
-            button_Cancelar.TabIndex = 1;
-            button_Cancelar.Text = "Cancelar Pedido";
-            button_Cancelar.UseVisualStyleBackColor = false;
-            button_Cancelar.Click += button_Cancelar_Click;
+            Columna_cantidadbolsones.HeaderText = "Cantidad Bolsones";
+            Columna_cantidadbolsones.Name = "Columna_cantidadbolsones";
             // 
-            // textBox_Cancelar
+            // Columna_Preciobolsones
             // 
-            textBox_Cancelar.Location = new Point(403, 376);
-            textBox_Cancelar.Name = "textBox_Cancelar";
-            textBox_Cancelar.PlaceholderText = "N° De Pedido A Cancelar";
-            textBox_Cancelar.Size = new Size(143, 23);
-            textBox_Cancelar.TabIndex = 2;
+            Columna_Preciobolsones.HeaderText = "Monto Bolsones";
+            Columna_Preciobolsones.Name = "Columna_Preciobolsones";
             // 
             // Pedidos_Form
             // 
@@ -213,6 +230,9 @@
         private ToolStripLabel toolStripLabel1;
         private ToolStripSeparator toolStripSeparator1;
         private DataGridView dataGridView_Pedidos;
+        private RoundButton Boton_Volver_Pedidos;
+        private Button button_Cancelar;
+        private TextBox textBox_Cancelar;
         private DataGridViewTextBoxColumn columna_Usuario;
         private DataGridViewTextBoxColumn Columna_Nombre;
         private DataGridViewTextBoxColumn Columna_Tipo;
@@ -220,11 +240,11 @@
         private DataGridViewTextBoxColumn Columna_MontoAPagar;
         private DataGridViewTextBoxColumn Columna_Numero_De_Pedido;
         private DataGridViewTextBoxColumn Columna_Direccion;
-        private RoundButton Boton_Volver_Pedidos;
-        private Button button_Cancelar;
         private DataGridViewTextBoxColumn Columna_Estado;
         private DataGridViewTextBoxColumn Columna_FechaEntrega;
         private DataGridViewTextBoxColumn Columna_FechaRetiro;
-        private TextBox textBox_Cancelar;
+        private DataGridViewTextBoxColumn columna_bolsones;
+        private DataGridViewTextBoxColumn Columna_cantidadbolsones;
+        private DataGridViewTextBoxColumn Columna_Preciobolsones;
     }
 }
