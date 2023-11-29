@@ -123,6 +123,7 @@
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "FormularioUsuario";
             Text = "Login";
+            
             ResumeLayout(false);
             PerformLayout();
         }

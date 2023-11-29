@@ -14,6 +14,7 @@ namespace formulario_parcial
     public partial class Form_alquiler : Form
     {
         private UserManager userManager = UserManager.Instancia;
+
         public Form_alquiler()
         {
             InitializeComponent();

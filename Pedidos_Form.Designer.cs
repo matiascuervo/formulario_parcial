@@ -34,9 +34,6 @@
             toolStripLabel1 = new ToolStripLabel();
             toolStripSeparator1 = new ToolStripSeparator();
             dataGridView_Pedidos = new DataGridView();
-            Boton_Volver_Pedidos = new RoundButton();
-            button_Cancelar = new Button();
-            textBox_Cancelar = new TextBox();
             columna_Usuario = new DataGridViewTextBoxColumn();
             Columna_Nombre = new DataGridViewTextBoxColumn();
             Columna_Tipo = new DataGridViewTextBoxColumn();
@@ -50,6 +47,9 @@
             columna_bolsones = new DataGridViewTextBoxColumn();
             Columna_cantidadbolsones = new DataGridViewTextBoxColumn();
             Columna_Preciobolsones = new DataGridViewTextBoxColumn();
+            Boton_Volver_Pedidos = new RoundButton();
+            button_Cancelar = new Button();
+            textBox_Cancelar = new TextBox();
             toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView_Pedidos).BeginInit();
             SuspendLayout();
@@ -98,42 +98,6 @@
             dataGridView_Pedidos.RowTemplate.Height = 25;
             dataGridView_Pedidos.Size = new Size(800, 333);
             dataGridView_Pedidos.TabIndex = 1;
-            // 
-            // Boton_Volver_Pedidos
-            // 
-            Boton_Volver_Pedidos.BackColor = Color.Transparent;
-            Boton_Volver_Pedidos.FlatStyle = FlatStyle.Popup;
-            Boton_Volver_Pedidos.Font = new Font("Segoe UI", 26.25F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
-            Boton_Volver_Pedidos.ForeColor = Color.Yellow;
-            Boton_Volver_Pedidos.Location = new Point(0, 376);
-            Boton_Volver_Pedidos.Name = "Boton_Volver_Pedidos";
-            Boton_Volver_Pedidos.Size = new Size(74, 76);
-            Boton_Volver_Pedidos.TabIndex = 3;
-            Boton_Volver_Pedidos.Text = "↩";
-            Boton_Volver_Pedidos.UseVisualStyleBackColor = false;
-            Boton_Volver_Pedidos.Click += Boton_Volver_Pedidos_Click_1;
-            // 
-            // button_Cancelar
-            // 
-            button_Cancelar.BackColor = Color.Gold;
-            button_Cancelar.BackgroundImageLayout = ImageLayout.Stretch;
-            button_Cancelar.FlatStyle = FlatStyle.Flat;
-            button_Cancelar.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            button_Cancelar.Location = new Point(199, 376);
-            button_Cancelar.Name = "button_Cancelar";
-            button_Cancelar.Size = new Size(116, 37);
-            button_Cancelar.TabIndex = 1;
-            button_Cancelar.Text = "Cancelar Pedido";
-            button_Cancelar.UseVisualStyleBackColor = false;
-            button_Cancelar.Click += button_Cancelar_Click;
-            // 
-            // textBox_Cancelar
-            // 
-            textBox_Cancelar.Location = new Point(403, 376);
-            textBox_Cancelar.Name = "textBox_Cancelar";
-            textBox_Cancelar.PlaceholderText = "N° De Pedido A Cancelar";
-            textBox_Cancelar.Size = new Size(143, 23);
-            textBox_Cancelar.TabIndex = 2;
             // 
             // columna_Usuario
             // 
@@ -199,6 +163,42 @@
             // 
             Columna_Preciobolsones.HeaderText = "Monto Bolsones";
             Columna_Preciobolsones.Name = "Columna_Preciobolsones";
+            // 
+            // Boton_Volver_Pedidos
+            // 
+            Boton_Volver_Pedidos.BackColor = Color.Transparent;
+            Boton_Volver_Pedidos.FlatStyle = FlatStyle.Popup;
+            Boton_Volver_Pedidos.Font = new Font("Segoe UI", 26.25F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            Boton_Volver_Pedidos.ForeColor = Color.Yellow;
+            Boton_Volver_Pedidos.Location = new Point(0, 376);
+            Boton_Volver_Pedidos.Name = "Boton_Volver_Pedidos";
+            Boton_Volver_Pedidos.Size = new Size(74, 76);
+            Boton_Volver_Pedidos.TabIndex = 3;
+            Boton_Volver_Pedidos.Text = "↩";
+            Boton_Volver_Pedidos.UseVisualStyleBackColor = false;
+            Boton_Volver_Pedidos.Click += Boton_Volver_Pedidos_Click_1;
+            // 
+            // button_Cancelar
+            // 
+            button_Cancelar.BackColor = Color.Gold;
+            button_Cancelar.BackgroundImageLayout = ImageLayout.Stretch;
+            button_Cancelar.FlatStyle = FlatStyle.Flat;
+            button_Cancelar.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            button_Cancelar.Location = new Point(199, 376);
+            button_Cancelar.Name = "button_Cancelar";
+            button_Cancelar.Size = new Size(116, 37);
+            button_Cancelar.TabIndex = 1;
+            button_Cancelar.Text = "Cancelar Pedido";
+            button_Cancelar.UseVisualStyleBackColor = false;
+            button_Cancelar.Click += button_Cancelar_Click;
+            // 
+            // textBox_Cancelar
+            // 
+            textBox_Cancelar.Location = new Point(343, 376);
+            textBox_Cancelar.Name = "textBox_Cancelar";
+            textBox_Cancelar.PlaceholderText = "N° De Pedido A Cancelar";
+            textBox_Cancelar.Size = new Size(143, 23);
+            textBox_Cancelar.TabIndex = 2;
             // 
             // Pedidos_Form
             // 

@@ -29,7 +29,7 @@ namespace formulario_parcial
         private int cantidadbolsones;
         private int NumeroDebolsones;
         private decimal costoTotalBolsones ;
-        private bool BolsonSolo = false;
+        
         private System.Windows.Forms.ToolTip toolTip1;
 
         public Form_ventas()
@@ -117,7 +117,7 @@ namespace formulario_parcial
                     producto.MontoAPagar = bolson_Grande.MontoAPagar;
                     bolsonSeleccionado = bolson_Grande;
                     bolsonSeleccionadoConVolquete = true;
-                    BolsonSolo = true;
+                    
                 }
                 else if (seleccion_Bolson == "1m3")
                 {
@@ -127,7 +127,7 @@ namespace formulario_parcial
                     producto.MontoAPagar = bolson_chico.MontoAPagar;
                     bolsonSeleccionado = bolson_chico;
                     bolsonSeleccionadoConVolquete = true;
-                    BolsonSolo = true;
+                    
 
                 }
 
@@ -283,17 +283,39 @@ namespace formulario_parcial
 
         private void Button_Pedir_Click(object sender, EventArgs e)
         {
-            if (comboBox_ventas.SelectedItem == null)
+
+
+            try 
             {
-                MessageBox.Show("Seleccione un tipo de volquete antes de hacer el pedido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (comboBox_ventas.SelectedItem == null && bolsonSeleccionadoConVolquete ==true)
+                {
+                    // Lanzar tu propia excepción si la condición no se cumple
+                    throw new MiExcepcionPropia("lo Sentimos,Pero No Vendemos Bolsones Por Separado.");
+                }
+
+            }
+            catch (MiExcepcionPropia ex)
+            {
+                
+                MessageBox.Show($"Atencion: {ex.Message}", "Atencion", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+
+            if (comboBox_ventas.SelectedItem == null)
+            {
+                MessageBox.Show("Seleccione un tipo de volquete antes de hacer el pedido.", "Atencion", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
 
             if (!int.TryParse(textBox_Cantidad.Text, out int cantidadVolquetes))
             {
                 MessageBox.Show("Ingrese una cantidad válida antes de hacer el pedido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+
+                    
+
 
 
 

@@ -114,10 +114,7 @@ namespace formulario_parcial
                     MessageBox.Show("Ingrese Un Número De Pedido En La Caja De Texto De La Derecha Para Cancelarlo.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
-            catch (PedidoNoEncontradoException ex)
-            {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            
             catch (Exception ex)
             {
                 MessageBox.Show($"Error inesperado: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);

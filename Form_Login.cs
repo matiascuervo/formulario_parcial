@@ -14,7 +14,7 @@ namespace formulario_parcial
     {
         //  la instancia única de UserManager Singleton
         private UserManager userManager = UserManager.Instancia;
-        
+
         public FormularioUsuario()
         {
             InitializeComponent();
@@ -39,13 +39,13 @@ namespace formulario_parcial
 
         private void textBoxNombre_TextChanged(object sender, EventArgs e)
         {
-            
+
             string Nombre = textBoxNombre.Text;
         }
 
         private void textBoxDNI_TextChanged(object sender, EventArgs e)
         {
-           
+
             string contraseña = textBoxDNI.Text;
         }
 
@@ -53,7 +53,7 @@ namespace formulario_parcial
         {
             try
             {
-                
+
                 string nombre = textBoxNombre.Text;
                 string contraseña = textBoxDNI.Text;
 
@@ -62,7 +62,7 @@ namespace formulario_parcial
                     throw new ArgumentException("El nombre y la contraseña son obligatorios.");
                 }
 
-                
+
                 if (!userManager.VerificarCredenciales(nombre, contraseña))
                 {
                     throw new ArgumentException("Credenciales incorrectas.");
@@ -70,26 +70,26 @@ namespace formulario_parcial
 
                 Persona usuario = userManager.GetUsuarios().FirstOrDefault(u => u.Nombre == nombre);
 
-                
+
                 if (usuario != null && usuario.Estado == "Activo")
                 {
-                    
+
                     textBoxNombre.Clear();
                     textBoxDNI.Clear();
 
-                    
+
                     Form_alquiler form_Alquiler = new Form_alquiler();
                     this.Hide();
                     form_Alquiler.ShowDialog();
                 }
                 else if (usuario != null && usuario.Estado == "Debaja")
                 {
-                    
+
                     MessageBox.Show("Ha sido dado de baja de la aplicación. Comuníquese con el soporte o llame al número 464-4100 para obtener más ayuda.", "Usuario Dado de Baja", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
                 else
                 {
-                    
+
                     throw new ArgumentException("Usuario no encontrado.");
                 }
             }
@@ -116,10 +116,10 @@ namespace formulario_parcial
             // Verificar y actualizar los campos nulos
             foreach (var usuario in usuarios)
             {
-                
+
                 if (usuario.Estado == null)
                 {
-                    usuario.Estado = "Activo"; 
+                    usuario.Estado = "Activo";
                 }
 
                 if (usuario.Rol == null)
@@ -129,10 +129,10 @@ namespace formulario_parcial
 
                 }
 
-                
+
             }
 
-            
+
             DataManager.GuardarDatos(usuarios);
         }
 

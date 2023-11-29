@@ -76,6 +76,7 @@
             Label_Nombre_Inicio.Size = new Size(203, 40);
             Label_Nombre_Inicio.TabIndex = 2;
             Label_Nombre_Inicio.Text = "Volquetes Poly";
+            
             // 
             // Form_inicio
             // 
@@ -91,6 +92,7 @@
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Form_inicio";
             Text = "VOLQUETES POLY";
+            
             ResumeLayout(false);
             PerformLayout();
         }

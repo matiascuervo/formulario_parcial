@@ -22,7 +22,7 @@ namespace formulario_parcial
             Registro.ShowDialog();
         }
 
-      
+
 
 
     }

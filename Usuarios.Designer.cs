@@ -63,7 +63,7 @@
             dataGridView_Usuarios.Location = new Point(0, -1);
             dataGridView_Usuarios.Name = "dataGridView_Usuarios";
             dataGridView_Usuarios.RowTemplate.Height = 25;
-            dataGridView_Usuarios.Size = new Size(444, 271);
+            dataGridView_Usuarios.Size = new Size(443, 389);
             dataGridView_Usuarios.TabIndex = 9;
             // 
             // Columna_Usuario
@@ -90,7 +90,7 @@
             // 
             Boton_Mostrar_Usuarios.BackColor = Color.LightSkyBlue;
             Boton_Mostrar_Usuarios.FlatStyle = FlatStyle.Flat;
-            Boton_Mostrar_Usuarios.Location = new Point(450, 12);
+            Boton_Mostrar_Usuarios.Location = new Point(476, 12);
             Boton_Mostrar_Usuarios.Name = "Boton_Mostrar_Usuarios";
             Boton_Mostrar_Usuarios.Size = new Size(133, 23);
             Boton_Mostrar_Usuarios.TabIndex = 10;
@@ -100,7 +100,7 @@
             // 
             // textBox_Baja
             // 
-            textBox_Baja.Location = new Point(652, 69);
+            textBox_Baja.Location = new Point(680, 69);
             textBox_Baja.Name = "textBox_Baja";
             textBox_Baja.PlaceholderText = "Usuarios";
             textBox_Baja.Size = new Size(108, 23);
@@ -110,7 +110,7 @@
             // 
             Bonton_Baja.BackColor = Color.LightSkyBlue;
             Bonton_Baja.FlatStyle = FlatStyle.Flat;
-            Bonton_Baja.Location = new Point(450, 69);
+            Bonton_Baja.Location = new Point(476, 69);
             Bonton_Baja.Name = "Bonton_Baja";
             Bonton_Baja.Size = new Size(133, 23);
             Bonton_Baja.TabIndex = 12;
@@ -122,7 +122,7 @@
             // 
             Boton_Reactivar_Usuario.BackColor = Color.LightSkyBlue;
             Boton_Reactivar_Usuario.FlatStyle = FlatStyle.Flat;
-            Boton_Reactivar_Usuario.Location = new Point(450, 129);
+            Boton_Reactivar_Usuario.Location = new Point(476, 126);
             Boton_Reactivar_Usuario.Name = "Boton_Reactivar_Usuario";
             Boton_Reactivar_Usuario.Size = new Size(133, 23);
             Boton_Reactivar_Usuario.TabIndex = 13;
