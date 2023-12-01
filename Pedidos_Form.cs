@@ -10,7 +10,10 @@ namespace formulario_parcial
         public Pedidos_Form()
         {
             InitializeComponent();
-
+            MostrarPedidosDelUsuario(UserManager.Instancia.UsuarioLogueado?.Nombre);
+            dataGridView_Pedidos.CellFormatting += dataGridView_Pedidos_CellFormatting;
+            dataGridView_Pedidos.CellContentClick += dataGridView_Pedidos_CellContentClick;
+            dataGridView_Pedidos.AllowUserToAddRows = false;
         }
 
 
@@ -28,7 +31,7 @@ namespace formulario_parcial
             // Verificar que el campo de búsqueda no esté vacío antes de buscar
 
             MostrarPedidosDelUsuario(UserManager.Instancia.UsuarioLogueado?.Nombre);
-
+            
 
         }
         private void MostrarPedidosDelUsuario(string nombreUsuario)
@@ -123,6 +126,48 @@ namespace formulario_parcial
 
 
 
+
+        private void dataGridView_Pedidos_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            // Verificar si el usuario hizo clic en la columna de Estado
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0 && dataGridView_Pedidos.Columns[e.ColumnIndex].Name == "Columna_Estado")
+            {
+                DataGridViewRow selectedRow = dataGridView_Pedidos.Rows[e.RowIndex];
+
+                // Obtener el número de pedido y el estado actual
+                string numeroPedido = selectedRow.Cells["Columna_Numero_De_Pedido"].Value.ToString();
+                string estadoActual = selectedRow.Cells["columna_Estado"].Value.ToString();
+
+                // Mostrar un cuadro de diálogo de confirmación
+                DialogResult result = MessageBox.Show($"¿Está seguro de que desea cancelar el pedido {numeroPedido}?", "Confirmar Cancelación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (result == DialogResult.Yes)
+                {
+                    // Cambiar el estado del pedido a Cancelado
+                    CambiarEstadoPedido(numeroPedido, EstadoPedido.Cancelado);
+
+                    // Actualizar el DataGridView después de la cancelación
+                    MostrarPedidosDelUsuario(UserManager.Instancia.UsuarioLogueado?.Nombre);
+                }
+            }
+        }
+
+
+
+
+        
+
+
+        private void dataGridView_Pedidos_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            // Reemplazar valores nulos o vacíos con un texto específico
+            if (e.Value == null || string.IsNullOrWhiteSpace(e.Value.ToString()))
+            {
+                e.Value = "Sin Especificar";
+                e.FormattingApplied = true;
+            }
+        }
+
         private void CambiarEstadoPedido(string numeroPedido, EstadoPedido nuevoEstado)
         {
             var enviroment = System.Environment.CurrentDirectory;
@@ -154,14 +199,21 @@ namespace formulario_parcial
                             }
                         }
 
+                        // Confirmación antes de cancelar el pedido
+                        DialogResult result = MessageBox.Show("¿Estás seguro de que deseas cancelar este pedido?", "Confirmación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-                        string nuevoEstadoStr = nuevoEstado.ToString();
-
-                        // Actualiza el estado del pedido en el archivo XML
-                        pedidoEncontrado.Element("Estado").Value = nuevoEstadoStr;
-
-
-                        doc.Save(rutaCompleta);
+                        if (result == DialogResult.Yes)
+                        {
+                            // Cambiar el estado del pedido a Cancelado
+                            string nuevoEstadoStr = nuevoEstado.ToString();
+                            pedidoEncontrado.Element("Estado").Value = nuevoEstadoStr;
+                            doc.Save(rutaCompleta);
+                            MessageBox.Show("Pedido cancelado exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }else if (result == DialogResult.No) 
+                        {
+                            MessageBox.Show("Pedido No Cancelado.", "Atencion", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        }
+                            
                     }
                     else
                     {
@@ -179,6 +231,6 @@ namespace formulario_parcial
             }
         }
 
-       
+
     }
 }

@@ -16,12 +16,13 @@ namespace formulario_parcial
     public partial class Usuarios : Form
     {
         private Pedidos_Form pedidosForm;
-
+        List<Persona> usuarios = DataManager.CargarDatos();
         public Usuarios()
         {
 
             InitializeComponent();
             pedidosForm = new Pedidos_Form();
+            AgregarUsuariosAlDataGridView(usuarios);
         }
 
         private void Usuarios_Load(object sender, EventArgs e)
@@ -62,8 +63,7 @@ namespace formulario_parcial
 
         private void Boton_Mostrar_Usuarios_Click(object sender, EventArgs e)
         {
-            List<Persona> usuarios = DataManager.CargarDatos();
-            AgregarUsuariosAlDataGridView(usuarios);
+            
         }
 
         private void Bonton_Baja_Click(object sender, EventArgs e)

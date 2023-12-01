@@ -14,6 +14,8 @@ using BiblotecaDatamanager;
 using Microsoft.VisualBasic.ApplicationServices;
 using BibliotecaDatamanager;
 using System.Reflection.Metadata.Ecma335;
+using System.Runtime.CompilerServices;
+
 
 
 namespace formulario_parcial
@@ -147,7 +149,7 @@ namespace formulario_parcial
         private void textBox_Cantidad_BolsonestChanged(object sender, EventArgs e)
         {   
             try
-            {
+            {   
                 string cantidadTexto = textBox_Cantidad_Bolsones.Text;
                 if (int.TryParse(cantidadTexto, out int cantidadbolsones))
                 {
@@ -158,7 +160,7 @@ namespace formulario_parcial
 
                         costoTotalBolsones = cantidadbolsones * precio; // Asigna el valor calculado a la variable de clase
                         NumeroDebolsones = cantidadbolsones;                                               // Agrega mensajes de depuración
-                        MessageBox.Show($"Costo total de bolsones: {costoTotalBolsones:C}");
+                       
                     }
                 }
                 else
@@ -218,7 +220,6 @@ namespace formulario_parcial
 
         private void textBox_Cantidad_TextChanged(object sender, EventArgs e)
         {
-            
             try
             {
                 string cantidadTexto = textBox_Cantidad.Text;
@@ -226,18 +227,26 @@ namespace formulario_parcial
                 {
                     if (comboBox_ventas.SelectedItem != null)
                     {
-                        var seleccion = comboBox_ventas.SelectedItem.ToString();
-                        // No necesitas crear una nueva instancia de Volquete aquí, ya tienes volqueteSeleccionado
-                        decimal precio = volqueteSeleccionado.MontoAPagar;
-
-                        if (recargosLocalidades.ContainsKey(comboBox_Localidad.SelectedItem.ToString()))
+                        if (comboBox_Localidad.SelectedItem != null)
                         {
-                            decimal recargo = recargosLocalidades[comboBox_Localidad.SelectedItem.ToString()];
-                            precio += precio * recargo;
-                        }
+                            var seleccion = comboBox_ventas.SelectedItem.ToString();
+                            // No necesitas crear una nueva instancia de Volquete aquí, ya tienes volqueteSeleccionado
+                            decimal precio = volqueteSeleccionado.MontoAPagar;
 
-                        decimal costoTotal = cantidadVolquetes * precio;
-                        // MessageBox.Show($"Costo total: {costoTotal:C}");
+                            if (recargosLocalidades.ContainsKey(comboBox_Localidad.SelectedItem.ToString()))
+                            {
+                                decimal recargo = recargosLocalidades[comboBox_Localidad.SelectedItem.ToString()];
+                                precio += precio * recargo;
+                            }
+
+                            decimal costoTotal = cantidadVolquetes * precio;
+                            // MessageBox.Show($"Costo total: {costoTotal:C}");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Seleccione Primero Una localidad", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            textBox_Cantidad.Clear();
+                        }
                     }
                 }
                 else
@@ -264,7 +273,7 @@ namespace formulario_parcial
         {
             if (volqueteSeleccionado != null && comboBox_ventas.SelectedItem != null)
             {
-                var localidad = comboBox_Localidad.SelectedItem.ToString();  // Mueve esta línea aquí
+                var localidad = comboBox_Localidad.SelectedItem.ToString();  
 
                 if (localidad == "Temperley")
                 {
@@ -281,10 +290,31 @@ namespace formulario_parcial
             }
         }
 
+
+
+
+        private void LimpiarControles()
+        {
+            foreach (Control control in Controls)
+            {
+                if (control is System.Windows.Forms.ComboBox)
+                {
+                    ((System.Windows.Forms.ComboBox)control).SelectedIndex = -1; // Limpia la selección del ComboBox
+                }
+                else if (control is System.Windows.Forms.TextBox)
+                {
+                    ((System.Windows.Forms.TextBox)control).Text = string.Empty; // Limpia el texto del TextBox
+                }
+            }
+        }
+
+
+
+
+
         private void Button_Pedir_Click(object sender, EventArgs e)
         {
-
-
+            
             try 
             {
                 if (comboBox_ventas.SelectedItem == null && bolsonSeleccionadoConVolquete ==true)
@@ -371,67 +401,92 @@ namespace formulario_parcial
                         nuevoPedido.MontoAPagarBolson = costoTotalBolsones;  // Asigna el costo total de los bolsones al pedido
                         var ConstoFinal = costoTotal + nuevoPedido.MontoAPagarBolson;
                         // Agrega mensajes de depuración para verificar los valores
-                        MessageBox.Show($"Monto a Pagar Final: {ConstoFinal}");
+                        MessageBox.Show($"Monto a Pagar Final : {ConstoFinal}");
                     }
-     
-     
-                        // Agregar el nuevo pedido a la lista
-                    listaPedidos.Add(nuevoPedido);
 
-                    var enviroment = System.Environment.CurrentDirectory;
-                    string rutaRelativa = Directory.GetParent(enviroment).Parent.Parent.FullName;
-                    string rutaCompleta = Path.Combine(rutaRelativa, "Xml_Usuarios", "pedidos.xml");
+                    DialogResult result = MessageBox.Show("¿Está seguro de realizar el pedido?", "Confirmar Pedido", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-                    var pedidosXml = new XElement("Pedidos",
-                       listaPedidos.Select(pedido =>
-                       new XElement("Pedido",
-                       new XElement("Usuario", pedido.Usuario),
-                       new XElement("Nombre", pedido.Nombre),
-                       new XElement("TipoVolquete", pedido.Tipo.Tipo),
-                       new XElement("Cantidad", pedido.Cantidad),
-                       new XElement("MontoAPagar", pedido.MontoAPagar),
-                       new XElement("NumeroDePedido", pedido.NumeroDePedido),
-                       new XElement("Domicilio", pedido.Domicilio),
-                       new XElement("Estado", pedido.Estado),
-                       new XElement("FechaEntrega", pedido.FechaEntrega.ToString("dd/MM/yyyy")),
-                       new XElement("DuracionEntregaDias", pedido.DuracionEntregaDias, "Dias"),
-                       new XElement("FechaRetiro", pedido.FechaRetiro.ToString("dd/MM/yyyy")),
-                       pedido.Bolson != null
-                       ? new XElement("Bolson",
-                         new XElement("TipoBolson", pedido.Bolson.Tipo),
-                         new XElement("CantidadBolsones", pedido.CantidadBolsones),
-                         new XElement("MontoAPagarBolson", pedido.MontoAPagarBolson)
-                        )
-                        : null
-
-                   )
-               )
-           );
-
-                    XDocument doc;
-                    if (System.IO.File.Exists(rutaCompleta))
+                    if (result == DialogResult.Yes)
                     {
-                        doc = XDocument.Load(rutaCompleta);
+
+                        listaPedidos.Add(nuevoPedido);
+
+                        var enviroment = System.Environment.CurrentDirectory;
+                        string rutaRelativa = Directory.GetParent(enviroment).Parent.Parent.FullName;
+                        string rutaCompleta = Path.Combine(rutaRelativa, "Xml_Usuarios", "pedidos.xml");
+
+                        var pedidosXml = new XElement("Pedidos",
+                           listaPedidos.Select(pedido =>
+                           new XElement("Pedido",
+                           new XElement("Usuario", pedido.Usuario),
+                           new XElement("Nombre", pedido.Nombre),
+                           new XElement("TipoVolquete", pedido.Tipo.Tipo),
+                           new XElement("Cantidad", pedido.Cantidad),
+                           new XElement("MontoAPagar", pedido.MontoAPagar),
+                           new XElement("NumeroDePedido", pedido.NumeroDePedido),
+                           new XElement("Domicilio", pedido.Domicilio),
+                           new XElement("Estado", pedido.Estado),
+                           new XElement("FechaEntrega", pedido.FechaEntrega.ToString("dd/MM/yyyy")),
+                           new XElement("DuracionEntregaDias", pedido.DuracionEntregaDias, "Dias"),
+                           new XElement("FechaRetiro", pedido.FechaRetiro.ToString("dd/MM/yyyy")),
+                           pedido.Bolson != null
+                           ? new XElement("Bolson",
+                             new XElement("TipoBolson", pedido.Bolson.Tipo),
+                             new XElement("CantidadBolsones", pedido.CantidadBolsones),
+                             new XElement("MontoAPagarBolson", pedido.MontoAPagarBolson)
+                            )
+                            : null
+
+                       )
+                   )
+               );
+
+                        XDocument doc;
+                        if (System.IO.File.Exists(rutaCompleta))
+                        {
+                            doc = XDocument.Load(rutaCompleta);
+                        }
+                        else
+                        {
+                            doc = new XDocument(new XElement("Pedidos"));
+                        }
+
+
+                        doc.Root.Add(pedidosXml);
+
+                        // Guardar el documento XML en el archivo
+                        doc.Save(rutaCompleta);
+
+                        MessageBox.Show($"Pedido Realizado con éxito.El Numero De Su Pedido es {numeroPedidoAleatorio}.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        this.Hide();
+                        Form_alquiler alquiler = new Form_alquiler();
+                        alquiler.Show();
+
                     }
                     else
                     {
-                        doc = new XDocument(new XElement("Pedidos"));
+                        // El usuario seleccionó "No", puedes hacer algo si es necesario
+                        MessageBox.Show("Pedido cancelado.", "Cancelado", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
 
 
-                    doc.Root.Add(pedidosXml);
-
-                    // Guardar el documento XML en el archivo
-                    doc.Save(rutaCompleta);
-
-                    MessageBox.Show("Pedido guardado con éxito.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    MessageBox.Show($"El Numero De Su Pedido es {numeroPedidoAleatorio}.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    
-                    
-                    
                 }
-            }
+
+
+
+
+            };
+                        // Agregar el nuevo pedido a la lista
+                        
+
+
+            
         }
+
+
+        
+
     }
 
 }

@@ -58,7 +58,6 @@
             label_BCantidad = new Label();
             label_Medida = new Label();
             textBox_Cantidad_Bolsones = new TextBox();
-            label_Agregar = new Label();
             radioButton_Bolson = new RadioButton();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
@@ -68,17 +67,17 @@
             // 
             label1.AutoSize = true;
             label1.BackColor = Color.Gold;
-            label1.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label1.Location = new Point(43, 9);
+            label1.Font = new Font("Segoe UI", 12.25F, FontStyle.Bold, GraphicsUnit.Point);
+            label1.Location = new Point(1, 63);
             label1.Name = "label1";
-            label1.Size = new Size(82, 25);
+            label1.Size = new Size(149, 23);
             label1.TabIndex = 0;
-            label1.Text = "Tamaño";
+            label1.Text = "Tipo De Volquete";
             // 
             // comboBox_ventas
             // 
             comboBox_ventas.FormattingEnabled = true;
-            comboBox_ventas.Location = new Point(137, 14);
+            comboBox_ventas.Location = new Point(167, 63);
             comboBox_ventas.Name = "comboBox_ventas";
             comboBox_ventas.Size = new Size(121, 23);
             comboBox_ventas.TabIndex = 1;
@@ -86,7 +85,7 @@
             // 
             // textBox_Cantidad
             // 
-            textBox_Cantidad.Location = new Point(137, 188);
+            textBox_Cantidad.Location = new Point(167, 330);
             textBox_Cantidad.Name = "textBox_Cantidad";
             textBox_Cantidad.Size = new Size(121, 23);
             textBox_Cantidad.TabIndex = 5;
@@ -97,7 +96,7 @@
             Label_Cantidad.AutoSize = true;
             Label_Cantidad.BackColor = Color.Gold;
             Label_Cantidad.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
-            Label_Cantidad.Location = new Point(39, 183);
+            Label_Cantidad.Location = new Point(1, 330);
             Label_Cantidad.Name = "Label_Cantidad";
             Label_Cantidad.Size = new Size(92, 25);
             Label_Cantidad.TabIndex = 3;
@@ -107,7 +106,7 @@
             // 
             Button_Pedir.BackColor = Color.Gold;
             Button_Pedir.FlatStyle = FlatStyle.Flat;
-            Button_Pedir.Location = new Point(595, 391);
+            Button_Pedir.Location = new Point(326, 411);
             Button_Pedir.Name = "Button_Pedir";
             Button_Pedir.Size = new Size(153, 40);
             Button_Pedir.TabIndex = 9;
@@ -120,9 +119,9 @@
             pictureBox1.BackColor = Color.Transparent;
             pictureBox1.BackgroundImage = (Image)resources.GetObject("pictureBox1.BackgroundImage");
             pictureBox1.BackgroundImageLayout = ImageLayout.Zoom;
-            pictureBox1.Location = new Point(347, 51);
+            pictureBox1.Location = new Point(296, -3);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(510, 214);
+            pictureBox1.Size = new Size(422, 268);
             pictureBox1.TabIndex = 5;
             pictureBox1.TabStop = false;
             // 
@@ -132,7 +131,7 @@
             Boton_Volver_Ventas.FlatStyle = FlatStyle.Popup;
             Boton_Volver_Ventas.Font = new Font("Segoe UI", 26.25F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
             Boton_Volver_Ventas.ForeColor = SystemColors.ActiveCaptionText;
-            Boton_Volver_Ventas.Location = new Point(-4, 455);
+            Boton_Volver_Ventas.Location = new Point(1, 411);
             Boton_Volver_Ventas.Name = "Boton_Volver_Ventas";
             Boton_Volver_Ventas.Size = new Size(57, 56);
             Boton_Volver_Ventas.TabIndex = 10;
@@ -145,7 +144,7 @@
             label_Localidad.AutoSize = true;
             label_Localidad.BackColor = Color.Gold;
             label_Localidad.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label_Localidad.Location = new Point(39, 51);
+            label_Localidad.Location = new Point(1, 122);
             label_Localidad.Name = "label_Localidad";
             label_Localidad.Size = new Size(97, 25);
             label_Localidad.TabIndex = 8;
@@ -154,7 +153,7 @@
             // comboBox_Localidad
             // 
             comboBox_Localidad.FormattingEnabled = true;
-            comboBox_Localidad.Location = new Point(137, 56);
+            comboBox_Localidad.Location = new Point(167, 127);
             comboBox_Localidad.Name = "comboBox_Localidad";
             comboBox_Localidad.Size = new Size(121, 23);
             comboBox_Localidad.TabIndex = 2;
@@ -162,7 +161,7 @@
             // 
             // textBox_Nombre_Final
             // 
-            textBox_Nombre_Final.Location = new Point(137, 103);
+            textBox_Nombre_Final.Location = new Point(167, 252);
             textBox_Nombre_Final.Name = "textBox_Nombre_Final";
             textBox_Nombre_Final.Size = new Size(121, 23);
             textBox_Nombre_Final.TabIndex = 3;
@@ -172,26 +171,26 @@
             label_Nombre_Final.AutoSize = true;
             label_Nombre_Final.BackColor = Color.Gold;
             label_Nombre_Final.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label_Nombre_Final.Location = new Point(39, 98);
+            label_Nombre_Final.Location = new Point(1, 252);
             label_Nombre_Final.Name = "label_Nombre_Final";
-            label_Nombre_Final.Size = new Size(86, 25);
+            label_Nombre_Final.Size = new Size(75, 25);
             label_Nombre_Final.TabIndex = 11;
-            label_Nombre_Final.Text = "Nombre";
+            label_Nombre_Final.Text = "Recibe ";
             // 
             // label_Dirrecion
             // 
             label_Dirrecion.AutoSize = true;
             label_Dirrecion.BackColor = Color.Gold;
             label_Dirrecion.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label_Dirrecion.Location = new Point(39, 142);
+            label_Dirrecion.Location = new Point(1, 191);
             label_Dirrecion.Name = "label_Dirrecion";
-            label_Dirrecion.Size = new Size(95, 25);
+            label_Dirrecion.Size = new Size(96, 25);
             label_Dirrecion.TabIndex = 12;
-            label_Dirrecion.Text = "Dirrecion";
+            label_Dirrecion.Text = "Direccion";
             // 
             // TextBox_Direccion
             // 
-            TextBox_Direccion.Location = new Point(137, 142);
+            TextBox_Direccion.Location = new Point(167, 191);
             TextBox_Direccion.Name = "TextBox_Direccion";
             TextBox_Direccion.Size = new Size(121, 23);
             TextBox_Direccion.TabIndex = 4;
@@ -211,7 +210,7 @@
             label_fecha.AutoSize = true;
             label_fecha.BackColor = Color.Gold;
             label_fecha.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label_fecha.Location = new Point(595, 298);
+            label_fecha.Location = new Point(326, 335);
             label_fecha.Name = "label_fecha";
             label_fecha.Size = new Size(114, 20);
             label_fecha.TabIndex = 15;
@@ -219,7 +218,7 @@
             // 
             // dateTime_Venta
             // 
-            dateTime_Venta.Location = new Point(595, 337);
+            dateTime_Venta.Location = new Point(326, 382);
             dateTime_Venta.Name = "dateTime_Venta";
             dateTime_Venta.Size = new Size(200, 23);
             dateTime_Venta.TabIndex = 8;
@@ -227,9 +226,9 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.BackColor = Color.Snow;
+            label3.BackColor = Color.Gold;
             label3.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            label3.Location = new Point(401, 51);
+            label3.Location = new Point(340, 212);
             label3.Name = "label3";
             label3.Size = new Size(64, 19);
             label3.TabIndex = 17;
@@ -238,8 +237,9 @@
             // label4
             // 
             label4.AutoSize = true;
+            label4.BackColor = Color.Gold;
             label4.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            label4.Location = new Point(683, 51);
+            label4.Location = new Point(554, 212);
             label4.Name = "label4";
             label4.Size = new Size(64, 19);
             label4.TabIndex = 18;
@@ -249,10 +249,10 @@
             // 
             label5.AutoSize = true;
             label5.BackColor = Color.Gold;
-            label5.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label5.Location = new Point(374, 9);
+            label5.Font = new Font("Segoe UI", 13.25F, FontStyle.Bold, GraphicsUnit.Point);
+            label5.Location = new Point(436, 212);
             label5.Name = "label5";
-            label5.Size = new Size(100, 25);
+            label5.Size = new Size(96, 25);
             label5.TabIndex = 19;
             label5.Text = "Volquetes";
             // 
@@ -262,9 +262,9 @@
             pictureBox2.BackgroundImage = (Image)resources.GetObject("pictureBox2.BackgroundImage");
             pictureBox2.BackgroundImageLayout = ImageLayout.Zoom;
             pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(347, 310);
+            pictureBox2.Location = new Point(722, 233);
             pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(211, 149);
+            pictureBox2.Size = new Size(145, 90);
             pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox2.TabIndex = 20;
             pictureBox2.TabStop = false;
@@ -273,9 +273,9 @@
             // label_PrecioBolsaG
             // 
             label_PrecioBolsaG.AutoSize = true;
-            label_PrecioBolsaG.BackColor = Color.Snow;
+            label_PrecioBolsaG.BackColor = Color.White;
             label_PrecioBolsaG.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            label_PrecioBolsaG.Location = new Point(361, 288);
+            label_PrecioBolsaG.Location = new Point(724, 233);
             label_PrecioBolsaG.Name = "label_PrecioBolsaG";
             label_PrecioBolsaG.Size = new Size(64, 19);
             label_PrecioBolsaG.TabIndex = 21;
@@ -285,9 +285,9 @@
             // label_PrecioBolsaC
             // 
             label_PrecioBolsaC.AutoSize = true;
-            label_PrecioBolsaC.BackColor = Color.Snow;
+            label_PrecioBolsaC.BackColor = Color.White;
             label_PrecioBolsaC.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            label_PrecioBolsaC.Location = new Point(468, 288);
+            label_PrecioBolsaC.Location = new Point(794, 233);
             label_PrecioBolsaC.Name = "label_PrecioBolsaC";
             label_PrecioBolsaC.Size = new Size(64, 19);
             label_PrecioBolsaC.TabIndex = 22;
@@ -299,7 +299,7 @@
             label_MedidaBolsaGrande.AutoSize = true;
             label_MedidaBolsaGrande.BackColor = Color.Gold;
             label_MedidaBolsaGrande.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label_MedidaBolsaGrande.Location = new Point(361, 252);
+            label_MedidaBolsaGrande.Location = new Point(724, 208);
             label_MedidaBolsaGrande.Name = "label_MedidaBolsaGrande";
             label_MedidaBolsaGrande.Size = new Size(51, 25);
             label_MedidaBolsaGrande.TabIndex = 23;
@@ -311,7 +311,7 @@
             label_MedidaBolsaGChica.AutoSize = true;
             label_MedidaBolsaGChica.BackColor = Color.Gold;
             label_MedidaBolsaGChica.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label_MedidaBolsaGChica.Location = new Point(468, 252);
+            label_MedidaBolsaGChica.Location = new Point(794, 208);
             label_MedidaBolsaGChica.Name = "label_MedidaBolsaGChica";
             label_MedidaBolsaGChica.Size = new Size(51, 25);
             label_MedidaBolsaGChica.TabIndex = 24;
@@ -321,7 +321,7 @@
             // comboBox_Bolsones
             // 
             comboBox_Bolsones.FormattingEnabled = true;
-            comboBox_Bolsones.Location = new Point(156, 294);
+            comboBox_Bolsones.Location = new Point(724, 111);
             comboBox_Bolsones.Name = "comboBox_Bolsones";
             comboBox_Bolsones.Size = new Size(121, 23);
             comboBox_Bolsones.TabIndex = 6;
@@ -333,7 +333,7 @@
             label_Bolsones.AutoSize = true;
             label_Bolsones.BackColor = Color.Gold;
             label_Bolsones.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label_Bolsones.Location = new Point(46, 252);
+            label_Bolsones.Location = new Point(724, 61);
             label_Bolsones.Name = "label_Bolsones";
             label_Bolsones.Size = new Size(91, 25);
             label_Bolsones.TabIndex = 26;
@@ -345,7 +345,7 @@
             label_BCantidad.AutoSize = true;
             label_BCantidad.BackColor = Color.Gold;
             label_BCantidad.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label_BCantidad.Location = new Point(45, 362);
+            label_BCantidad.Location = new Point(861, 183);
             label_BCantidad.Name = "label_BCantidad";
             label_BCantidad.Size = new Size(92, 25);
             label_BCantidad.TabIndex = 27;
@@ -357,7 +357,7 @@
             label_Medida.AutoSize = true;
             label_Medida.BackColor = Color.Gold;
             label_Medida.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label_Medida.Location = new Point(46, 292);
+            label_Medida.Location = new Point(863, 111);
             label_Medida.Name = "label_Medida";
             label_Medida.Size = new Size(79, 25);
             label_Medida.TabIndex = 28;
@@ -366,30 +366,19 @@
             // 
             // textBox_Cantidad_Bolsones
             // 
-            textBox_Cantidad_Bolsones.Location = new Point(156, 364);
+            textBox_Cantidad_Bolsones.Location = new Point(724, 183);
             textBox_Cantidad_Bolsones.Name = "textBox_Cantidad_Bolsones";
             textBox_Cantidad_Bolsones.Size = new Size(121, 23);
             textBox_Cantidad_Bolsones.TabIndex = 7;
             textBox_Cantidad_Bolsones.Visible = false;
             textBox_Cantidad_Bolsones.TextChanged += textBox_Cantidad_BolsonestChanged;
             // 
-            // label_Agregar
-            // 
-            label_Agregar.AutoSize = true;
-            label_Agregar.BackColor = Color.Gold;
-            label_Agregar.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label_Agregar.Location = new Point(46, 227);
-            label_Agregar.Name = "label_Agregar";
-            label_Agregar.Size = new Size(151, 25);
-            label_Agregar.TabIndex = 29;
-            label_Agregar.Text = "Agregar Bolson";
-            // 
             // radioButton_Bolson
             // 
             radioButton_Bolson.AutoSize = true;
-            radioButton_Bolson.BackColor = Color.Gold;
+            radioButton_Bolson.BackColor = Color.White;
             radioButton_Bolson.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            radioButton_Bolson.Location = new Point(221, 233);
+            radioButton_Bolson.Location = new Point(608, 63);
             radioButton_Bolson.Name = "radioButton_Bolson";
             radioButton_Bolson.Size = new Size(110, 19);
             radioButton_Bolson.TabIndex = 31;
@@ -404,9 +393,8 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(926, 509);
+            ClientSize = new Size(954, 514);
             Controls.Add(radioButton_Bolson);
-            Controls.Add(label_Agregar);
             Controls.Add(textBox_Cantidad_Bolsones);
             Controls.Add(label_Medida);
             Controls.Add(label_BCantidad);
@@ -477,7 +465,6 @@
         private Label label_BCantidad;
         private Label label_Medida;
         private TextBox textBox_Cantidad_Bolsones;
-        private Label label_Agregar;
         private CheckBox checkBox_Bolsones;
         private RadioButton radioButton_Bolson;
     }
