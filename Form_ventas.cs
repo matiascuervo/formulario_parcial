@@ -292,26 +292,6 @@ namespace formulario_parcial
 
 
 
-
-        private void LimpiarControles()
-        {
-            foreach (Control control in Controls)
-            {
-                if (control is System.Windows.Forms.ComboBox)
-                {
-                    ((System.Windows.Forms.ComboBox)control).SelectedIndex = -1; // Limpia la selección del ComboBox
-                }
-                else if (control is System.Windows.Forms.TextBox)
-                {
-                    ((System.Windows.Forms.TextBox)control).Text = string.Empty; // Limpia el texto del TextBox
-                }
-            }
-        }
-
-
-
-
-
         private void Button_Pedir_Click(object sender, EventArgs e)
         {
             
@@ -477,7 +457,7 @@ namespace formulario_parcial
 
 
             };
-                        // Agregar el nuevo pedido a la lista
+                        
                         
 
 

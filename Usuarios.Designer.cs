@@ -96,7 +96,7 @@
             Boton_Mostrar_Usuarios.TabIndex = 10;
             Boton_Mostrar_Usuarios.Text = "Mostrar usuarios";
             Boton_Mostrar_Usuarios.UseVisualStyleBackColor = false;
-            Boton_Mostrar_Usuarios.Click += Boton_Mostrar_Usuarios_Click;
+            
             // 
             // textBox_Baja
             // 

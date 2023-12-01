@@ -17,9 +17,9 @@ namespace formulario_parcial
     {
         private Pedidos_Form pedidosForm;
         List<Persona> usuarios = DataManager.CargarDatos();
+
         public Usuarios()
         {
-
             InitializeComponent();
             pedidosForm = new Pedidos_Form();
             AgregarUsuariosAlDataGridView(usuarios);
@@ -27,7 +27,6 @@ namespace formulario_parcial
 
         private void Usuarios_Load(object sender, EventArgs e)
         {
-
             List<Persona> usuarios = DataManager.CargarDatos();
 
             // Enlazar la lista
@@ -41,8 +40,6 @@ namespace formulario_parcial
             alquiler.ShowDialog();
         }
 
-
-
         private void AgregarUsuariosAlDataGridView(List<Persona> usuarios)
         {
             foreach (var usuario in usuarios)
@@ -50,27 +47,18 @@ namespace formulario_parcial
                 int rowIndex = dataGridView_Usuarios.Rows.Add();
                 DataGridViewRow row = dataGridView_Usuarios.Rows[rowIndex];
 
-
                 row.Cells["columna_Usuario"].Value = usuario.Nombre;
                 row.Cells["columna_Contraseña"].Value = usuario.Contraseña;
                 row.Cells["columna_Rol"].Value = usuario.Rol;
                 row.Cells["columna_Estado"].Value = usuario.Estado;
-
             }
+
         }
 
-
-
-        private void Boton_Mostrar_Usuarios_Click(object sender, EventArgs e)
+        // Método común para realizar operaciones
+        private void RealizarOperacion(string nombreUsuario, string nuevoEstado, string mensajeExito)
         {
-            
-        }
-
-        private void Bonton_Baja_Click(object sender, EventArgs e)
-        {
-            string nombreUsuario = textBox_Baja.Text;
-
-            // Carga los usuarios
+            // Cargar los usuarios
             List<Persona> usuarios = DataManager.CargarDatos();
 
             // Buscar al usuario en la lista
@@ -78,52 +66,45 @@ namespace formulario_parcial
 
             if (usuario != null)
             {
-                // Cambiar el estado del usuario 
-                usuario.Estado = "Debaja";
+                // Cambiar el estado del usuario
+                usuario.Estado = nuevoEstado;
 
-
-                DataManager.GuardarDatos(usuarios);
-
-                // Actualizar el DataGridView 
-                dataGridView_Usuarios.Rows.Clear();
-                AgregarUsuariosAlDataGridView(usuarios);
-
-                MessageBox.Show($"Usuario {nombreUsuario} dado de baja correctamente.", "Baja Exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            else
-            {
-                MessageBox.Show($"El usuario {nombreUsuario} no existe.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void Boton_Reactivar_Usuario_Click(object sender, EventArgs e)
-        {
-            string nombreUsuario = textBox_Baja.Text;
-
-            // Carga los usuarios
-            List<Persona> usuarios = DataManager.CargarDatos();
-
-            // Buscar al usuario en la lista
-            Persona usuario = usuarios.FirstOrDefault(u => u.Nombre == nombreUsuario);
-
-            if (usuario != null)
-            {
-                // Cambiar el estado del usuario a "Activo"
-                usuario.Estado = "Activo";
-
-                // Guardar los cambios en el archivo JSON
                 DataManager.GuardarDatos(usuarios);
 
                 // Actualizar el DataGridView
                 dataGridView_Usuarios.Rows.Clear();
                 AgregarUsuariosAlDataGridView(usuarios);
 
-                MessageBox.Show($"Usuario {nombreUsuario} reactivado correctamente.", "Reactivación Exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show($"Usuario {nombreUsuario} {mensajeExito}", "Operación Exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {
                 MessageBox.Show($"El usuario {nombreUsuario} no existe.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        // Sobrecarga para dar de baja
+        private void RealizarOperacion(string nombreUsuario)
+        {
+            RealizarOperacion(nombreUsuario, "Debaja", "dado de baja correctamente.");
+        }
+
+        // Sobrecarga para reactivar
+        private void RealizarOperacion(string nombreUsuario, bool reactivar)
+        {
+            RealizarOperacion(nombreUsuario, reactivar ? "Activo" : "Inactivo", $"{(reactivar ? "reactivado" : "desactivado")} correctamente.");
+        }
+
+        private void Bonton_Baja_Click(object sender, EventArgs e)
+        {
+            string nombreUsuario = textBox_Baja.Text;
+            RealizarOperacion(nombreUsuario);
+        }
+
+        private void Boton_Reactivar_Usuario_Click(object sender, EventArgs e)
+        {
+            string nombreUsuario = textBox_Baja.Text;
+            RealizarOperacion(nombreUsuario, true);
         }
     }
 }
