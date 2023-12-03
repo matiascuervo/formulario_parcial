@@ -16,19 +16,19 @@ namespace formulario_parcial
     public partial class Usuarios : Form
     {
         private Pedidos_Form pedidosForm;
-        List<Persona> usuarios = DataManager.CargarDatos();
+        private IDataManager dataManager = new DataManager();
+        private List<Persona> usuarios;
 
         public Usuarios()
         {
             InitializeComponent();
             pedidosForm = new Pedidos_Form();
+            usuarios = dataManager.CargarDatos();
             AgregarUsuariosAlDataGridView(usuarios);
         }
 
         private void Usuarios_Load(object sender, EventArgs e)
         {
-            List<Persona> usuarios = DataManager.CargarDatos();
-
             // Enlazar la lista
             dataGridView_Usuarios.DataSource = usuarios;
         }
@@ -44,38 +44,42 @@ namespace formulario_parcial
         {
             foreach (var usuario in usuarios)
             {
-                int rowIndex = dataGridView_Usuarios.Rows.Add();
-                DataGridViewRow row = dataGridView_Usuarios.Rows[rowIndex];
+                // Filtra los usuarios con rol "administrador"
+                if (usuario.Rol != "administrador")
+                {
+                    int rowIndex = dataGridView_Usuarios.Rows.Add();
+                    DataGridViewRow row = dataGridView_Usuarios.Rows[rowIndex];
 
-                row.Cells["columna_Usuario"].Value = usuario.Nombre;
-                row.Cells["columna_Contraseña"].Value = usuario.Contraseña;
-                row.Cells["columna_Rol"].Value = usuario.Rol;
-                row.Cells["columna_Estado"].Value = usuario.Estado;
+                    row.Cells["columna_Usuario"].Value = usuario.Nombre;
+                    row.Cells["columna_Contraseña"].Value = usuario.Contraseña;
+                    row.Cells["columna_Rol"].Value = usuario.Rol;
+                    row.Cells["columna_Estado"].Value = usuario.Estado;
+                }
             }
-
         }
 
-        // Método común para realizar operaciones
         private void RealizarOperacion(string nombreUsuario, string nuevoEstado, string mensajeExito)
         {
-            // Cargar los usuarios
-            List<Persona> usuarios = DataManager.CargarDatos();
-
-            // Buscar al usuario en la lista
             Persona usuario = usuarios.FirstOrDefault(u => u.Nombre == nombreUsuario);
 
             if (usuario != null)
             {
-                // Cambiar el estado del usuario
-                usuario.Estado = nuevoEstado;
+                // Verificar si se desea realmente realizar la operación
+                DialogResult confirmacion = MessageBox.Show($"¿Seguro que desea asignar {nuevoEstado.ToLower()} al usuario {nombreUsuario}?", "Confirmar Operación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-                DataManager.GuardarDatos(usuarios);
+                if (confirmacion == DialogResult.Yes)
+                {
+                    // Cambiar el estado del usuario
+                    usuario.Estado = nuevoEstado;
 
-                // Actualizar el DataGridView
-                dataGridView_Usuarios.Rows.Clear();
-                AgregarUsuariosAlDataGridView(usuarios);
+                    dataManager.GuardarDatos(usuarios);
 
-                MessageBox.Show($"Usuario {nombreUsuario} {mensajeExito}", "Operación Exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    // Actualizar el DataGridView
+                    dataGridView_Usuarios.Rows.Clear();
+                    AgregarUsuariosAlDataGridView(usuarios);
+
+                    MessageBox.Show($"Usuario {nombreUsuario} {mensajeExito}", "Operación Exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
             else
             {
@@ -86,7 +90,7 @@ namespace formulario_parcial
         // Sobrecarga para dar de baja
         private void RealizarOperacion(string nombreUsuario)
         {
-            RealizarOperacion(nombreUsuario, "Debaja", "dado de baja correctamente.");
+            RealizarOperacion(nombreUsuario, "Debaja", "Dado de baja correctamente.");
         }
 
         // Sobrecarga para reactivar
@@ -108,3 +112,4 @@ namespace formulario_parcial
         }
     }
 }
+

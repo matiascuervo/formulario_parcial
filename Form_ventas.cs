@@ -30,8 +30,8 @@ namespace formulario_parcial
         private bool bolsonSeleccionadoConVolquete = false;
         private int cantidadbolsones;
         private int NumeroDebolsones;
-        private decimal costoTotalBolsones ;
-        
+        private decimal costoTotalBolsones;
+
         private System.Windows.Forms.ToolTip toolTip1;
 
         public Form_ventas()
@@ -41,7 +41,7 @@ namespace formulario_parcial
 
             InitializeComboBoxItems();
 
-            InitializeRecargosDiccionario();
+            
             InitilizecomboBox_Localidad();
             InitializecomboBox_BolsonesItems();
             radioButton_Bolson.CheckedChanged += radioButton_Bolson_CheckedChanged;
@@ -49,15 +49,7 @@ namespace formulario_parcial
             toolTip1.SetToolTip(radioButton_Bolson, "Los Bolsones Solo Se venden En Conjunto Con Algun Volquete.");
         }
 
-        private void InitializeRecargosDiccionario()
-        {
-            recargosLocalidades.Add("Temperley", 0m);  // Sin recargo
-            recargosLocalidades.Add("Lomas", 0.1m);    // 10% de recargo
-            recargosLocalidades.Add("Adrogue", 0.1m);  // 10% de recargo
-            recargosLocalidades.Add("Banfield", 0.2m); // 20% de recargo
-            recargosLocalidades.Add("Burzaco", 0.2m);  // 20% de recargo
-
-        }
+       
 
         private void InitilizecomboBox_Localidad()
         {
@@ -90,10 +82,10 @@ namespace formulario_parcial
 
         private void radioButton_Bolson_CheckedChanged(object sender, EventArgs e)
         {
-            
+
             if (radioButton_Bolson.Checked)
             {
-                label_Bolsones.Visible = textBox_Cantidad_Bolsones.Visible = comboBox_Bolsones.Visible = label_Medida.Visible= label_BCantidad.Visible = pictureBox2.Visible = label_PrecioBolsaG .Visible = label_MedidaBolsaGrande.Visible = label_MedidaBolsaGChica .Visible = label_PrecioBolsaC.Visible= true;
+                label_Bolsones.Visible = textBox_Cantidad_Bolsones.Visible = comboBox_Bolsones.Visible = label_Medida.Visible = label_BCantidad.Visible = pictureBox2.Visible = label_PrecioBolsaG.Visible = label_MedidaBolsaGrande.Visible = label_MedidaBolsaGChica.Visible = label_PrecioBolsaC.Visible = true;
             }
             else
             {
@@ -119,7 +111,7 @@ namespace formulario_parcial
                     producto.MontoAPagar = bolson_Grande.MontoAPagar;
                     bolsonSeleccionado = bolson_Grande;
                     bolsonSeleccionadoConVolquete = true;
-                    
+
                 }
                 else if (seleccion_Bolson == "1m3")
                 {
@@ -129,11 +121,11 @@ namespace formulario_parcial
                     producto.MontoAPagar = bolson_chico.MontoAPagar;
                     bolsonSeleccionado = bolson_chico;
                     bolsonSeleccionadoConVolquete = true;
-                    
+
 
                 }
 
-                
+
                 MessageBox.Show("Los Bolsones No Tienen Recarga De Acarreo");
             }
             catch (Exception ex)
@@ -147,9 +139,9 @@ namespace formulario_parcial
 
 
         private void textBox_Cantidad_BolsonestChanged(object sender, EventArgs e)
-        {   
+        {
             try
-            {   
+            {
                 string cantidadTexto = textBox_Cantidad_Bolsones.Text;
                 if (int.TryParse(cantidadTexto, out int cantidadbolsones))
                 {
@@ -160,7 +152,7 @@ namespace formulario_parcial
 
                         costoTotalBolsones = cantidadbolsones * precio; // Asigna el valor calculado a la variable de clase
                         NumeroDebolsones = cantidadbolsones;                                               // Agrega mensajes de depuración
-                       
+
                     }
                 }
                 else
@@ -191,7 +183,7 @@ namespace formulario_parcial
 
                 if (seleccion == "chicos")
                 {
-                    
+
                     string tamañoVolqueteChico = "chico";
                     Volquete volquete_chico = new Volquete(tamañoVolqueteChico);
                     producto.Tipo = volquete_chico.Tipo;
@@ -200,7 +192,7 @@ namespace formulario_parcial
                 }
                 else if (seleccion == "grandes")
                 {
-                    
+
                     string tamañoVolqueteGrande = "grande";
                     Volquete volquete_grande = new Volquete(tamañoVolqueteGrande);
                     producto.Tipo = volquete_grande.Tipo;
@@ -230,12 +222,13 @@ namespace formulario_parcial
                         if (comboBox_Localidad.SelectedItem != null)
                         {
                             var seleccion = comboBox_ventas.SelectedItem.ToString();
-                            // No necesitas crear una nueva instancia de Volquete aquí, ya tienes volqueteSeleccionado
+                            
                             decimal precio = volqueteSeleccionado.MontoAPagar;
 
                             if (recargosLocalidades.ContainsKey(comboBox_Localidad.SelectedItem.ToString()))
                             {
-                                decimal recargo = recargosLocalidades[comboBox_Localidad.SelectedItem.ToString()];
+                                decimal recargo = volqueteSeleccionado.CalcularRecargoPorLocalidad(comboBox_Localidad.SelectedItem.ToString());
+
                                 precio += precio * recargo;
                             }
 
@@ -273,15 +266,16 @@ namespace formulario_parcial
         {
             if (volqueteSeleccionado != null && comboBox_ventas.SelectedItem != null)
             {
-                var localidad = comboBox_Localidad.SelectedItem.ToString();  
+                var localidad = comboBox_Localidad.SelectedItem.ToString();
 
                 if (localidad == "Temperley")
                 {
                     MessageBox.Show($"Has seleccionado un volquete {volqueteSeleccionado} en {localidad}. En Temperley, su pedido no tiene recarga");
                 }
-                else if (recargosLocalidades.ContainsKey(localidad))
+                else
                 {
-                    decimal recargo = recargosLocalidades[localidad];
+                    // Utiliza el método de la instancia de Volquete para calcular el recargo
+                    decimal recargo = volqueteSeleccionado.CalcularRecargoPorLocalidad(localidad);
 
                     decimal precio = volqueteSeleccionado.MontoAPagar;
                     decimal precioConRecargo = precio + (precio * recargo);
@@ -294,29 +288,25 @@ namespace formulario_parcial
 
         private void Button_Pedir_Click(object sender, EventArgs e)
         {
-            
-            try 
+            try
             {
-                if (comboBox_ventas.SelectedItem == null && bolsonSeleccionadoConVolquete ==true)
+                if (comboBox_ventas.SelectedItem == null && bolsonSeleccionadoConVolquete == true)
                 {
                     // Lanzar tu propia excepción si la condición no se cumple
-                    throw new MiExcepcionPropia("lo Sentimos,Pero No Vendemos Bolsones Por Separado.");
+                    throw new MiExcepcionPropia("Lo sentimos, pero no vendemos bolsones por separado.");
                 }
-
             }
             catch (MiExcepcionPropia ex)
             {
-                
-                MessageBox.Show($"Atencion: {ex.Message}", "Atencion", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show($"Atención: {ex.Message}", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
             if (comboBox_ventas.SelectedItem == null)
             {
-                MessageBox.Show("Seleccione un tipo de volquete antes de hacer el pedido.", "Atencion", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Seleccione un tipo de volquete antes de hacer el pedido.", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-
 
             if (!int.TryParse(textBox_Cantidad.Text, out int cantidadVolquetes))
             {
@@ -324,148 +314,121 @@ namespace formulario_parcial
                 return;
             }
 
-                    
-
-
-
-
-                var seleccion = comboBox_ventas.SelectedItem.ToString();
+            var seleccion = comboBox_ventas.SelectedItem.ToString();
 
             if (comboBox_Localidad.SelectedItem != null)
             {
                 var localidad = comboBox_Localidad.SelectedItem.ToString();
-                if (recargosLocalidades.ContainsKey(localidad))
+
+                // Utiliza el polimorfismo para calcular el recargo por localidad
+                decimal recargo = volqueteSeleccionado.CalcularRecargoPorLocalidad(localidad);
+
+                // Aplica el recargo al precio del volquete
+                decimal precio = volqueteSeleccionado.MontoAPagar + (volqueteSeleccionado.MontoAPagar * recargo);
+                decimal costoTotal = cantidadVolquetes * precio;
+                string nombre = textBox_Nombre_Final.Text.ToLower();
+                string Direccion = TextBox_Direccion.Text.ToLower();
+
+                int numeroPedidoAleatorio = random.Next(100000, 999999);
+                string nombreUsuarioLogeado = UserManager.Instancia.UsuarioLogueado?.Nombre;
+                DateTime FechaEntrega = dateTime_Venta.Value;
+                DateTime FechaRetiro = FechaEntrega.AddDays(7);
+
+                // Crear el objeto Pedido
+                Pedido nuevoPedido = new Pedido
                 {
-                    // Aplica el recargo al precio del volquete
-                    decimal recargo = recargosLocalidades[localidad];
-                    decimal precioConRecargo = volqueteSeleccionado.MontoAPagar + (volqueteSeleccionado.MontoAPagar * recargo);
-                    decimal costoTotal = cantidadVolquetes * precioConRecargo;
-                    string nombre = textBox_Nombre_Final.Text.ToLower();
-                    string Direccion = TextBox_Direccion.Text.ToLower();
+                    Usuario = nombreUsuarioLogeado,
+                    Nombre = nombre,
+                    Tipo = volqueteSeleccionado,
+                    Cantidad = cantidadVolquetes,
+                    MontoAPagar = costoTotal,
+                    NumeroDePedido = numeroPedidoAleatorio.ToString(),
+                    Domicilio = Direccion,
+                    Estado = Pedido.EstadoPedido.Activo,
+                    FechaEntrega = FechaEntrega,
+                    DuracionEntregaDias = 7,
+                    FechaRetiro = FechaRetiro,
+                    Bolson = bolsonSeleccionadoConVolquete ? bolsonSeleccionado : null,
+                    CantidadBolsones = bolsonSeleccionadoConVolquete ? cantidadbolsones : 0,
+                    MontoAPagarBolson = costoTotalBolsones
+                };
 
+                if (bolsonSeleccionadoConVolquete == true)
+                {
+                    nuevoPedido.Bolson = bolsonSeleccionado;
+                    nuevoPedido.CantidadBolsones = NumeroDebolsones;
+                    nuevoPedido.MontoAPagarBolson = costoTotalBolsones;  // Asigna el costo total de los bolsones al pedido
+                    var ConstoFinal = costoTotal + nuevoPedido.MontoAPagarBolson;
+                    MessageBox.Show($"Monto a Pagar Final : {ConstoFinal}");
+                }
 
-                    
+                DialogResult result = MessageBox.Show("¿Está seguro de realizar el pedido?", "Confirmar Pedido", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-                    int numeroPedidoAleatorio = random.Next(100000, 999999);
+                if (result == DialogResult.Yes)
+                {
+                    listaPedidos.Add(nuevoPedido);
 
-                    string nombreUsuarioLogeado = UserManager.Instancia.UsuarioLogueado?.Nombre;
+                    var enviroment = System.Environment.CurrentDirectory;
+                    string rutaRelativa = Directory.GetParent(enviroment).Parent.Parent.FullName;
+                    string rutaCompleta = Path.Combine(rutaRelativa, "Xml_Usuarios", "pedidos.xml");
 
-                    DateTime FechaEntrega = dateTime_Venta.Value;
-
-                    DateTime FechaRetiro = FechaEntrega.AddDays(7);
-
-                    // Crear el objeto Pedido
-                    Pedido nuevoPedido = new Pedido
-                    {
-                        Usuario = nombreUsuarioLogeado,
-                        Nombre = nombre,
-                        Tipo = volqueteSeleccionado,
-                        Cantidad = cantidadVolquetes,
-                        MontoAPagar = costoTotal,
-                        NumeroDePedido = numeroPedidoAleatorio.ToString(),
-                        Domicilio = Direccion,
-                        Estado = Pedido.EstadoPedido.Activo,
-                        FechaEntrega = FechaEntrega,
-                        DuracionEntregaDias = 7,
-                        FechaRetiro = FechaRetiro,
-                        Bolson = bolsonSeleccionadoConVolquete ? bolsonSeleccionado : null,
-                        CantidadBolsones = bolsonSeleccionadoConVolquete ? cantidadbolsones :0,
-                        MontoAPagarBolson = costoTotalBolsones
-                    };
-
-                    if (bolsonSeleccionadoConVolquete == true)
-                    {   
-
-                        nuevoPedido.Bolson = bolsonSeleccionado;
-                        nuevoPedido.CantidadBolsones = NumeroDebolsones;
-                        nuevoPedido.MontoAPagarBolson = costoTotalBolsones;  // Asigna el costo total de los bolsones al pedido
-                        var ConstoFinal = costoTotal + nuevoPedido.MontoAPagarBolson;
-                        // Agrega mensajes de depuración para verificar los valores
-                        MessageBox.Show($"Monto a Pagar Final : {ConstoFinal}");
-                    }
-
-                    DialogResult result = MessageBox.Show("¿Está seguro de realizar el pedido?", "Confirmar Pedido", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-                    if (result == DialogResult.Yes)
-                    {
-
-                        listaPedidos.Add(nuevoPedido);
-
-                        var enviroment = System.Environment.CurrentDirectory;
-                        string rutaRelativa = Directory.GetParent(enviroment).Parent.Parent.FullName;
-                        string rutaCompleta = Path.Combine(rutaRelativa, "Xml_Usuarios", "pedidos.xml");
-
-                        var pedidosXml = new XElement("Pedidos",
-                           listaPedidos.Select(pedido =>
-                           new XElement("Pedido",
-                           new XElement("Usuario", pedido.Usuario),
-                           new XElement("Nombre", pedido.Nombre),
-                           new XElement("TipoVolquete", pedido.Tipo.Tipo),
-                           new XElement("Cantidad", pedido.Cantidad),
-                           new XElement("MontoAPagar", pedido.MontoAPagar),
-                           new XElement("NumeroDePedido", pedido.NumeroDePedido),
-                           new XElement("Domicilio", pedido.Domicilio),
-                           new XElement("Estado", pedido.Estado),
-                           new XElement("FechaEntrega", pedido.FechaEntrega.ToString("dd/MM/yyyy")),
-                           new XElement("DuracionEntregaDias", pedido.DuracionEntregaDias, "Dias"),
-                           new XElement("FechaRetiro", pedido.FechaRetiro.ToString("dd/MM/yyyy")),
-                           pedido.Bolson != null
-                           ? new XElement("Bolson",
-                             new XElement("TipoBolson", pedido.Bolson.Tipo),
-                             new XElement("CantidadBolsones", pedido.CantidadBolsones),
-                             new XElement("MontoAPagarBolson", pedido.MontoAPagarBolson)
+                    var pedidosXml = new XElement("Pedidos",
+                        listaPedidos.Select(pedido =>
+                            new XElement("Pedido",
+                                new XElement("Usuario", pedido.Usuario),
+                                new XElement("Nombre", pedido.Nombre),
+                                new XElement("TipoVolquete", pedido.Tipo.Tipo),
+                                new XElement("Cantidad", pedido.Cantidad),
+                                new XElement("MontoAPagar", pedido.MontoAPagar),
+                                new XElement("NumeroDePedido", pedido.NumeroDePedido),
+                                new XElement("Domicilio", pedido.Domicilio),
+                                new XElement("Estado", pedido.Estado),
+                                new XElement("FechaEntrega", pedido.FechaEntrega.ToString("dd/MM/yyyy")),
+                                new XElement("DuracionEntregaDias", pedido.DuracionEntregaDias, "Dias"),
+                                new XElement("FechaRetiro", pedido.FechaRetiro.ToString("dd/MM/yyyy")),
+                                pedido.Bolson != null
+                                    ? new XElement("Bolson",
+                                        new XElement("TipoBolson", pedido.Bolson.Tipo),
+                                        new XElement("CantidadBolsones", pedido.CantidadBolsones),
+                                        new XElement("MontoAPagarBolson", pedido.MontoAPagarBolson)
+                                    )
+                                    : null
                             )
-                            : null
+                        )
+                    );
 
-                       )
-                   )
-               );
-
-                        XDocument doc;
-                        if (System.IO.File.Exists(rutaCompleta))
-                        {
-                            doc = XDocument.Load(rutaCompleta);
-                        }
-                        else
-                        {
-                            doc = new XDocument(new XElement("Pedidos"));
-                        }
-
-
-                        doc.Root.Add(pedidosXml);
-
-                        // Guardar el documento XML en el archivo
-                        doc.Save(rutaCompleta);
-
-                        MessageBox.Show($"Pedido Realizado con éxito.El Numero De Su Pedido es {numeroPedidoAleatorio}.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                        this.Hide();
-                        Form_alquiler alquiler = new Form_alquiler();
-                        alquiler.Show();
-
+                    XDocument doc;
+                    if (System.IO.File.Exists(rutaCompleta))
+                    {
+                        doc = XDocument.Load(rutaCompleta);
                     }
                     else
                     {
-                        // El usuario seleccionó "No", puedes hacer algo si es necesario
-                        MessageBox.Show("Pedido cancelado.", "Cancelado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        doc = new XDocument(new XElement("Pedidos"));
                     }
 
+                    doc.Root.Add(pedidosXml);
 
+                    // Guardar el documento XML en el archivo
+                    doc.Save(rutaCompleta);
+
+                    MessageBox.Show($"Pedido Realizado con éxito. El Numero De Su Pedido es {numeroPedidoAleatorio}.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    this.Hide();
+                    Form_alquiler alquiler = new Form_alquiler();
+                    alquiler.Show();
                 }
-
-
-
-
-            };
-                        
-                        
-
-
-            
+                else
+                {
+                    // El usuario seleccionó "No", puedes hacer algo si es necesario
+                    MessageBox.Show("Pedido cancelado.", "Cancelado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
         }
 
 
-        
+
+
 
     }
 

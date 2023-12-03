@@ -35,7 +35,6 @@
             Columna_Contraseña = new DataGridViewTextBoxColumn();
             Columna_Rol = new DataGridViewTextBoxColumn();
             Columna_Estado = new DataGridViewTextBoxColumn();
-            Boton_Mostrar_Usuarios = new Button();
             textBox_Baja = new TextBox();
             Bonton_Baja = new Button();
             Boton_Reactivar_Usuario = new Button();
@@ -86,21 +85,9 @@
             Columna_Estado.HeaderText = "Estado";
             Columna_Estado.Name = "Columna_Estado";
             // 
-            // Boton_Mostrar_Usuarios
-            // 
-            Boton_Mostrar_Usuarios.BackColor = Color.LightSkyBlue;
-            Boton_Mostrar_Usuarios.FlatStyle = FlatStyle.Flat;
-            Boton_Mostrar_Usuarios.Location = new Point(476, 12);
-            Boton_Mostrar_Usuarios.Name = "Boton_Mostrar_Usuarios";
-            Boton_Mostrar_Usuarios.Size = new Size(133, 23);
-            Boton_Mostrar_Usuarios.TabIndex = 10;
-            Boton_Mostrar_Usuarios.Text = "Mostrar usuarios";
-            Boton_Mostrar_Usuarios.UseVisualStyleBackColor = false;
-            
-            // 
             // textBox_Baja
             // 
-            textBox_Baja.Location = new Point(680, 69);
+            textBox_Baja.Location = new Point(476, 12);
             textBox_Baja.Name = "textBox_Baja";
             textBox_Baja.PlaceholderText = "Usuarios";
             textBox_Baja.Size = new Size(108, 23);
@@ -110,7 +97,7 @@
             // 
             Bonton_Baja.BackColor = Color.LightSkyBlue;
             Bonton_Baja.FlatStyle = FlatStyle.Flat;
-            Bonton_Baja.Location = new Point(476, 69);
+            Bonton_Baja.Location = new Point(611, 11);
             Bonton_Baja.Name = "Bonton_Baja";
             Bonton_Baja.Size = new Size(133, 23);
             Bonton_Baja.TabIndex = 12;
@@ -122,7 +109,7 @@
             // 
             Boton_Reactivar_Usuario.BackColor = Color.LightSkyBlue;
             Boton_Reactivar_Usuario.FlatStyle = FlatStyle.Flat;
-            Boton_Reactivar_Usuario.Location = new Point(476, 126);
+            Boton_Reactivar_Usuario.Location = new Point(611, 53);
             Boton_Reactivar_Usuario.Name = "Boton_Reactivar_Usuario";
             Boton_Reactivar_Usuario.Size = new Size(133, 23);
             Boton_Reactivar_Usuario.TabIndex = 13;
@@ -139,7 +126,6 @@
             Controls.Add(Boton_Reactivar_Usuario);
             Controls.Add(Bonton_Baja);
             Controls.Add(textBox_Baja);
-            Controls.Add(Boton_Mostrar_Usuarios);
             Controls.Add(Boton_Volver_Usuarios);
             Controls.Add(dataGridView_Usuarios);
             FormBorderStyle = FormBorderStyle.Fixed3D;
@@ -155,7 +141,6 @@
 
         private RoundButton Boton_Volver_Usuarios;
         private DataGridView dataGridView_Usuarios;
-        private Button Boton_Mostrar_Usuarios;
         private DataGridViewTextBoxColumn Columna_Usuario;
         private DataGridViewTextBoxColumn Columna_Contraseña;
         private DataGridViewTextBoxColumn Columna_Rol;

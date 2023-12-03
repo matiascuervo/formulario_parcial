@@ -76,8 +76,8 @@
             // toolStripLabel1
             // 
             toolStripLabel1.Name = "toolStripLabel1";
-            toolStripLabel1.Size = new Size(49, 22);
-            toolStripLabel1.Text = "Pedidos";
+            toolStripLabel1.Size = new Size(113, 22);
+            toolStripLabel1.Text = "Pedidos Cancelados";
             // 
             // toolStripSeparator1
             // 
@@ -106,7 +106,7 @@
             // 
             // Columna_Nombre
             // 
-            Columna_Nombre.HeaderText = "Nombre";
+            Columna_Nombre.HeaderText = "Recibe";
             Columna_Nombre.Name = "Columna_Nombre";
             // 
             // Columna_Tipo
