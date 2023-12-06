@@ -25,6 +25,11 @@
 
   <ItemGroup>
     <Folder Include="json_datos_usuarios\" />
+    <Folder Include="PDF\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="PDFsharp" Version="6.0.0" />
   </ItemGroup>
 
   <ItemGroup>

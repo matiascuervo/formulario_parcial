@@ -30,9 +30,14 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Pedidos_Form));
             toolStrip1 = new ToolStrip();
-            toolStripButton_Pedidos = new ToolStripButton();
+            toolStripButton_Cancelados = new ToolStripButton();
             toolStripLabel1 = new ToolStripLabel();
             toolStripSeparator1 = new ToolStripSeparator();
+            toolStripButton_VerPedidos = new ToolStripButton();
+            toolStripLabel2 = new ToolStripLabel();
+            toolStripSeparator2 = new ToolStripSeparator();
+            toolStripButton1 = new ToolStripButton();
+            toolStripLabel3 = new ToolStripLabel();
             dataGridView_Pedidos = new DataGridView();
             columna_Usuario = new DataGridViewTextBoxColumn();
             Columna_Nombre = new DataGridViewTextBoxColumn();
@@ -48,30 +53,33 @@
             Columna_cantidadbolsones = new DataGridViewTextBoxColumn();
             Columna_Preciobolsones = new DataGridViewTextBoxColumn();
             Boton_Volver_Pedidos = new RoundButton();
-            button_Cancelar = new Button();
-            textBox_Cancelar = new TextBox();
+            button_Buscar = new Button();
+            textBox_Fecha = new TextBox();
+            button_Generar_Pdf = new Button();
+            textBox_Pdf = new TextBox();
             toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView_Pedidos).BeginInit();
             SuspendLayout();
             // 
             // toolStrip1
             // 
-            toolStrip1.Items.AddRange(new ToolStripItem[] { toolStripButton_Pedidos, toolStripLabel1, toolStripSeparator1 });
+            toolStrip1.Items.AddRange(new ToolStripItem[] { toolStripButton_Cancelados, toolStripLabel1, toolStripSeparator1, toolStripButton_VerPedidos, toolStripLabel2, toolStripSeparator2, toolStripButton1, toolStripLabel3 });
             toolStrip1.Location = new Point(0, 0);
             toolStrip1.Name = "toolStrip1";
             toolStrip1.Size = new Size(800, 25);
             toolStrip1.TabIndex = 0;
             toolStrip1.Text = "toolStrip1";
             // 
-            // toolStripButton_Pedidos
+            // toolStripButton_Cancelados
             // 
-            toolStripButton_Pedidos.DisplayStyle = ToolStripItemDisplayStyle.Image;
-            toolStripButton_Pedidos.Image = (Image)resources.GetObject("toolStripButton_Pedidos.Image");
-            toolStripButton_Pedidos.ImageTransparentColor = Color.Magenta;
-            toolStripButton_Pedidos.Name = "toolStripButton_Pedidos";
-            toolStripButton_Pedidos.Size = new Size(23, 22);
-            toolStripButton_Pedidos.Text = "toolStripButton1";
-            toolStripButton_Pedidos.Click += toolStripButton_Pedidos_Click;
+            toolStripButton_Cancelados.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            toolStripButton_Cancelados.Image = (Image)resources.GetObject("toolStripButton_Cancelados.Image");
+            toolStripButton_Cancelados.ImageTransparentColor = Color.Magenta;
+            toolStripButton_Cancelados.Name = "toolStripButton_Cancelados";
+            toolStripButton_Cancelados.Size = new Size(23, 22);
+            toolStripButton_Cancelados.Text = "toolStripButton_Cancelados";
+            toolStripButton_Cancelados.ToolTipText = "Precione Para Ver Sus Pedidos Cancelados";
+            toolStripButton_Cancelados.Click += toolStripButton_Cancelados_Click_1;
             // 
             // toolStripLabel1
             // 
@@ -83,6 +91,46 @@
             // 
             toolStripSeparator1.Name = "toolStripSeparator1";
             toolStripSeparator1.Size = new Size(6, 25);
+            // 
+            // toolStripButton_VerPedidos
+            // 
+            toolStripButton_VerPedidos.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            toolStripButton_VerPedidos.Image = (Image)resources.GetObject("toolStripButton_VerPedidos.Image");
+            toolStripButton_VerPedidos.ImageTransparentColor = Color.Magenta;
+            toolStripButton_VerPedidos.Name = "toolStripButton_VerPedidos";
+            toolStripButton_VerPedidos.Size = new Size(23, 22);
+            toolStripButton_VerPedidos.Text = "toolStripButton1";
+            toolStripButton_VerPedidos.TextDirection = ToolStripTextDirection.Horizontal;
+            toolStripButton_VerPedidos.ToolTipText = "Precione Para Ver Sus Pedidos Activos";
+            toolStripButton_VerPedidos.Click += toolStripButton_VerPedidos_Click;
+            // 
+            // toolStripLabel2
+            // 
+            toolStripLabel2.Name = "toolStripLabel2";
+            toolStripLabel2.Size = new Size(91, 22);
+            toolStripLabel2.Text = "Pedidos Activos";
+            // 
+            // toolStripSeparator2
+            // 
+            toolStripSeparator2.Name = "toolStripSeparator2";
+            toolStripSeparator2.Size = new Size(6, 25);
+            // 
+            // toolStripButton1
+            // 
+            toolStripButton1.DisplayStyle = ToolStripItemDisplayStyle.Image;
+            toolStripButton1.Image = (Image)resources.GetObject("toolStripButton1.Image");
+            toolStripButton1.ImageTransparentColor = Color.Magenta;
+            toolStripButton1.Name = "toolStripButton1";
+            toolStripButton1.Size = new Size(23, 22);
+            toolStripButton1.Text = "toolStripButton1";
+            toolStripButton1.ToolTipText = "Ver Todos Los Pedidos";
+            toolStripButton1.Click += toolStripButton1_Click;
+            // 
+            // toolStripLabel3
+            // 
+            toolStripLabel3.Name = "toolStripLabel3";
+            toolStripLabel3.Size = new Size(105, 22);
+            toolStripLabel3.Text = "Todos Mis Pedidos";
             // 
             // dataGridView_Pedidos
             // 
@@ -178,27 +226,50 @@
             Boton_Volver_Pedidos.UseVisualStyleBackColor = false;
             Boton_Volver_Pedidos.Click += Boton_Volver_Pedidos_Click_1;
             // 
-            // button_Cancelar
+            // button_Buscar
             // 
-            button_Cancelar.BackColor = Color.Gold;
-            button_Cancelar.BackgroundImageLayout = ImageLayout.Stretch;
-            button_Cancelar.FlatStyle = FlatStyle.Flat;
-            button_Cancelar.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            button_Cancelar.Location = new Point(199, 376);
-            button_Cancelar.Name = "button_Cancelar";
-            button_Cancelar.Size = new Size(116, 37);
-            button_Cancelar.TabIndex = 1;
-            button_Cancelar.Text = "Cancelar Pedido";
-            button_Cancelar.UseVisualStyleBackColor = false;
-            button_Cancelar.Click += button_Cancelar_Click;
+            button_Buscar.BackColor = Color.Gold;
+            button_Buscar.BackgroundImageLayout = ImageLayout.Stretch;
+            button_Buscar.FlatStyle = FlatStyle.Flat;
+            button_Buscar.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            button_Buscar.Location = new Point(607, 405);
+            button_Buscar.Name = "button_Buscar";
+            button_Buscar.Size = new Size(144, 37);
+            button_Buscar.TabIndex = 1;
+            button_Buscar.Text = "Buscar Pedidos";
+            button_Buscar.UseVisualStyleBackColor = false;
+            button_Buscar.Click += button_Buscar_Click;
             // 
-            // textBox_Cancelar
+            // textBox_Fecha
             // 
-            textBox_Cancelar.Location = new Point(343, 376);
-            textBox_Cancelar.Name = "textBox_Cancelar";
-            textBox_Cancelar.PlaceholderText = "N° De Pedido A Cancelar";
-            textBox_Cancelar.Size = new Size(143, 23);
-            textBox_Cancelar.TabIndex = 2;
+            textBox_Fecha.Location = new Point(607, 376);
+            textBox_Fecha.Name = "textBox_Fecha";
+            textBox_Fecha.PlaceholderText = "Ejem: 25/12/2023";
+            textBox_Fecha.Size = new Size(144, 23);
+            textBox_Fecha.TabIndex = 2;
+            // 
+            // button_Generar_Pdf
+            // 
+            button_Generar_Pdf.BackColor = Color.Gold;
+            button_Generar_Pdf.BackgroundImageLayout = ImageLayout.Stretch;
+            button_Generar_Pdf.FlatStyle = FlatStyle.Flat;
+            button_Generar_Pdf.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            button_Generar_Pdf.Location = new Point(408, 406);
+            button_Generar_Pdf.Name = "button_Generar_Pdf";
+            button_Generar_Pdf.Size = new Size(144, 37);
+            button_Generar_Pdf.TabIndex = 4;
+            button_Generar_Pdf.Text = "Descargar PDF";
+            button_Generar_Pdf.UseVisualStyleBackColor = false;
+            button_Generar_Pdf.TextChanged += button_Generar_Pdf_Click_1;
+            button_Generar_Pdf.Click += button_Generar_Pdf_Click_1;
+            // 
+            // textBox_Pdf
+            // 
+            textBox_Pdf.Location = new Point(408, 376);
+            textBox_Pdf.Name = "textBox_Pdf";
+            textBox_Pdf.PlaceholderText = "N° De Pedido";
+            textBox_Pdf.Size = new Size(144, 23);
+            textBox_Pdf.TabIndex = 5;
             // 
             // Pedidos_Form
             // 
@@ -207,8 +278,10 @@
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(800, 450);
-            Controls.Add(textBox_Cancelar);
-            Controls.Add(button_Cancelar);
+            Controls.Add(textBox_Pdf);
+            Controls.Add(button_Generar_Pdf);
+            Controls.Add(textBox_Fecha);
+            Controls.Add(button_Buscar);
             Controls.Add(Boton_Volver_Pedidos);
             Controls.Add(dataGridView_Pedidos);
             Controls.Add(toolStrip1);
@@ -226,13 +299,13 @@
         #endregion
 
         private ToolStrip toolStrip1;
-        private ToolStripButton toolStripButton_Pedidos;
+        private ToolStripButton toolStripButton_Cancelados;
         private ToolStripLabel toolStripLabel1;
         private ToolStripSeparator toolStripSeparator1;
         private DataGridView dataGridView_Pedidos;
         private RoundButton Boton_Volver_Pedidos;
-        private Button button_Cancelar;
-        private TextBox textBox_Cancelar;
+        private Button button_Buscar;
+        private TextBox textBox_Fecha;
         private DataGridViewTextBoxColumn columna_Usuario;
         private DataGridViewTextBoxColumn Columna_Nombre;
         private DataGridViewTextBoxColumn Columna_Tipo;
@@ -246,5 +319,12 @@
         private DataGridViewTextBoxColumn columna_bolsones;
         private DataGridViewTextBoxColumn Columna_cantidadbolsones;
         private DataGridViewTextBoxColumn Columna_Preciobolsones;
+        private ToolStripButton toolStripButton_VerPedidos;
+        private ToolStripLabel toolStripLabel2;
+        private ToolStripButton toolStripButton1;
+        private ToolStripSeparator toolStripSeparator2;
+        private ToolStripLabel toolStripLabel3;
+        private Button button_Generar_Pdf;
+        private TextBox textBox_Pdf;
     }
 }

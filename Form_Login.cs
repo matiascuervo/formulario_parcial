@@ -8,23 +8,23 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using BiblotecaDatamanager;
+using BibliotecaDatamanager;
 
 namespace formulario_parcial
 {
     public partial class FormularioUsuario : Form
     {
+        
         // La instancia única de UserManager Singleton
         private UserManager userManager = UserManager.Instancia;
 
         // Nueva instancia de DataManager
-        private IDataManager dataManager = new DataManager();
-
         public FormularioUsuario()
         {
             InitializeComponent();
 
             ConfigurarAutocompletado();
-            ActualizarUsuarios();
+           
         }
 
         private void ConfigurarAutocompletado()
@@ -49,7 +49,7 @@ namespace formulario_parcial
             string contraseña = textBoxDNI.Text;
         }
 
-        private void Boton_login_Click(object sender, EventArgs e)
+        public void Boton_login_Click(object sender, EventArgs e)
         {
             try
             {
@@ -100,27 +100,7 @@ namespace formulario_parcial
             inicio.ShowDialog();
         }
 
-        private void ActualizarUsuarios()
-        {
-            // Cargar usuarios utilizando la instancia de DataManager
-            List<Persona> usuarios = dataManager.CargarDatos();
-
-            // Verificar y actualizar los campos nulos
-            foreach (var usuario in usuarios)
-            {
-                if (usuario.Estado == null)
-                {
-                    usuario.Estado = "Activo";
-                }
-
-                if (usuario.Rol == null)
-                {
-                    usuario.Rol = "Usuario";
-                }
-            }
-
-            // Utilizar la instancia de DataManager para guardar datos
-            dataManager.GuardarDatos(usuarios);
-        }
+        
     }
+    
 }

@@ -62,7 +62,7 @@
             dataGridView_Usuarios.Location = new Point(0, -1);
             dataGridView_Usuarios.Name = "dataGridView_Usuarios";
             dataGridView_Usuarios.RowTemplate.Height = 25;
-            dataGridView_Usuarios.Size = new Size(443, 389);
+            dataGridView_Usuarios.Size = new Size(442, 389);
             dataGridView_Usuarios.TabIndex = 9;
             // 
             // Columna_Usuario
@@ -132,6 +132,7 @@
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Usuarios";
             Text = "Usuarios";
+            Load += Usuarios_Load_1;
             ((System.ComponentModel.ISupportInitialize)dataGridView_Usuarios).EndInit();
             ResumeLayout(false);
             PerformLayout();

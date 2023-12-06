@@ -1,12 +1,17 @@
 ﻿using BiblotecaDatamanager;
+using System.Globalization;
 using System.Xml.Linq;
 using static BiblotecaDatamanager.Pedido;
+using PdfSharp.Pdf;
+using PdfSharp.Drawing;
+using System;
+using PdfSharp.Fonts;
 
 namespace formulario_parcial
 {
     public partial class Pedidos_Form : Form
     {
-
+        
         public Pedidos_Form()
         {
             InitializeComponent();
@@ -17,23 +22,6 @@ namespace formulario_parcial
         }
 
 
-
-       
-
-        private void toolStripTextBox_Pedidos_Click(object sender, EventArgs e)
-        {
-            // Verificar que el campo de búsqueda no esté vacío antes de buscar
-           
-        }
-
-        private void toolStripButton_Pedidos_Click(object sender, EventArgs e)
-        {
-            // Verificar que el campo de búsqueda no esté vacío antes de buscar
-
-            MostrarPedidosDelUsuario(UserManager.Instancia.UsuarioLogueado?.Nombre);
-            
-
-        }
         private void MostrarPedidosDelUsuario(string nombreUsuario)
         {
             dataGridView_Pedidos.Rows.Clear();
@@ -96,33 +84,7 @@ namespace formulario_parcial
             alquiler.ShowDialog();
         }
 
-        private void button_Cancelar_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                // Verifica si hay un número de pedido ingresado
-                if (!string.IsNullOrEmpty(textBox_Cancelar.Text.Trim()))
-                {
-                    string numeroPedido = textBox_Cancelar.Text.Trim();
 
-                    // Busca el pedido por el número y lo cancela
-                    CambiarEstadoPedido(numeroPedido, EstadoPedido.Cancelado);
-
-                    // Vuelve a mostrar los pedidos del usuario después de la cancelación
-                    MostrarPedidosDelUsuario(UserManager.Instancia.UsuarioLogueado?.Nombre);
-                }
-                else
-                {
-                    // Muestra un mensaje indicando que el número de pedido no es válido
-                    MessageBox.Show("Ingrese Un Número De Pedido En La Caja De Texto De La Derecha Para Cancelarlo.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error inesperado: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
 
 
 
@@ -139,23 +101,20 @@ namespace formulario_parcial
                 string estadoActual = selectedRow.Cells["columna_Estado"].Value.ToString();
 
                 // Mostrar un cuadro de diálogo de confirmación
-                DialogResult result = MessageBox.Show($"¿Está seguro de que desea cancelar el pedido {numeroPedido}?", "Confirmar Cancelación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                //DialogResult result = MessageBox.Show($"¿Está seguro de que desea cancelar el pedido {numeroPedido}?", "Confirmar Cancelación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-                if (result == DialogResult.Yes)
-                {
-                    // Cambiar el estado del pedido a Cancelado
-                    CambiarEstadoPedido(numeroPedido, EstadoPedido.Cancelado);
+                CambiarEstadoPedido(numeroPedido, EstadoPedido.Cancelado);
 
-                    // Actualizar el DataGridView después de la cancelación
-                    MostrarPedidosDelUsuario(UserManager.Instancia.UsuarioLogueado?.Nombre);
-                }
+                // Actualizar el DataGridView después de la cancelación
+                MostrarPedidosDelUsuario(UserManager.Instancia.UsuarioLogueado?.Nombre);
+
             }
         }
 
 
 
 
-        
+
 
 
         private void dataGridView_Pedidos_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
@@ -195,7 +154,7 @@ namespace formulario_parcial
                             if (estadoActual == EstadoPedido.Cancelado)
                             {
                                 MessageBox.Show("El pedido ya ha sido cancelado.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                                return; // No cambiamos el estado si ya está cancelado
+                                return;
                             }
                         }
 
@@ -209,11 +168,12 @@ namespace formulario_parcial
                             pedidoEncontrado.Element("Estado").Value = nuevoEstadoStr;
                             doc.Save(rutaCompleta);
                             MessageBox.Show("Pedido cancelado exitosamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        }else if (result == DialogResult.No) 
+                        }
+                        else if (result == DialogResult.No)
                         {
                             MessageBox.Show("Pedido No Cancelado.", "Atencion", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                         }
-                            
+
                     }
                     else
                     {
@@ -231,6 +191,282 @@ namespace formulario_parcial
             }
         }
 
+        private void toolStripButton_Cancelados_Click_1(object sender, EventArgs e)
+        {
+            MostrarPedidosCancelados(UserManager.Instancia.UsuarioLogueado?.Nombre);
+        }
 
+        private void MostrarPedidosCancelados(string nombreUsuario)
+        {
+            dataGridView_Pedidos.Rows.Clear();
+
+            var enviroment = System.Environment.CurrentDirectory;
+            string rutaRelativa = Directory.GetParent(enviroment).Parent.Parent.FullName;
+            string rutaCompleta = Path.Combine(rutaRelativa, "Xml_Usuarios", "pedidos.xml");
+
+            if (File.Exists(rutaCompleta))
+            {
+                try
+                {
+                    XDocument doc = XDocument.Load(rutaCompleta);
+
+                    var pedidosCancelados = doc.Descendants("Pedido")
+                        .Where(p => p.Element("Usuario")?.Value == nombreUsuario && p.Element("Estado")?.Value == EstadoPedido.Cancelado.ToString());
+
+                    foreach (var pedido in pedidosCancelados)
+                    {
+                        AgregarFilaPedidoAlDataGridView(pedido);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error al leer el archivo XML: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("El archivo XML de pedidos no existe.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void button_Buscar_Click(object sender, EventArgs e)
+        {
+            // Verifica si se ha ingresado una fecha válida
+            if (DateTime.TryParse(textBox_Fecha.Text, out DateTime fechaBusqueda))
+            {
+                MostrarPedidosPorFecha(UserManager.Instancia.UsuarioLogueado?.Nombre, fechaBusqueda);
+            }
+            else
+            {
+                MessageBox.Show("Ingrese una fecha válida en el formato correcto.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        public void MostrarPedidosPorFecha(string nombreUsuario, DateTime fechaBusqueda)
+        {
+            dataGridView_Pedidos.Rows.Clear();
+
+            var enviroment = System.Environment.CurrentDirectory;
+            string rutaRelativa = Directory.GetParent(enviroment).Parent.Parent.FullName;
+            string rutaCompleta = Path.Combine(rutaRelativa, "Xml_Usuarios", "pedidos.xml");
+
+            if (File.Exists(rutaCompleta))
+            {
+                try
+                {
+                    XDocument doc = XDocument.Load(rutaCompleta);
+
+                    var pedidosPorFecha = doc.Descendants("Pedido")
+                        .Where(p => p.Element("Usuario")?.Value == nombreUsuario &&
+                                    DateTime.TryParseExact(p.Element("FechaEntrega")?.Value, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime fechaPedido) &&
+                                    fechaPedido.Date == fechaBusqueda.Date);
+
+                    if (pedidosPorFecha.Any())
+                    {
+                        foreach (var pedido in pedidosPorFecha)
+                        {
+                            AgregarFilaPedidoAlDataGridView(pedido);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("No hay pedidos para la fecha ingresada.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+                catch (FormatException)
+                {
+                    MessageBox.Show("Formato de fecha incorrecto en el archivo XML.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error al leer el archivo XML: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("El archivo XML de pedidos no existe.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void MostrarPedidosActivos(string nombreUsuario)
+        {
+            dataGridView_Pedidos.Rows.Clear();
+
+            var enviroment = System.Environment.CurrentDirectory;
+            string rutaRelativa = Directory.GetParent(enviroment).Parent.Parent.FullName;
+            string rutaCompleta = Path.Combine(rutaRelativa, "Xml_Usuarios", "pedidos.xml");
+
+            if (File.Exists(rutaCompleta))
+            {
+                try
+                {
+                    XDocument doc = XDocument.Load(rutaCompleta);
+
+                    var pedidosActivos = doc.Descendants("Pedido")
+                        .Where(p => p.Element("Usuario")?.Value == nombreUsuario && p.Element("Estado")?.Value == EstadoPedido.Activo.ToString());
+
+                    if (pedidosActivos.Any())
+                    {
+                        foreach (var pedido in pedidosActivos)
+                        {
+                            AgregarFilaPedidoAlDataGridView(pedido);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("No hay pedidos activos para mostrar.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error al leer el archivo XML: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("El archivo XML de pedidos no existe.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+
+        private void toolStripButton_VerPedidos_Click(object sender, EventArgs e)
+        {
+            MostrarPedidosActivos(UserManager.Instancia.UsuarioLogueado?.Nombre);
+        }
+
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            MostrarPedidosDelUsuario(UserManager.Instancia.UsuarioLogueado?.Nombre);
+        }
+
+
+        private void GenerarPdf(int numeroPedido)
+        {
+            
+            var pedido = BuscarPedidoPorNumero(numeroPedido);
+
+            if (pedido != null)
+            {
+                    // Crear  PDF
+                    // Agregar una página al documento
+                    // Obtener el objeto XGraphics para dibujar en la página
+                using (PdfDocument document = new PdfDocument())
+                {
+                    PdfPage page = document.AddPage();
+
+                    using (XGraphics gfx = XGraphics.FromPdfPage(page))
+                    {
+                        XFont font = ObtenerFuenteArial();
+
+                        double yPosition = 40;
+
+                        
+                        gfx.DrawString($"Comprobante de Compra - Pedido #{numeroPedido}", font, XBrushes.Black, new XRect(10, yPosition, page.Width, page.Height), XStringFormats.TopLeft);
+                        yPosition += 20;
+
+                        
+                        
+                        AgregarLineaDetalle(gfx, font, "Recibe", pedido.Element("Nombre")?.Value, ref yPosition);
+                        AgregarLineaDetalle(gfx, font, "Tipo De Volquete", pedido.Element("TipoVolquete")?.Value, ref yPosition);
+                        AgregarLineaDetalle(gfx, font, "Cantidad", pedido.Element("Cantidad")?.Value, ref yPosition);
+                        AgregarLineaDetalle(gfx, font, "Monto a Pagar", pedido.Element("MontoAPagar")?.Value, ref yPosition);
+                        AgregarLineaDetalle(gfx, font, "Número de Pedido", pedido.Element("NumeroDePedido")?.Value, ref yPosition);
+                        AgregarLineaDetalle(gfx, font, "Domicilio", pedido.Element("Domicilio")?.Value, ref yPosition);
+                        AgregarLineaDetalle(gfx, font, "Estado", pedido.Element("Estado")?.Value, ref yPosition);
+                        AgregarLineaDetalle(gfx, font, "Fecha de Entrega", pedido.Element("FechaEntrega")?.Value, ref yPosition);
+                        AgregarLineaDetalle(gfx, font, "Duración de Entrega", $"{pedido.Element("DuracionEntregaDias")?.Value} Días", ref yPosition);
+                        AgregarLineaDetalle(gfx, font, "Fecha de Retiro", pedido.Element("FechaRetiro")?.Value, ref yPosition);
+
+                        var bolson = pedido.Element("Bolson");
+                        if (bolson != null)
+                        {
+                            // Agregar detalles del bolson si existe
+                            AgregarLineaDetalle(gfx, font, "Tipo de Bolson", bolson.Element("TipoBolson")?.Value, ref yPosition);
+                            AgregarLineaDetalle(gfx, font, "Cantidad de Bolsones", bolson.Element("CantidadBolsones")?.Value, ref yPosition);
+                            AgregarLineaDetalle(gfx, font, "Monto a Pagar por Bolsones", bolson.Element("MontoAPagarBolson")?.Value, ref yPosition);
+                        }
+
+
+                        MessageBox.Show($"PDF generado con éxito.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                    }
+
+                    string rutaRelativa = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName;
+                    string rutaPdf = Path.Combine(rutaRelativa, "PDF", $"ComprobantePedido_{numeroPedido}.pdf");
+                    document.Save(rutaPdf);
+                }
+            }
+            else
+            {
+                MessageBox.Show($"Pedido #{numeroPedido} no encontrado.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+
+        private void AgregarLineaDetalle(XGraphics gfx, XFont font, string etiqueta, string valor, ref double yPosition)
+        {
+            // Mostrar la etiqueta y el valor en líneas separadas
+            gfx.DrawString($"{etiqueta}: {valor}", font, XBrushes.Black, new XRect(10, yPosition, 500, 20), XStringFormats.TopLeft);
+            yPosition += 20;
+        }
+
+
+
+
+
+
+        private XElement BuscarPedidoPorNumero(int numeroPedido)
+        {
+            var enviroment = System.Environment.CurrentDirectory;
+            string rutaRelativa = Directory.GetParent(enviroment).Parent.Parent.FullName;
+            string rutaCompleta = Path.Combine(rutaRelativa, "Xml_Usuarios", "pedidos.xml");
+
+            if (File.Exists(rutaCompleta))
+            {
+                try
+                {
+                    XDocument doc = XDocument.Load(rutaCompleta);
+
+                    // Buscar el pedido por número en el archivo XML
+                    var pedidoEncontrado = doc.Descendants("Pedido")
+                        .FirstOrDefault(p => p.Element("NumeroDePedido")?.Value == numeroPedido.ToString());
+
+                    return pedidoEncontrado;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error al leer el archivo XML: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("El archivo XML de pedidos no existe.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            return null;
+        }
+
+
+
+
+        private XFont ObtenerFuenteArial()
+        {
+            GlobalFontSettings.FontResolver = new FontResolver();
+
+            return new XFont("Arial", 12);
+        }
+
+
+        private void button_Generar_Pdf_Click_1(object sender, EventArgs e)
+        {
+            if (int.TryParse(textBox_Pdf.Text, out int numeroPedido))
+            {
+                GenerarPdf(numeroPedido);
+            }
+            else
+            {
+                MessageBox.Show("Ingrese un número de pedido válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }

@@ -110,6 +110,11 @@ namespace formulario_parcial
             string nombreUsuario = textBox_Baja.Text;
             RealizarOperacion(nombreUsuario, true);
         }
+
+        private void Usuarios_Load_1(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 

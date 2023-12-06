@@ -15,10 +15,22 @@ namespace formulario_parcial
     {
         private UserManager userManager = UserManager.Instancia;
 
+        private IDataManager dataManager = new DataManager();
+        public BienvenidaAdministradorEvent bienvenidaAdministradorEvent = new BienvenidaAdministradorEvent();
         public Form_alquiler()
         {
             InitializeComponent();
             VerificarRolDeUsuario();
+            bienvenidaAdministradorEvent.AdministradorBienvenido += MostrarMensajeBienvenida;
+
+        }
+
+
+
+
+        private void MostrarMensajeBienvenida(object sender, BienvenidaAdministradorEvent.BienvenidaAdministradorEventArgs e)
+        {
+            MessageBox.Show($"¡Bienvenido, {e.NombreAdministrador}! Todos los usuarios han sido actualizados.", "Usuarios Actualizados", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void VerificarRolDeUsuario()
@@ -29,6 +41,8 @@ namespace formulario_parcial
                 // Si el usuario es administrador, muestra el botón de usuarios
                 button_usuarios.Visible = true;
                 Boton_Pedidos_Usuarios.Visible = true;
+                bienvenidaAdministradorEvent.OnAdministradorBienvenido(userManager.UsuarioLogueado.Nombre);
+
             }
             else
             {
@@ -37,6 +51,13 @@ namespace formulario_parcial
                 Boton_Pedidos_Usuarios.Visible = false;
             }
         }
+
+
+
+        
+
+
+
 
 
 
@@ -66,17 +87,46 @@ namespace formulario_parcial
             this.Hide();
             Usuarios usuarios = new Usuarios();
             usuarios.ShowDialog();
+        }
+
+
+        private void ActualizarUsuarios()
+        {
+            
+            List<Persona> usuarios = dataManager.CargarDatos();
+
+            // Verificar y actualizar los campos nulos
+            foreach (var usuario in usuarios)
+            {
+                if (usuario.Estado == null)
+                {
+                    usuario.Estado = "Activo";
+                }
+
+                if (usuario.Rol == null)
+                {
+                    usuario.Rol = "Usuario";
+                }
+            }
+
+            dataManager.GuardarDatos(usuarios);
 
         }
 
+
+
+
+
+
         private void Boton_Pedidos_Usuarios_Click(object sender, EventArgs e)
         {
-
+            
         }
 
         private void Form_alquiler_Load(object sender, EventArgs e)
         {
-
+            
         }
     }
 }
+

@@ -635,7 +635,7 @@
       <MontoAPagar>44000.0</MontoAPagar>
       <NumeroDePedido>782752</NumeroDePedido>
       <Domicilio>carabobo 123</Domicilio>
-      <Estado>Activo</Estado>
+      <Estado>Cancelado</Estado>
       <FechaEntrega>04/12/2023</FechaEntrega>
       <DuracionEntregaDias>7Dias</DuracionEntregaDias>
       <FechaRetiro>11/12/2023</FechaRetiro>
@@ -850,7 +850,7 @@
       <MontoAPagar>44000.0</MontoAPagar>
       <NumeroDePedido>749446</NumeroDePedido>
       <Domicilio>123</Domicilio>
-      <Estado>Activo</Estado>
+      <Estado>Cancelado</Estado>
       <FechaEntrega>30/11/2023</FechaEntrega>
       <DuracionEntregaDias>7Dias</DuracionEntregaDias>
       <FechaRetiro>07/12/2023</FechaRetiro>
