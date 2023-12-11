@@ -348,9 +348,16 @@ namespace formulario_parcial
         }
 
 
+        private void MostrarHiloPrincipal()
+        {
+            // Este método se ejecutará en el hilo principal
+            MessageBox.Show($"Hilo principal: {Thread.CurrentThread.ManagedThreadId}", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
         private void GenerarPdf(int numeroPedido)
         {
-            
+            MessageBox.Show($"Hilo actual antes de GenerarPdf: {Thread.CurrentThread.ManagedThreadId}", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
             try
             {
              var pedido = BuscarPedidoPorNumero(numeroPedido);
@@ -434,7 +441,11 @@ namespace formulario_parcial
                 
                 MessageBox.Show($"Se produjo un error al generar el PDF para el pedido #{numeroPedido}.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
+            finally
+            {
+                // Mostrar el ID del hilo actual después de que la generación del PDF haya terminado
+                MessageBox.Show($"Hilo actual después de GenerarPdf: {Thread.CurrentThread.ManagedThreadId}", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
 
         }
 
@@ -493,11 +504,15 @@ namespace formulario_parcial
         }
 
 
-        private void button_Generar_Pdf_Click_1(object sender, EventArgs e)
+        private async void button_Generar_Pdf_Click_1(object sender, EventArgs e)
         {
             if (int.TryParse(textBox_Pdf.Text, out int numeroPedido))
             {
-                GenerarPdf(numeroPedido);
+                
+                Invoke(new Action(MostrarHiloPrincipal));
+
+                
+                await Task.Run(() => GenerarPdf(numeroPedido));
             }
             else
             {
