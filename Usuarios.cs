@@ -29,7 +29,7 @@ namespace formulario_parcial
 
         private void Usuarios_Load(object sender, EventArgs e)
         {
-            // Enlazar la lista
+            
             dataGridView_Usuarios.DataSource = usuarios;
         }
 
@@ -111,10 +111,63 @@ namespace formulario_parcial
             RealizarOperacion(nombreUsuario, true);
         }
 
-        private void Usuarios_Load_1(object sender, EventArgs e)
-        {
 
+
+
+
+        private void ModificarPropiedadUsuario<T>(string nombreUsuario, string propertyName, object nuevoValor, string mensajeExito)
+        {
+            Persona usuario = usuarios.FirstOrDefault(u => u.Nombre == nombreUsuario);
+
+            if (usuario != null)
+            {
+                
+                DialogResult confirmacion = MessageBox.Show($"¿Seguro que desea modificar la propiedad del usuario {nombreUsuario}?", "Confirmar Operación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+                if (confirmacion == DialogResult.Yes)
+                {
+                    // Modificar la propiedad del usuario
+                    var propertyInfo = typeof(T).GetProperty(propertyName);
+                    propertyInfo?.SetValue(usuario, nuevoValor);
+
+                    
+                    dataManager.GuardarDatos(usuarios);
+
+                    
+                    dataGridView_Usuarios.Rows.Clear();
+                    AgregarUsuariosAlDataGridView(usuarios);
+
+                    MessageBox.Show($"Propiedad del usuario {nombreUsuario} modificada {mensajeExito}", "Operación Exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            else
+            {
+                MessageBox.Show($"El usuario {nombreUsuario} no existe.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
+
+
+
+
+        private void Bonton_ModificarNombre_Click(object sender, EventArgs e)
+        {
+            string nombreUsuario = textBox_Baja.Text;
+            string nuevoNombre = textBox_Nuevo_Valor.Text;
+
+            ModificarPropiedadUsuario<Persona>(nombreUsuario, "Nombre", nuevoNombre, "correctamente.");
+        }
+
+        private void Bonton_ModificarContraseña_Click(object sender, EventArgs e)
+        {
+            string nombreUsuario = textBox_Baja.Text;
+            string nuevaContraseña = textBox_Nuevo_Valor.Text;
+
+            ModificarPropiedadUsuario<Persona>(nombreUsuario, "Contraseña", nuevaContraseña, "correctamente.");
+        }
+
+
+
+
     }
 }
 

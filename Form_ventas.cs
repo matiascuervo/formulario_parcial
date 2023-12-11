@@ -47,6 +47,8 @@ namespace formulario_parcial
             radioButton_Bolson.CheckedChanged += radioButton_Bolson_CheckedChanged;
             toolTip1 = new System.Windows.Forms.ToolTip();
             toolTip1.SetToolTip(radioButton_Bolson, "Los Bolsones Solo Se venden En Conjunto Con Algun Volquete.");
+
+
         }
 
        
@@ -292,7 +294,7 @@ namespace formulario_parcial
             {
                 if (comboBox_ventas.SelectedItem == null && bolsonSeleccionadoConVolquete == true)
                 {
-                    // Lanzar tu propia excepción si la condición no se cumple
+                    
                     throw new MiExcepcionPropia("Lo sentimos, pero no vendemos bolsones por separado.");
                 }
             }
@@ -420,7 +422,7 @@ namespace formulario_parcial
                 }
                 else
                 {
-                    // El usuario seleccionó "No", puedes hacer algo si es necesario
+                    
                     MessageBox.Show("Pedido cancelado.", "Cancelado", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }

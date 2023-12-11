@@ -11,7 +11,7 @@ namespace formulario_parcial
 {
     public partial class Pedidos_Form : Form
     {
-        
+        private Logger logger;
         public Pedidos_Form()
         {
             InitializeComponent();
@@ -19,6 +19,14 @@ namespace formulario_parcial
             dataGridView_Pedidos.CellFormatting += dataGridView_Pedidos_CellFormatting;
             dataGridView_Pedidos.CellContentClick += dataGridView_Pedidos_CellContentClick;
             dataGridView_Pedidos.AllowUserToAddRows = false;
+
+
+            string enviroment = AppDomain.CurrentDomain.BaseDirectory;
+            string rutaRelativa = Path.Combine(enviroment, "..","..","..", "logger_Excepciones");
+            string logFileName = "logger_Errores.txt";
+            logger = new Logger(rutaRelativa, logFileName);
+
+
         }
 
 
@@ -343,69 +351,97 @@ namespace formulario_parcial
         private void GenerarPdf(int numeroPedido)
         {
             
-            var pedido = BuscarPedidoPorNumero(numeroPedido);
-
-            if (pedido != null)
+            try
             {
+             var pedido = BuscarPedidoPorNumero(numeroPedido);
+                if (pedido != null)
+                {
                     // Crear  PDF
                     // Agregar una página al documento
                     // Obtener el objeto XGraphics para dibujar en la página
-                using (PdfDocument document = new PdfDocument())
-                {
-                    PdfPage page = document.AddPage();
-
-                    using (XGraphics gfx = XGraphics.FromPdfPage(page))
+                    using (PdfDocument document = new PdfDocument())
                     {
-                        XFont font = ObtenerFuenteArial();
+                        PdfPage page = document.AddPage();
 
-                        double yPosition = 40;
-
-                        
-                        gfx.DrawString($"Comprobante de Compra - Pedido #{numeroPedido}", font, XBrushes.Black, new XRect(10, yPosition, page.Width, page.Height), XStringFormats.TopLeft);
-                        yPosition += 20;
-
-                        
-                        
-                        AgregarLineaDetalle(gfx, font, "Recibe", pedido.Element("Nombre")?.Value, ref yPosition);
-                        AgregarLineaDetalle(gfx, font, "Tipo De Volquete", pedido.Element("TipoVolquete")?.Value, ref yPosition);
-                        AgregarLineaDetalle(gfx, font, "Cantidad", pedido.Element("Cantidad")?.Value, ref yPosition);
-                        AgregarLineaDetalle(gfx, font, "Monto a Pagar", pedido.Element("MontoAPagar")?.Value, ref yPosition);
-                        AgregarLineaDetalle(gfx, font, "Número de Pedido", pedido.Element("NumeroDePedido")?.Value, ref yPosition);
-                        AgregarLineaDetalle(gfx, font, "Domicilio", pedido.Element("Domicilio")?.Value, ref yPosition);
-                        AgregarLineaDetalle(gfx, font, "Estado", pedido.Element("Estado")?.Value, ref yPosition);
-                        AgregarLineaDetalle(gfx, font, "Fecha de Entrega", pedido.Element("FechaEntrega")?.Value, ref yPosition);
-                        AgregarLineaDetalle(gfx, font, "Duración de Entrega", $"{pedido.Element("DuracionEntregaDias")?.Value} Días", ref yPosition);
-                        AgregarLineaDetalle(gfx, font, "Fecha de Retiro", pedido.Element("FechaRetiro")?.Value, ref yPosition);
-
-                        var bolson = pedido.Element("Bolson");
-                        if (bolson != null)
+                        using (XGraphics gfx = XGraphics.FromPdfPage(page))
                         {
-                            // Agregar detalles del bolson si existe
-                            AgregarLineaDetalle(gfx, font, "Tipo de Bolson", bolson.Element("TipoBolson")?.Value, ref yPosition);
-                            AgregarLineaDetalle(gfx, font, "Cantidad de Bolsones", bolson.Element("CantidadBolsones")?.Value, ref yPosition);
-                            AgregarLineaDetalle(gfx, font, "Monto a Pagar por Bolsones", bolson.Element("MontoAPagarBolson")?.Value, ref yPosition);
+                            XFont font = ObtenerFuenteArial();
+
+                            double yPosition = 40;
+
+
+
+                            gfx.DrawString("Volquetes Poly", font, XBrushes.Black, new XRect(10, yPosition, page.Width, page.Height), XStringFormats.TopLeft);
+                            yPosition += 30;
+
+
+                            gfx.DrawString($"Comprobante de Compra - Pedido #{numeroPedido}", font, XBrushes.Black, new XRect(10, yPosition, page.Width, page.Height), XStringFormats.TopLeft);
+                            yPosition += 20;
+
+
+
+                            AgregarLineaDetalle(gfx, font, "Recibe", pedido.Element("Nombre")?.Value, ref yPosition);
+                            AgregarLineaDetalle(gfx, font, "Tipo De Volquete", pedido.Element("TipoVolquete")?.Value, ref yPosition);
+                            AgregarLineaDetalle(gfx, font, "Cantidad", pedido.Element("Cantidad")?.Value, ref yPosition);
+                            AgregarLineaDetalle(gfx, font, "Monto a Pagar", pedido.Element("MontoAPagar")?.Value, ref yPosition);
+                            AgregarLineaDetalle(gfx, font, "Número de Pedido", pedido.Element("NumeroDePedido")?.Value, ref yPosition);
+                            AgregarLineaDetalle(gfx, font, "Domicilio", pedido.Element("Domicilio")?.Value, ref yPosition);
+                            AgregarLineaDetalle(gfx, font, "Estado", pedido.Element("Estado")?.Value, ref yPosition);
+                            AgregarLineaDetalle(gfx, font, "Fecha de Entrega", pedido.Element("FechaEntrega")?.Value, ref yPosition);
+                            //  AgregarLineaDetalle(gfx, font, "Duración de Entrega", $"{pedido.Element("DuracionEntregaDias")?.Value} Días", ref yPosition);
+                            AgregarLineaDetalle(gfx, font, "Fecha de Retiro", pedido.Element("FechaRetiro")?.Value, ref yPosition);
+
+                            var bolson = pedido.Element("Bolson");
+                            if (bolson != null)
+                            {
+                                // Agregar detalles del bolson si existe
+                                AgregarLineaDetalle(gfx, font, "Tipo de Bolson", bolson.Element("TipoBolson")?.Value, ref yPosition);
+                                AgregarLineaDetalle(gfx, font, "Cantidad de Bolsones", bolson.Element("CantidadBolsones")?.Value, ref yPosition);
+                                //AgregarLineaDetalle(gfx, font, "Monto a Pagar por Bolsones", bolson.Element("MontoAPagarBolson")?.Value, ref yPosition);
+                            }
+
+
+                            MessageBox.Show($"PDF generado con éxito.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
                         }
 
-
-                        MessageBox.Show($"PDF generado con éxito.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+                        string rutaRelativa = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName;
+                        string rutaPdf = Path.Combine(rutaRelativa, "PDF", $"ComprobantePedido_{numeroPedido}.pdf");
+                        document.Save(rutaPdf);
                     }
-
-                    string rutaRelativa = Directory.GetParent(Environment.CurrentDirectory).Parent.Parent.FullName;
-                    string rutaPdf = Path.Combine(rutaRelativa, "PDF", $"ComprobantePedido_{numeroPedido}.pdf");
-                    document.Save(rutaPdf);
                 }
+                else
+                {
+                    var methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+                    var className = this.GetType().Name;
+                    logger.LogError(null, $"Error Numero Ingresado Incorrecto  #{numeroPedido}.", methodName, className);
+
+                    //Preguntarle a Wido
+
+                    MessageBox.Show($"Pedido #{numeroPedido} no encontrado.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show($"Pedido #{numeroPedido} no encontrado.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                
+                var methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+                var className = this.GetType().Name;
+
+               
+                logger.LogError(ex, $"Error al generar PDF para el pedido #{numeroPedido}.", methodName, className);
+
+                
+                MessageBox.Show($"Se produjo un error al generar el PDF para el pedido #{numeroPedido}.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
+
         }
 
 
         private void AgregarLineaDetalle(XGraphics gfx, XFont font, string etiqueta, string valor, ref double yPosition)
         {
-            // Mostrar la etiqueta y el valor en líneas separadas
+            
             gfx.DrawString($"{etiqueta}: {valor}", font, XBrushes.Black, new XRect(10, yPosition, 500, 20), XStringFormats.TopLeft);
             yPosition += 20;
         }

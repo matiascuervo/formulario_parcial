@@ -9,7 +9,7 @@ namespace formulario_parcial
     {
         public RoundButton()
         {
-            // Establece el tamaño  para un botón redondo
+            
             this.Width = 100;
             this.Height = 100;
             this.Padding = new Padding(0);
@@ -26,7 +26,7 @@ namespace formulario_parcial
                 this.Region = new Region(path);
             }
 
-            // Pinta el fondo del círculo
+            
             using (SolidBrush brush = new SolidBrush(this.BackColor))
             {
                 e.Graphics.FillEllipse(brush, new Rectangle(0, 0, Width - 1, Height - 1));

@@ -1,0 +1,20 @@
+7/12/2023 22:36:46 - Descripción: Error al generar PDF para el pedido #112.
+Clase y Método: Pedidos_Form.GenerarPdf
+--------------------------------------------------
+
+7/12/2023 22:47:03 - Descripción: Error al validar Credenciales.
+Clase y Método: FormularioUsuario.Boton_login_Click
+--------------------------------------------------
+
+7/12/2023 22:47:07 - Descripción: Error al validar Credenciales.
+Clase y Método: FormularioUsuario.Boton_login_Click
+--------------------------------------------------
+
+7/12/2023 23:03:59 - Descripción: Error Numero Ingresado Incorrecto  #1231.
+Clase y Método: Pedidos_Form.GenerarPdf
+--------------------------------------------------
+
+9/12/2023 17:43:32 - Descripción: Error al validar Credenciales.
+Clase y Método: FormularioUsuario.Boton_login_Click
+--------------------------------------------------
+

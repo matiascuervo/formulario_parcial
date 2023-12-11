@@ -53,14 +53,6 @@ namespace formulario_parcial
         }
 
 
-
-        
-
-
-
-
-
-
         private void Boton_Volver_App_Click(object sender, EventArgs e)
         {
             Form_inicio inicio = new Form_inicio();
@@ -112,11 +104,6 @@ namespace formulario_parcial
             dataManager.GuardarDatos(usuarios);
 
         }
-
-
-
-
-
 
         private void Boton_Pedidos_Usuarios_Click(object sender, EventArgs e)
         {

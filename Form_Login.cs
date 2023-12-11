@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using BiblotecaDatamanager;
 using BibliotecaDatamanager;
+using Microsoft.Extensions.Logging;
 
 namespace formulario_parcial
 {
@@ -18,13 +19,17 @@ namespace formulario_parcial
         // La instancia única de UserManager Singleton
         private UserManager userManager = UserManager.Instancia;
 
-        // Nueva instancia de DataManager
+        private Logger logger;
         public FormularioUsuario()
         {
             InitializeComponent();
 
             ConfigurarAutocompletado();
-           
+            string enviroment = AppDomain.CurrentDomain.BaseDirectory;
+            string rutaRelativa = Path.Combine(enviroment, "..", "..", "..", "logger_Excepciones");
+            string logFileName = "logger_Errores.txt";
+            logger = new Logger(rutaRelativa, logFileName);
+
         }
 
         private void ConfigurarAutocompletado()
@@ -89,6 +94,12 @@ namespace formulario_parcial
             }
             catch (ArgumentException ex)
             {
+                var methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+                var className = this.GetType().Name;
+
+
+                logger.LogError(ex, $"Error al validar Credenciales.", methodName, className);
+
                 MessageBox.Show("Error: " + ex.Message, "Error de validación", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }

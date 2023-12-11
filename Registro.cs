@@ -38,7 +38,7 @@ namespace formulario_parcial
                     // Registra al nuevo usuario utilizando el UserManager (Singleton)
                     userManager.RegistrarCredenciales(Usuario, contraseña,"Usuario","Activo");
 
-                    // Limpia los campos de entrada
+                    
                     textBox_Nombre_Registro.Clear();
                     textBox_Contraseña_Registro.Clear();
 

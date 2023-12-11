@@ -157,7 +157,6 @@
             comboBox_Localidad.Name = "comboBox_Localidad";
             comboBox_Localidad.Size = new Size(121, 23);
             comboBox_Localidad.TabIndex = 2;
-            
             // 
             // textBox_Nombre_Final
             // 
@@ -378,7 +377,7 @@
             radioButton_Bolson.AutoSize = true;
             radioButton_Bolson.BackColor = Color.Gold;
             radioButton_Bolson.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            radioButton_Bolson.Location = new Point(5, 299);
+            radioButton_Bolson.Location = new Point(608, 243);
             radioButton_Bolson.Name = "radioButton_Bolson";
             radioButton_Bolson.Size = new Size(110, 19);
             radioButton_Bolson.TabIndex = 31;

@@ -38,6 +38,9 @@
             textBox_Baja = new TextBox();
             Bonton_Baja = new Button();
             Boton_Reactivar_Usuario = new Button();
+            textBox_Nuevo_Valor = new TextBox();
+            Bonton_ModificarNombre = new Button();
+            Bonton_ModificarContraseña = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView_Usuarios).BeginInit();
             SuspendLayout();
             // 
@@ -90,7 +93,7 @@
             textBox_Baja.Location = new Point(476, 12);
             textBox_Baja.Name = "textBox_Baja";
             textBox_Baja.PlaceholderText = "Usuarios";
-            textBox_Baja.Size = new Size(108, 23);
+            textBox_Baja.Size = new Size(118, 23);
             textBox_Baja.TabIndex = 11;
             // 
             // Bonton_Baja
@@ -117,12 +120,49 @@
             Boton_Reactivar_Usuario.UseVisualStyleBackColor = false;
             Boton_Reactivar_Usuario.Click += Boton_Reactivar_Usuario_Click;
             // 
+            // textBox_Nuevo_Valor
+            // 
+            textBox_Nuevo_Valor.Location = new Point(476, 157);
+            textBox_Nuevo_Valor.Name = "textBox_Nuevo_Valor";
+            textBox_Nuevo_Valor.PlaceholderText = "Nombre/Contraseña";
+            textBox_Nuevo_Valor.Size = new Size(118, 23);
+            textBox_Nuevo_Valor.TabIndex = 14;
+            // 
+            // Bonton_ModificarNombre
+            // 
+            Bonton_ModificarNombre.BackColor = Color.LightSkyBlue;
+            Bonton_ModificarNombre.FlatStyle = FlatStyle.Flat;
+            Bonton_ModificarNombre.Location = new Point(611, 156);
+            Bonton_ModificarNombre.Name = "Bonton_ModificarNombre";
+            Bonton_ModificarNombre.Size = new Size(133, 23);
+            Bonton_ModificarNombre.TabIndex = 15;
+            Bonton_ModificarNombre.Text = "Modificar Nombre";
+            Bonton_ModificarNombre.UseVisualStyleBackColor = false;
+            Bonton_ModificarNombre.EnabledChanged += Bonton_ModificarNombre_Click;
+            Bonton_ModificarNombre.Click += Bonton_ModificarNombre_Click;
+            // 
+            // Bonton_ModificarContraseña
+            // 
+            Bonton_ModificarContraseña.BackColor = Color.LightSkyBlue;
+            Bonton_ModificarContraseña.FlatStyle = FlatStyle.Flat;
+            Bonton_ModificarContraseña.Location = new Point(611, 196);
+            Bonton_ModificarContraseña.Name = "Bonton_ModificarContraseña";
+            Bonton_ModificarContraseña.Size = new Size(133, 23);
+            Bonton_ModificarContraseña.TabIndex = 16;
+            Bonton_ModificarContraseña.Text = "Modificar Contraseña";
+            Bonton_ModificarContraseña.UseVisualStyleBackColor = false;
+            Bonton_ModificarContraseña.EnabledChanged += Bonton_ModificarContraseña_Click;
+            Bonton_ModificarContraseña.Click += Bonton_ModificarContraseña_Click;
+            // 
             // Usuarios
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.SteelBlue;
             ClientSize = new Size(800, 450);
+            Controls.Add(Bonton_ModificarContraseña);
+            Controls.Add(Bonton_ModificarNombre);
+            Controls.Add(textBox_Nuevo_Valor);
             Controls.Add(Boton_Reactivar_Usuario);
             Controls.Add(Bonton_Baja);
             Controls.Add(textBox_Baja);
@@ -132,7 +172,6 @@
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Usuarios";
             Text = "Usuarios";
-            Load += Usuarios_Load_1;
             ((System.ComponentModel.ISupportInitialize)dataGridView_Usuarios).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -149,5 +188,8 @@
         private TextBox textBox_Baja;
         private Button Bonton_Baja;
         private Button Boton_Reactivar_Usuario;
+        private TextBox textBox_Nuevo_Valor;
+        private Button Bonton_ModificarNombre;
+        private Button Bonton_ModificarContraseña;
     }
 }
