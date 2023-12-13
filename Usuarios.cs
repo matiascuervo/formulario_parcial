@@ -64,7 +64,7 @@ namespace formulario_parcial
 
             if (usuario != null)
             {
-                // Verificar si se desea realmente realizar la operación
+                
                 DialogResult confirmacion = MessageBox.Show($"¿Seguro que desea asignar {nuevoEstado.ToLower()} al usuario {nombreUsuario}?", "Confirmar Operación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
                 if (confirmacion == DialogResult.Yes)
@@ -112,33 +112,32 @@ namespace formulario_parcial
         }
 
 
-
-
-
-        private void ModificarPropiedadUsuario<T>(string nombreUsuario, string propertyName, object nuevoValor, string mensajeExito)
+        private void ModificarPropiedadUsuario<T>(T valor, string propertyName, object nuevoValor, string mensajeExito)
         {
-            Persona usuario = usuarios.FirstOrDefault(u => u.Nombre == nombreUsuario);
+            DialogResult confirmacion = MessageBox.Show("¿Seguro que desea modificar la propiedad del usuario ?", "Confirmar Operación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (confirmacion == DialogResult.Yes)
+            {
+                
+                var propertyInfo = typeof(T).GetProperty(propertyName);
+                propertyInfo?.SetValue(valor, nuevoValor);
+
+                MessageBox.Show($"Propiedad del usuario modificada {mensajeExito}", "Operación Exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void Bonton_ModificarNombre_Click(object sender, EventArgs e)
+        {
+            string nombreUsuario = textBox_Baja.Text;
+            IPersona usuario = usuarios.FirstOrDefault(u => u.Nombre == nombreUsuario);
 
             if (usuario != null)
             {
+                string nuevoNombre = textBox_Nuevo_Valor.Text;
+                ModificarPropiedadUsuario(usuario, "Nombre", nuevoNombre, "correctamente.");
+
                 
-                DialogResult confirmacion = MessageBox.Show($"¿Seguro que desea modificar la propiedad del usuario {nombreUsuario}?", "Confirmar Operación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-                if (confirmacion == DialogResult.Yes)
-                {
-                    // Modificar la propiedad del usuario
-                    var propertyInfo = typeof(T).GetProperty(propertyName);
-                    propertyInfo?.SetValue(usuario, nuevoValor);
-
-                    
-                    dataManager.GuardarDatos(usuarios);
-
-                    
-                    dataGridView_Usuarios.Rows.Clear();
-                    AgregarUsuariosAlDataGridView(usuarios);
-
-                    MessageBox.Show($"Propiedad del usuario {nombreUsuario} modificada {mensajeExito}", "Operación Exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
+                GuardarDatosYActualizarDataGridView();
             }
             else
             {
@@ -146,24 +145,35 @@ namespace formulario_parcial
             }
         }
 
-
-
-
-        private void Bonton_ModificarNombre_Click(object sender, EventArgs e)
-        {
-            string nombreUsuario = textBox_Baja.Text;
-            string nuevoNombre = textBox_Nuevo_Valor.Text;
-
-            ModificarPropiedadUsuario<Persona>(nombreUsuario, "Nombre", nuevoNombre, "correctamente.");
-        }
-
         private void Bonton_ModificarContraseña_Click(object sender, EventArgs e)
         {
             string nombreUsuario = textBox_Baja.Text;
-            string nuevaContraseña = textBox_Nuevo_Valor.Text;
+            IPersona usuario = usuarios.FirstOrDefault(u => u.Nombre == nombreUsuario);
 
-            ModificarPropiedadUsuario<Persona>(nombreUsuario, "Contraseña", nuevaContraseña, "correctamente.");
+            if (usuario != null)
+            {
+                string nuevaContraseña = textBox_Nuevo_Valor.Text;
+                ModificarPropiedadUsuario(usuario, "Contraseña", nuevaContraseña, "correctamente.");
+
+                
+                GuardarDatosYActualizarDataGridView();
+            }
+            else
+            {
+                MessageBox.Show($"El usuario {nombreUsuario} no existe.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
+
+        private void GuardarDatosYActualizarDataGridView()
+        {
+            
+            dataManager.GuardarDatos(usuarios);
+
+            
+            dataGridView_Usuarios.Rows.Clear();
+            AgregarUsuariosAlDataGridView(usuarios);
+        }
+
 
 
 

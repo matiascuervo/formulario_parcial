@@ -11,7 +11,8 @@ namespace formulario_parcial
 {
     public partial class Pedidos_Form : Form
     {
-        private Logger logger;
+        private ILogger logger;
+
         public Pedidos_Form()
         {
             InitializeComponent();
@@ -21,8 +22,9 @@ namespace formulario_parcial
             dataGridView_Pedidos.AllowUserToAddRows = false;
 
 
+
             string enviroment = AppDomain.CurrentDomain.BaseDirectory;
-            string rutaRelativa = Path.Combine(enviroment, "..","..","..", "logger_Excepciones");
+            string rutaRelativa = Path.Combine(enviroment, "..", "..", "..", "logger_Excepciones");
             string logFileName = "logger_Errores.txt";
             logger = new Logger(rutaRelativa, logFileName);
 
@@ -30,7 +32,7 @@ namespace formulario_parcial
         }
 
 
-        private void MostrarPedidosDelUsuario(string nombreUsuario)
+        public void MostrarPedidosDelUsuario(string nombreUsuario)
         {
             dataGridView_Pedidos.Rows.Clear();
 
@@ -61,6 +63,9 @@ namespace formulario_parcial
             {
                 MessageBox.Show("El archivo XML de pedidos no existe.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+
+            //PedidosDeLosUsuarios pedidosDeLosUsuariosForm = new PedidosDeLosUsuarios();
+            // pedidosDeLosUsuariosForm.ActualizarDataGridView(listaDePedidos);
         }
 
 
@@ -360,7 +365,7 @@ namespace formulario_parcial
 
             try
             {
-             var pedido = BuscarPedidoPorNumero(numeroPedido);
+                var pedido = BuscarPedidoPorNumero(numeroPedido);
                 if (pedido != null)
                 {
                     // Crear  PDF
@@ -423,7 +428,7 @@ namespace formulario_parcial
                     var className = this.GetType().Name;
                     logger.LogError(null, $"Error Numero Ingresado Incorrecto  #{numeroPedido}.", methodName, className);
 
-                    //Preguntarle a Wido
+
 
                     MessageBox.Show($"Pedido #{numeroPedido} no encontrado.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
@@ -431,14 +436,14 @@ namespace formulario_parcial
             }
             catch (Exception ex)
             {
-                
+
                 var methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
                 var className = this.GetType().Name;
 
-               
+
                 logger.LogError(ex, $"Error al generar PDF para el pedido #{numeroPedido}.", methodName, className);
 
-                
+
                 MessageBox.Show($"Se produjo un error al generar el PDF para el pedido #{numeroPedido}.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             finally
@@ -452,7 +457,7 @@ namespace formulario_parcial
 
         private void AgregarLineaDetalle(XGraphics gfx, XFont font, string etiqueta, string valor, ref double yPosition)
         {
-            
+
             gfx.DrawString($"{etiqueta}: {valor}", font, XBrushes.Black, new XRect(10, yPosition, 500, 20), XStringFormats.TopLeft);
             yPosition += 20;
         }
@@ -508,16 +513,77 @@ namespace formulario_parcial
         {
             if (int.TryParse(textBox_Pdf.Text, out int numeroPedido))
             {
-                
+
                 Invoke(new Action(MostrarHiloPrincipal));
 
-                
+
                 await Task.Run(() => GenerarPdf(numeroPedido));
             }
             else
             {
                 MessageBox.Show("Ingrese un número de pedido válido.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+
+        public void MostrarPedidosPorFechaOrdenados(string nombreUsuario)
+        {
+            dataGridView_Pedidos.Rows.Clear();
+
+            var enviroment = System.Environment.CurrentDirectory;
+            string rutaRelativa = Directory.GetParent(enviroment).Parent.Parent.FullName;
+            string rutaCompleta = Path.Combine(rutaRelativa, "Xml_Usuarios", "pedidos.xml");
+
+            if (File.Exists(rutaCompleta))
+            {
+                try
+                {
+                    XDocument doc = XDocument.Load(rutaCompleta);
+
+                    var pedidos = doc.Descendants("Pedido")
+                        .Where(p => p.Element("Usuario")?.Value == nombreUsuario)
+                        .ToList();
+
+                    if (pedidos.Any())
+                    {
+                        // Ordenar los pedidos por fecha de entrega utilizando el delegado
+                        OrdenamientoPedidos.OrdenarPorFecha(pedidos, OrdenamientoPedidos.ComparadoresPedidoPorFecha.PorFechaEntrega);
+
+                        foreach (var pedido in pedidos)
+                        {
+                            AgregarFilaPedidoAlDataGridView(pedido);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("No hay pedidos para el usuario ingresado.", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+                catch (FormatException)
+                {
+                    MessageBox.Show("Formato de fecha incorrecto en el archivo XML.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error al leer el archivo XML: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                MessageBox.Show("El archivo XML de pedidos no existe.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void button_ordenados_Click(object sender, EventArgs e)
+        {
+            string nombreUsuario = UserManager.Instancia.UsuarioLogueado?.Nombre;
+           
+                // Incluye la hora
+
+            // Ajustar la fecha actual para que no incluya la hora
+            
+
+            MostrarPedidosPorFechaOrdenados(nombreUsuario);
         }
     }
 }

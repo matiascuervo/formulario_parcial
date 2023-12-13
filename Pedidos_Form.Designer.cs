@@ -57,6 +57,7 @@
             textBox_Fecha = new TextBox();
             button_Generar_Pdf = new Button();
             textBox_Pdf = new TextBox();
+            button_ordenados = new Button();
             toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView_Pedidos).BeginInit();
             SuspendLayout();
@@ -271,6 +272,16 @@
             textBox_Pdf.Size = new Size(144, 23);
             textBox_Pdf.TabIndex = 5;
             // 
+            // button_ordenados
+            // 
+            button_ordenados.Location = new Point(206, 394);
+            button_ordenados.Name = "button_ordenados";
+            button_ordenados.Size = new Size(75, 23);
+            button_ordenados.TabIndex = 6;
+            button_ordenados.Text = "button1";
+            button_ordenados.UseVisualStyleBackColor = true;
+            button_ordenados.Click += button_ordenados_Click;
+            // 
             // Pedidos_Form
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -278,6 +289,7 @@
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(800, 450);
+            Controls.Add(button_ordenados);
             Controls.Add(textBox_Pdf);
             Controls.Add(button_Generar_Pdf);
             Controls.Add(textBox_Fecha);
@@ -326,5 +338,6 @@
         private ToolStripLabel toolStripLabel3;
         private Button button_Generar_Pdf;
         private TextBox textBox_Pdf;
+        private Button button_ordenados;
     }
 }

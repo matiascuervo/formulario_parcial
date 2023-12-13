@@ -18,3 +18,11 @@ Clase y Método: Pedidos_Form.GenerarPdf
 Clase y Método: FormularioUsuario.Boton_login_Click
 --------------------------------------------------
 
+12/12/2023 11:02:36 - Descripción: Error Numero Ingresado Incorrecto  #1111.
+Clase y Método: Pedidos_Form.GenerarPdf
+--------------------------------------------------
+
+12/12/2023 20:39:44 - Descripción: Error al generar PDF para el pedido #927861.
+Clase y Método: Pedidos_Form.GenerarPdf
+--------------------------------------------------
+

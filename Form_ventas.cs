@@ -149,11 +149,11 @@ namespace formulario_parcial
                 {
                     if (comboBox_ventas.SelectedItem != null && bolsonSeleccionado != null)
                     {
-                        // No necesitas crear una nueva instancia de Volquete aquí, ya tienes volqueteSeleccionado
+                        
                         decimal precio = bolsonSeleccionado.MontoAPagar;
 
-                        costoTotalBolsones = cantidadbolsones * precio; // Asigna el valor calculado a la variable de clase
-                        NumeroDebolsones = cantidadbolsones;                                               // Agrega mensajes de depuración
+                        costoTotalBolsones = cantidadbolsones * precio; 
+                        NumeroDebolsones = cantidadbolsones;                                              
 
                     }
                 }
@@ -294,11 +294,10 @@ namespace formulario_parcial
             {
                 if (comboBox_ventas.SelectedItem == null && bolsonSeleccionadoConVolquete == true)
                 {
-                    
-                    throw new MiExcepcionPropia("Lo sentimos, pero no vendemos bolsones por separado.");
+                    throw new Exception("Lo sentimos, pero no vendemos bolsones por separado.");
                 }
             }
-            catch (MiExcepcionPropia ex)
+            catch (Exception ex)
             {
                 MessageBox.Show($"Atención: {ex.Message}", "Atención", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;

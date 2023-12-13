@@ -72,7 +72,7 @@ namespace formulario_parcial
                     throw new ArgumentException("Credenciales incorrectas.");
                 }
 
-                Persona usuario = userManager.GetUsuarios().FirstOrDefault(u => u.Nombre == nombre);
+                IPersona usuario = userManager.GetUsuarios().FirstOrDefault(u => u.Nombre == nombre);
 
                 if (usuario != null && usuario.Estado == "Activo")
                 {

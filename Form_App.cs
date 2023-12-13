@@ -107,7 +107,9 @@ namespace formulario_parcial
 
         private void Boton_Pedidos_Usuarios_Click(object sender, EventArgs e)
         {
-            
+            this.Hide();
+            PedidosDeLosUsuarios pedios = new PedidosDeLosUsuarios();
+            pedios.ShowDialog();
         }
 
         private void Form_alquiler_Load(object sender, EventArgs e)

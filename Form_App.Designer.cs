@@ -96,7 +96,7 @@
             Boton_Pedidos_Usuarios.Name = "Boton_Pedidos_Usuarios";
             Boton_Pedidos_Usuarios.Size = new Size(134, 44);
             Boton_Pedidos_Usuarios.TabIndex = 9;
-            Boton_Pedidos_Usuarios.Text = "Pedidos De Usuarios";
+            Boton_Pedidos_Usuarios.Text = "Pedidos";
             Boton_Pedidos_Usuarios.UseVisualStyleBackColor = true;
             Boton_Pedidos_Usuarios.Visible = false;
             Boton_Pedidos_Usuarios.Click += Boton_Pedidos_Usuarios_Click;
