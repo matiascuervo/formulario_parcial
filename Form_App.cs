@@ -40,15 +40,16 @@ namespace formulario_parcial
             {
                 // Si el usuario es administrador, muestra el botón de usuarios
                 button_usuarios.Visible = true;
-                Boton_Pedidos_Usuarios.Visible = true;
+                
                 bienvenidaAdministradorEvent.OnAdministradorBienvenido(userManager.UsuarioLogueado.Nombre);
+                button_BaseDatos.Visible = true;
 
             }
             else
             {
                 // Si el usuario no es administrador, oculta el botón de usuarios
                 button_usuarios.Visible = false;
-                Boton_Pedidos_Usuarios.Visible = false;
+                
             }
         }
 
@@ -84,7 +85,7 @@ namespace formulario_parcial
 
         private void ActualizarUsuarios()
         {
-            
+
             List<Persona> usuarios = dataManager.CargarDatos();
 
             // Verificar y actualizar los campos nulos
@@ -114,7 +115,15 @@ namespace formulario_parcial
 
         private void Form_alquiler_Load(object sender, EventArgs e)
         {
-            
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            BaseDatosManager manager = new BaseDatosManager("Data Source=DESKTOP-7SSNEAH\\MATIASSQL;Initial Catalog=MiBaseDeDatos;Integrated Security=True");
+            Form_BasedeDatos basedeDatos = new Form_BasedeDatos(manager);
+            basedeDatos.ShowDialog();
         }
     }
 }

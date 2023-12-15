@@ -255,7 +255,7 @@
             button_Generar_Pdf.BackgroundImageLayout = ImageLayout.Stretch;
             button_Generar_Pdf.FlatStyle = FlatStyle.Flat;
             button_Generar_Pdf.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            button_Generar_Pdf.Location = new Point(408, 406);
+            button_Generar_Pdf.Location = new Point(408, 405);
             button_Generar_Pdf.Name = "button_Generar_Pdf";
             button_Generar_Pdf.Size = new Size(144, 37);
             button_Generar_Pdf.TabIndex = 4;
@@ -274,12 +274,16 @@
             // 
             // button_ordenados
             // 
-            button_ordenados.Location = new Point(206, 394);
+            button_ordenados.BackColor = Color.Gold;
+            button_ordenados.FlatStyle = FlatStyle.Flat;
+            button_ordenados.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            button_ordenados.ForeColor = SystemColors.ControlText;
+            button_ordenados.Location = new Point(209, 405);
             button_ordenados.Name = "button_ordenados";
-            button_ordenados.Size = new Size(75, 23);
+            button_ordenados.Size = new Size(151, 37);
             button_ordenados.TabIndex = 6;
-            button_ordenados.Text = "button1";
-            button_ordenados.UseVisualStyleBackColor = true;
+            button_ordenados.Text = "Ordenar Por Fecha";
+            button_ordenados.UseVisualStyleBackColor = false;
             button_ordenados.Click += button_ordenados_Click;
             // 
             // Pedidos_Form

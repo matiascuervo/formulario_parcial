@@ -6,6 +6,7 @@ using PdfSharp.Pdf;
 using PdfSharp.Drawing;
 using System;
 using PdfSharp.Fonts;
+using formulario_parcial.formulario_parcial;
 
 namespace formulario_parcial
 {
@@ -359,7 +360,7 @@ namespace formulario_parcial
             MessageBox.Show($"Hilo principal: {Thread.CurrentThread.ManagedThreadId}", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        private void GenerarPdf(int numeroPedido)
+        public void GenerarPdf(int numeroPedido)
         {
             MessageBox.Show($"Hilo actual antes de GenerarPdf: {Thread.CurrentThread.ManagedThreadId}", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
@@ -448,7 +449,7 @@ namespace formulario_parcial
             }
             finally
             {
-                // Mostrar el ID del hilo actual después de que la generación del PDF haya terminado
+                // ID del hilo actual después de que la generación del PDF haya terminado
                 MessageBox.Show($"Hilo actual después de GenerarPdf: {Thread.CurrentThread.ManagedThreadId}", "Información", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 
@@ -463,10 +464,6 @@ namespace formulario_parcial
         }
 
 
-
-
-
-
         private XElement BuscarPedidoPorNumero(int numeroPedido)
         {
             var enviroment = System.Environment.CurrentDirectory;
@@ -479,11 +476,17 @@ namespace formulario_parcial
                 {
                     XDocument doc = XDocument.Load(rutaCompleta);
 
-                    // Buscar el pedido por número en el archivo XML
                     var pedidoEncontrado = doc.Descendants("Pedido")
                         .FirstOrDefault(p => p.Element("NumeroDePedido")?.Value == numeroPedido.ToString());
 
-                    return pedidoEncontrado;
+                    if (pedidoEncontrado != null)
+                    {
+                        return pedidoEncontrado;
+                    }
+                    else 
+                    {
+                        MessageBox.Show($"Error El Pedido No Existe", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
                 catch (Exception ex)
                 {

@@ -26,3 +26,39 @@ Clase y Método: Pedidos_Form.GenerarPdf
 Clase y Método: Pedidos_Form.GenerarPdf
 --------------------------------------------------
 
+13/12/2023 12:59:47 - Descripción: Error al generar PDF para el pedido #159407.
+Clase y Método: Pedidos_Form.GenerarPdf
+--------------------------------------------------
+
+13/12/2023 13:01:00 - Descripción: Error al generar PDF para el pedido #1.
+Clase y Método: Pedidos_Form.GenerarPdf
+--------------------------------------------------
+
+13/12/2023 13:04:20 - Descripción: Error Numero Ingresado Incorrecto  #1234.
+Clase y Método: Pedidos_Form.GenerarPdf
+--------------------------------------------------
+
+13/12/2023 13:04:23 - Descripción: Error al generar PDF para el pedido #1234.
+Clase y Método: Pedidos_Form.GenerarPdf
+--------------------------------------------------
+
+13/12/2023 13:07:37 - Descripción: Error Numero Ingresado Incorrecto  #123454.
+Clase y Método: Pedidos_Form.GenerarPdf
+--------------------------------------------------
+
+13/12/2023 13:10:05 - Descripción: Error Numero Ingresado Incorrecto  #121345.
+Clase y Método: Pedidos_Form.GenerarPdf
+--------------------------------------------------
+
+13/12/2023 15:00:18 - Descripción: Error Numero Ingresado Incorrecto  #1111.
+Clase y Método: Pedidos_Form.GenerarPdf
+--------------------------------------------------
+
+13/12/2023 15:06:54 - Descripción: Error al validar Credenciales.
+Clase y Método: FormularioUsuario.Boton_login_Click
+--------------------------------------------------
+
+13/12/2023 15:24:03 - Descripción: Error al validar Credenciales.
+Clase y Método: FormularioUsuario.Boton_login_Click
+--------------------------------------------------
+

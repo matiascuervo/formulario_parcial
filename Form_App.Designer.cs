@@ -33,8 +33,8 @@
             button_Pedidos = new Button();
             Boton_Volver_App = new RoundButton();
             button_usuarios = new Button();
-            Boton_Pedidos_Usuarios = new Button();
             pictureBox1 = new PictureBox();
+            button_BaseDatos = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -90,17 +90,6 @@
             button_usuarios.Visible = false;
             button_usuarios.Click += button_usuarios_Click;
             // 
-            // Boton_Pedidos_Usuarios
-            // 
-            Boton_Pedidos_Usuarios.Location = new Point(629, 280);
-            Boton_Pedidos_Usuarios.Name = "Boton_Pedidos_Usuarios";
-            Boton_Pedidos_Usuarios.Size = new Size(134, 44);
-            Boton_Pedidos_Usuarios.TabIndex = 9;
-            Boton_Pedidos_Usuarios.Text = "Pedidos";
-            Boton_Pedidos_Usuarios.UseVisualStyleBackColor = true;
-            Boton_Pedidos_Usuarios.Visible = false;
-            Boton_Pedidos_Usuarios.Click += Boton_Pedidos_Usuarios_Click;
-            // 
             // pictureBox1
             // 
             pictureBox1.BackColor = Color.Transparent;
@@ -112,6 +101,17 @@
             pictureBox1.TabIndex = 10;
             pictureBox1.TabStop = false;
             // 
+            // button_BaseDatos
+            // 
+            button_BaseDatos.Location = new Point(629, 281);
+            button_BaseDatos.Name = "button_BaseDatos";
+            button_BaseDatos.Size = new Size(134, 43);
+            button_BaseDatos.TabIndex = 11;
+            button_BaseDatos.Text = "Base De Datos";
+            button_BaseDatos.UseVisualStyleBackColor = true;
+            button_BaseDatos.Visible = false;
+            button_BaseDatos.Click += button1_Click;
+            // 
             // Form_alquiler
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -119,8 +119,8 @@
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(800, 450);
+            Controls.Add(button_BaseDatos);
             Controls.Add(pictureBox1);
-            Controls.Add(Boton_Pedidos_Usuarios);
             Controls.Add(button_usuarios);
             Controls.Add(Boton_Volver_App);
             Controls.Add(button_Pedidos);
@@ -139,7 +139,7 @@
         private Button button_Pedidos;
         private RoundButton Boton_Volver_App;
         private Button button_usuarios;
-        private Button Boton_Pedidos_Usuarios;
         private PictureBox pictureBox1;
+        private Button button_BaseDatos;
     }
 }
