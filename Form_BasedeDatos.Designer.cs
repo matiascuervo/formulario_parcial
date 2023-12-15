@@ -64,34 +64,39 @@
             // comboBoxUsuarios
             // 
             comboBoxUsuarios.FormattingEnabled = true;
-            comboBoxUsuarios.Location = new Point(88, 327);
+            comboBoxUsuarios.Location = new Point(97, 327);
             comboBoxUsuarios.Name = "comboBoxUsuarios";
             comboBoxUsuarios.Size = new Size(121, 23);
-            comboBoxUsuarios.TabIndex = 9;
+            comboBoxUsuarios.TabIndex = 1;
             // 
             // textBoxNuevoValor
             // 
-            textBoxNuevoValor.Location = new Point(441, 327);
+            textBoxNuevoValor.Location = new Point(442, 327);
             textBoxNuevoValor.Name = "textBoxNuevoValor";
+            textBoxNuevoValor.PlaceholderText = "Nuevo Valor";
             textBoxNuevoValor.Size = new Size(100, 23);
             textBoxNuevoValor.TabIndex = 10;
             // 
             // buttonConfirmar
             // 
-            buttonConfirmar.Location = new Point(453, 382);
+            buttonConfirmar.BackColor = Color.Gold;
+            buttonConfirmar.FlatStyle = FlatStyle.Popup;
+            buttonConfirmar.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            buttonConfirmar.Location = new Point(441, 382);
             buttonConfirmar.Name = "buttonConfirmar";
             buttonConfirmar.Size = new Size(101, 27);
             buttonConfirmar.TabIndex = 11;
             buttonConfirmar.Text = "Confirmar";
-            buttonConfirmar.UseVisualStyleBackColor = true;
+            buttonConfirmar.UseVisualStyleBackColor = false;
             buttonConfirmar.Click += buttonConfirmar_Click;
             // 
             // textBoxValorActual
             // 
             textBoxValorActual.Location = new Point(276, 327);
             textBoxValorActual.Name = "textBoxValorActual";
+            textBoxValorActual.PlaceholderText = "Valor Actual";
             textBoxValorActual.Size = new Size(100, 23);
-            textBoxValorActual.TabIndex = 12;
+            textBoxValorActual.TabIndex = 2;
             // 
             // Form_BasedeDatos
             // 

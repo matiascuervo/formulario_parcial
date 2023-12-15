@@ -112,21 +112,27 @@ namespace formulario_parcial
         }
 
 
-        private void ModificarPropiedadUsuario<T>(T valor, string propertyName, object nuevoValor, string mensajeExito)
+        private async Task ModificarPropiedadUsuarioAsync<T>(T valor, string propertyName, object nuevoValor, string mensajeExito)
         {
-            DialogResult confirmacion = MessageBox.Show("¿Seguro que desea modificar la propiedad del usuario ?", "Confirmar Operación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult confirmacion = MessageBox.Show("¿Seguro que desea modificar la propiedad del usuario?", "Confirmar Operación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (confirmacion == DialogResult.Yes)
             {
-                
                 var propertyInfo = typeof(T).GetProperty(propertyName);
                 propertyInfo?.SetValue(valor, nuevoValor);
 
-                MessageBox.Show($"Propiedad del usuario modificada {mensajeExito}", "Operación Exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                // Simular un retraso y chequeo que se pueda navegar 
+                await Task.Delay(3000);
+
+                
+                Invoke(new Action(() =>
+                {
+                    MessageBox.Show($"Propiedad del usuario modificada {mensajeExito}", "Operación Exitosa", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }));
             }
         }
 
-        private void Bonton_ModificarNombre_Click(object sender, EventArgs e)
+        private async void Bonton_ModificarNombre_Click(object sender, EventArgs e)
         {
             string nombreUsuario = textBox_Baja.Text;
             IPersona usuario = usuarios.FirstOrDefault(u => u.Nombre == nombreUsuario);
@@ -134,7 +140,9 @@ namespace formulario_parcial
             if (usuario != null)
             {
                 string nuevoNombre = textBox_Nuevo_Valor.Text;
-                ModificarPropiedadUsuario(usuario, "Nombre", nuevoNombre, "correctamente.");
+
+                
+                await Task.Run(() => ModificarPropiedadUsuarioAsync(usuario, "Nombre", nuevoNombre, "correctamente."));
 
                 
                 GuardarDatosYActualizarDataGridView();
@@ -145,7 +153,7 @@ namespace formulario_parcial
             }
         }
 
-        private void Bonton_ModificarContraseña_Click(object sender, EventArgs e)
+        private async void Bonton_ModificarContraseña_Click(object sender, EventArgs e)
         {
             string nombreUsuario = textBox_Baja.Text;
             IPersona usuario = usuarios.FirstOrDefault(u => u.Nombre == nombreUsuario);
@@ -153,7 +161,9 @@ namespace formulario_parcial
             if (usuario != null)
             {
                 string nuevaContraseña = textBox_Nuevo_Valor.Text;
-                ModificarPropiedadUsuario(usuario, "Contraseña", nuevaContraseña, "correctamente.");
+
+                
+                await Task.Run(() => ModificarPropiedadUsuarioAsync(usuario, "Contraseña", nuevaContraseña, "correctamente."));
 
                 
                 GuardarDatosYActualizarDataGridView();
