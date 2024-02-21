@@ -15,6 +15,7 @@ using Microsoft.VisualBasic.ApplicationServices;
 using BibliotecaDatamanager;
 using System.Reflection.Metadata.Ecma335;
 using System.Runtime.CompilerServices;
+using System.Data.SqlClient;
 
 
 
@@ -286,7 +287,46 @@ namespace formulario_parcial
             }
         }
 
+        public void InsertarPedidoEnBaseDeDatos(Pedido pedido)
+        {
+            string query = "INSERT INTO Pedidos (Usuario, Recibe, TipoVolquete, Cantidad, MontoAPagar, NumeroDePedido, Domicilio, Estado, FechaEntrega, DuracionEntregaDias, FechaRetiro, TipoBolson, CantidadBolsones, MontoAPagarBolson) " +
+                           "VALUES (@Usuario, @Recibe, @TipoVolquete, @Cantidad, @MontoAPagar, @NumeroDePedido, @Domicilio, @Estado, @FechaEntrega, @DuracionEntregaDias, @FechaRetiro, @TipoBolson, @CantidadBolsones, @MontoAPagarBolson)";
 
+            using (SqlConnection connection = new SqlConnection("Data Source=DESKTOP-7SSNEAH\\MATIASSQL;Initial Catalog=MiBaseDeDatos;Integrated Security=True"))
+            {
+                connection.Open();
+
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@Usuario", pedido.Usuario);
+                    command.Parameters.AddWithValue("@Recibe", pedido.Nombre);
+                    command.Parameters.AddWithValue("@TipoVolquete", pedido.Tipo.Tipo.ToString());
+                    command.Parameters.AddWithValue("@Cantidad", pedido.Cantidad);
+                    command.Parameters.AddWithValue("@MontoAPagar", pedido.MontoAPagar);
+                    command.Parameters.AddWithValue("@NumeroDePedido", pedido.NumeroDePedido);
+                    command.Parameters.AddWithValue("@Domicilio", pedido.Domicilio);
+                    command.Parameters.AddWithValue("@Estado", "Activo");
+                    command.Parameters.AddWithValue("@FechaEntrega", pedido.FechaEntrega);
+                    command.Parameters.AddWithValue("@DuracionEntregaDias", pedido.DuracionEntregaDias);
+                    command.Parameters.AddWithValue("@FechaRetiro", pedido.FechaRetiro);
+
+                    if (pedido.Bolson != null)
+                    {
+                        command.Parameters.AddWithValue("@TipoBolson", pedido.Bolson.Tipo.ToString());
+                        command.Parameters.AddWithValue("@CantidadBolsones", pedido.CantidadBolsones);
+                        command.Parameters.AddWithValue("@MontoAPagarBolson", pedido.MontoAPagarBolson);
+                    }
+                    else
+                    {
+                        command.Parameters.AddWithValue("@TipoBolson", "no asignado");
+                        command.Parameters.AddWithValue("@CantidadBolsones", 0);
+                        command.Parameters.AddWithValue("@MontoAPagarBolson", 0);
+                    }
+
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
 
         private void Button_Pedir_Click(object sender, EventArgs e)
         {
@@ -385,7 +425,7 @@ namespace formulario_parcial
                                 new XElement("Domicilio", pedido.Domicilio),
                                 new XElement("Estado", pedido.Estado),
                                 new XElement("FechaEntrega", pedido.FechaEntrega.ToString("dd/MM/yyyy")),
-                                new XElement("DuracionEntregaDias", pedido.DuracionEntregaDias, "Dias"),
+                                new XElement("DuracionEntregaDias", pedido.DuracionEntregaDias),
                                 new XElement("FechaRetiro", pedido.FechaRetiro.ToString("dd/MM/yyyy")),
                                 pedido.Bolson != null
                                     ? new XElement("Bolson",
@@ -412,6 +452,8 @@ namespace formulario_parcial
 
                     // Guardar el documento XML en el archivo
                     doc.Save(rutaCompleta);
+
+                    InsertarPedidoEnBaseDeDatos(nuevoPedido);
 
                     MessageBox.Show($"Pedido Realizado con éxito. El Numero De Su Pedido es {numeroPedidoAleatorio}.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
 

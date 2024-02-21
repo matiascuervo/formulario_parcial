@@ -44,7 +44,7 @@
             dataGridView1.Location = new Point(97, 12);
             dataGridView1.Name = "dataGridView1";
             dataGridView1.RowTemplate.Height = 25;
-            dataGridView1.Size = new Size(603, 300);
+            dataGridView1.Size = new Size(564, 309);
             dataGridView1.TabIndex = 1;
             // 
             // Boton_Volver_BaseDeDatos

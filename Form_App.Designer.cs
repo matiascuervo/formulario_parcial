@@ -81,12 +81,15 @@
             // 
             // button_usuarios
             // 
+            button_usuarios.BackColor = Color.CadetBlue;
+            button_usuarios.FlatStyle = FlatStyle.Flat;
+            button_usuarios.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             button_usuarios.Location = new Point(629, 120);
             button_usuarios.Name = "button_usuarios";
             button_usuarios.Size = new Size(134, 43);
             button_usuarios.TabIndex = 8;
             button_usuarios.Text = "Usuarios";
-            button_usuarios.UseVisualStyleBackColor = true;
+            button_usuarios.UseVisualStyleBackColor = false;
             button_usuarios.Visible = false;
             button_usuarios.Click += button_usuarios_Click;
             // 
@@ -103,12 +106,15 @@
             // 
             // button_BaseDatos
             // 
+            button_BaseDatos.BackColor = Color.CadetBlue;
+            button_BaseDatos.FlatStyle = FlatStyle.Flat;
+            button_BaseDatos.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             button_BaseDatos.Location = new Point(629, 281);
             button_BaseDatos.Name = "button_BaseDatos";
             button_BaseDatos.Size = new Size(134, 43);
             button_BaseDatos.TabIndex = 11;
             button_BaseDatos.Text = "Base De Datos";
-            button_BaseDatos.UseVisualStyleBackColor = true;
+            button_BaseDatos.UseVisualStyleBackColor = false;
             button_BaseDatos.Visible = false;
             button_BaseDatos.Click += button1_Click;
             // 

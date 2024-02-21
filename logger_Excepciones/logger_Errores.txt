@@ -62,3 +62,31 @@ Clase y Método: FormularioUsuario.Boton_login_Click
 Clase y Método: FormularioUsuario.Boton_login_Click
 --------------------------------------------------
 
+25/01/2024 17:48:51 - Descripción: Error al validar Credenciales.
+Clase y Método: FormularioUsuario.Boton_login_Click
+--------------------------------------------------
+
+02/02/2024 15:55:06 - Descripción: Error al validar Credenciales.
+Clase y Método: FormularioUsuario.Boton_login_Click
+--------------------------------------------------
+
+21/02/2024 18:35:01 - Descripción: Error al validar Credenciales.
+Clase y Método: FormularioUsuario.Boton_login_Click
+--------------------------------------------------
+
+21/02/2024 18:48:32 - Descripción: Error al validar Credenciales.
+Clase y Método: FormularioUsuario.Boton_login_Click
+--------------------------------------------------
+
+21/02/2024 18:49:15 - Descripción: Error al verificar credenciales en la base de datos.
+Clase y Método: FormularioUsuario.VerificarCredencialesBaseDeDatos
+--------------------------------------------------
+
+21/02/2024 18:50:19 - Descripción: Error al verificar credenciales en la base de datos.
+Clase y Método: FormularioUsuario.VerificarCredencialesBaseDeDatos
+--------------------------------------------------
+
+21/02/2024 18:50:43 - Descripción: Error al verificar credenciales en la base de datos.
+Clase y Método: FormularioUsuario.VerificarCredencialesBaseDeDatos
+--------------------------------------------------
+

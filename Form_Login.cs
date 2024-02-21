@@ -10,12 +10,13 @@ using System.Windows.Forms;
 using BiblotecaDatamanager;
 using BibliotecaDatamanager;
 using Microsoft.Extensions.Logging;
+using System.Data.SqlClient;
 
 namespace formulario_parcial
 {
     public partial class FormularioUsuario : Form
     {
-        
+        private BaseDatosManager baseDatosManager;
         // La instancia única de UserManager Singleton
         private UserManager userManager = UserManager.Instancia;
 
@@ -29,6 +30,7 @@ namespace formulario_parcial
             string rutaRelativa = Path.Combine(enviroment, "..", "..", "..", "logger_Excepciones");
             string logFileName = "logger_Errores.txt";
             logger = new Logger(rutaRelativa, logFileName);
+            
 
         }
 
@@ -72,6 +74,11 @@ namespace formulario_parcial
                     throw new ArgumentException("Credenciales incorrectas.");
                 }
 
+                /*if (VerificarCredencialesBaseDeDatos())
+                {
+                    throw new ArgumentException("Credenciales De incorrectas.");
+                }*/
+
                 IPersona usuario = userManager.GetUsuarios().FirstOrDefault(u => u.Nombre == nombre);
 
                 if (usuario != null && usuario.Estado == "Activo")
@@ -104,6 +111,87 @@ namespace formulario_parcial
             }
         }
 
+
+
+        /*public bool VerificarCredencialesBaseDeDatos()
+        {
+            string nombre = textBoxNombre.Text;
+            string contraseña = textBoxDNI.Text;
+
+            // Consulta SQL para verificar las credenciales
+            string query = "SELECT COUNT(*) FROM Usuarios WHERE Nombre = @Nombre AND Contraseña = @Contraseña";
+
+            using (SqlConnection connection = new SqlConnection("tu_cadena_de_conexión"))
+            {
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    // Agregar parámetros para evitar inyecciones SQL
+                    command.Parameters.AddWithValue("@Nombre", nombre);
+                    command.Parameters.AddWithValue("@Contraseña", contraseña);
+
+                    connection.Open();
+                    int count = (int)command.ExecuteScalar();
+
+                    // Si count es mayor que cero, las credenciales son válidas
+                    return count > 0;
+                }
+            }
+        }*/
+
+        public bool VerificarCredencialesBaseDeDatos()
+        {
+            try
+            {
+                string nombre = textBoxNombre.Text;
+                string contraseña = textBoxDNI.Text;
+
+
+                if (string.IsNullOrWhiteSpace(nombre) || string.IsNullOrWhiteSpace(contraseña))
+                {
+                    throw new ArgumentException("El nombre y la contraseña son obligatorios.");
+                }
+
+                // Consulta SQL para verificar las credenciales
+                string query = "SELECT COUNT(*) FROM Usuarios WHERE Nombre = @Nombre AND Contraseña = @Contraseña";
+
+                using (SqlConnection connection = new SqlConnection("\"Data Source=DESKTOP-7SSNEAH\\\\MATIASSQL;Initial Catalog=MiBaseDeDatos;Integrated Security=True\""))
+                {
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        // Agregar parámetros para evitar inyecciones SQL
+                        command.Parameters.AddWithValue("@Nombre", nombre);
+                        command.Parameters.AddWithValue("@Contraseña", contraseña);
+
+                        connection.Open();
+                        int count = (int)command.ExecuteScalar();
+
+                        // Si count es mayor que cero, las credenciales son válidas
+                        return count > 0;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Manejo de excepciones
+                var methodName = System.Reflection.MethodBase.GetCurrentMethod().Name;
+                var className = this.GetType().Name;
+
+                logger.LogError(ex, $"Error al verificar credenciales en la base de datos.", methodName, className);
+
+                MessageBox.Show("Error: " + ex.Message, "Error de validación", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false; // Retorna false en caso de error
+            }
+        }
+
+
+
+
+
+
+
+
+
+
         private void Boton_Atras_Login_Click(object sender, EventArgs e)
         {
             this.Hide();
@@ -111,7 +199,13 @@ namespace formulario_parcial
             inicio.ShowDialog();
         }
 
-        
+
+
+
+
+
+
+
     }
     
 }

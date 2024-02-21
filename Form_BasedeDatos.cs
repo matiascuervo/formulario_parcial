@@ -53,7 +53,7 @@ namespace formulario_parcial
                         System.Data.DataTable dataTable = new System.Data.DataTable();
                         adapter.Fill(dataTable);
 
-                        // Limpiar las columnas existentes en el DataGridView
+                        
                         dataGridView1.Columns.Clear();
 
                         // Asignar la fuente de datos al DataGridView
@@ -117,7 +117,7 @@ namespace formulario_parcial
                     }
                 }
 
-                // Volver a cargar los datos en el DataGridView después de la modificación
+                
                 MostrarDatosEnDataGridView();
 
                 MessageBox.Show("El valor se ha modificado correctamente.", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
